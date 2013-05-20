@@ -11,7 +11,11 @@
       "moment": {},
       "accounting": {},
       "mongodb-aggregation": {},
-      "belt-flash": {}
+      "belt-flash": {},
+      "tags": {
+        "git": "https://github.com/apendua/meteor-tags",
+        "branch": "master"
+      }
     },
     "packages": {
       "router": {
@@ -43,6 +47,11 @@
         "git": "https://github.com/meteorbelt/belt-flash.git",
         "tag": "v0.1.0",
         "commit": "6300bc8df4021b1b8f8f3ad1516de24280f727b6"
+      },
+      "tags": {
+        "git": "https://github.com/apendua/meteor-tags",
+        "branch": "master",
+        "commit": "323bf627f26f7bcca283de9b122308631d2dc75c"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",

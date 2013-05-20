@@ -9,6 +9,10 @@
     "moment": {},
     "accounting": {},
     "mongodb-aggregation": {},
-    "belt-flash": {}
+    "belt-flash": {},
+    "tags": {
+      "git": "https://github.com/apendua/meteor-tags",
+      "branch": "master"
+    }
   }
 }

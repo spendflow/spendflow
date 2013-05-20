@@ -14,5 +14,3 @@ router
 stripe
 moment
 accounting
-mongodb-aggregation
-belt-flash
