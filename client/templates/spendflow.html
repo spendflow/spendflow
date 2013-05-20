@@ -1,0 +1,29 @@
+<head>
+  <title>Spendflow</title>
+</head>
+
+<body>
+  {{renderPage}}
+</body>
+
+<template name="nav">
+  <ul class="nav nav-tabs">
+    <li id="page-in"><a href="#">In</a></li>
+    <li id="page-out"><a href="#">Out</a></li>
+    <li id="page-gone"><a href="#">Gone</a></li>
+    <li id="page-to-do"><a href="#">To do</a></li>
+  </ul>
+</template>
+
+<template name="public">
+  <div>Not logged in.</div>
+  {{loginButtons}}
+</template>
+
+<template name="loading">
+  We assure you the page is loading, even though there's not a fancy spinning wheel.
+</template>
+
+<template name="index">
+  {{> nav}}
+</template>
