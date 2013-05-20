@@ -4,3 +4,15 @@
 # but you can also edit it by hand.
 
 preserve-inputs
+accounts-ui
+accounts-password
+bootstrap
+coffeescript
+jquery
+underscore
+router
+stripe
+moment
+accounting
+mongodb-aggregation
+belt-flash

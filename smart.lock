@@ -5,7 +5,50 @@
     "commit": "5d736d4bf0448c7db1f9b47124dfafc34a9631bb"
   },
   "dependencies": {
-    "basePackages": {},
-    "packages": {}
+    "basePackages": {
+      "router": {},
+      "stripe": {},
+      "moment": {},
+      "accounting": {},
+      "mongodb-aggregation": {},
+      "belt-flash": {}
+    },
+    "packages": {
+      "router": {
+        "git": "https://github.com/tmeasday/meteor-router.git",
+        "tag": "v0.5.1",
+        "commit": "32e377c7703bb119acccc859fc7296882903cbe7"
+      },
+      "stripe": {
+        "git": "https://github.com/appleifreak/stripe-meteor.git",
+        "tag": "v1.2.0",
+        "commit": "4f156b5d8208fd449a5689cc259a95e673ef1252"
+      },
+      "moment": {
+        "git": "https://github.com/possibilities/meteor-moment.git",
+        "tag": "v1.7.0",
+        "commit": "c64b6ec0e714b9556f4b6643d430b868ba69d3d7"
+      },
+      "accounting": {
+        "git": "https://github.com/IainShigeoka/meteor-accounting.git",
+        "tag": "v0.3.2.3",
+        "commit": "330cf532e6ac7282cf85ef3b83a54c1a25f5bdae"
+      },
+      "mongodb-aggregation": {
+        "git": "https://github.com/jhoxray/meteor-mongo-extensions.git",
+        "tag": "v0.1.5",
+        "commit": "54579b8a35fc59939995c63af26305024ed3bdad"
+      },
+      "belt-flash": {
+        "git": "https://github.com/meteorbelt/belt-flash.git",
+        "tag": "v0.1.0",
+        "commit": "6300bc8df4021b1b8f8f3ad1516de24280f727b6"
+      },
+      "page-js-ie-support": {
+        "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",
+        "tag": "v1.3.5",
+        "commit": "b99ed8380aefd10b2afc8f18d9eed4dd0d8ea9cb"
+      }
+    }
   }
 }

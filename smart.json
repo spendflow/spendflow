@@ -3,5 +3,12 @@
     "git": "https://github.com/meteor/meteor.git",
     "branch": "master"
   },
-  "packages": {}
+  "packages": {
+    "router": {},
+    "stripe": {},
+    "moment": {},
+    "accounting": {},
+    "mongodb-aggregation": {},
+    "belt-flash": {}
+  }
 }
