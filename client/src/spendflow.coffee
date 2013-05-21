@@ -1,5 +1,9 @@
 Meteor.Router.add({
   '/': 'index'
+  '/income': 'income'
+  '/expenses': 'expenses'
+  '/payments': 'payments'
+  '/tasks': 'tasks'
 })
 
 Meteor.Router.filters({
