@@ -1,0 +1,27 @@
+<template name="accounts">
+  <button class="btn btn-large new-account-trigger" data-toggle="collapse" data-target="#new-account-form"><i
+    class="icon-plus"></i>New account
+  </button>
+  {{> newAccountForm}}
+</template>
+
+<template name="newAccountForm">
+  <div id="new-account-form" class="collapse">
+    <form id="new-account-form">
+      <div>
+        <select name="type">
+          {{! TODO: Be sure to actually validate these values}}
+          <option value="">Select account type</option>
+          <option value="bank">Bank account (for receiving income)</option>
+          <option value="payFrom">Virtual/savings account for specific expenses (e.g. Eating Out)</option>
+          <option value="payTo">Accounts to pay back (e.g. Credit Card)</option>
+        </select>
+      </div>
+      <label>Name this account</label>
+      <input type="text" name="name"/>
+      <label>Initial account balance</label>
+      <input type="text" placeholder="0.00"/>
+      <div><button type="submit" class="btn">Add</button></div>
+    </form>
+  </div>
+</template>
