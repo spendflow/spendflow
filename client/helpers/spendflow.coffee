@@ -18,3 +18,8 @@ Meteor.Router.filters({
 })
 
 Meteor.Router.filter('checkLoggedIn')
+
+# Define some generally-useful stuff
+
+@successAlertSelector = "#nav-flash-success"
+@errorAlertSelector = "#nav-flash-error"

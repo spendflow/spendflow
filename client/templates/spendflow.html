@@ -5,6 +5,8 @@
 <body>
   {{#if currentUser}}
     {{> nav}}
+    {{> errorAlert}}
+    {{> successAlert}}
   {{/if}}
   {{renderPage}}
 </body>
@@ -20,4 +22,16 @@
 
 <template name="index">
   <div>Some sort of fantastic dashboard will go here.</div>
+</template>
+
+<template name="errorAlert">
+  <div id="nav-flash-error" class="alert alert-error">
+
+  </div>
+</template>
+
+<template name="successAlert">
+  <div id="nav-flash-success" class="alert alert-success">
+
+  </div>
 </template>
