@@ -5,6 +5,7 @@ Meteor.Router.add({
   '/payments': 'payments'
   '/tasks': 'tasks'
   '/accounts': 'accounts'
+  '/envelopes': 'envelopes'
 })
 
 Meteor.Router.filters({
