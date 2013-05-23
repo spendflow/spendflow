@@ -1,9 +1,14 @@
 <template name="nav">
-  <ul class="nav nav-tabs">
+  {{! Put these into a Settings dropdown or something}}
+  <ul class="nav nav-pills pull-right">
+    <li id="page-accounts"><a href="{{accountsUrl}}">Accounts</a></li>
+    <li id="page-envelopes"><a href="{{accountsUrl}}">Envelopes</a></li>
+  </ul>
+
+  <ul class="nav nav-pills pull-left">
     <li id="page-income"><a href="{{incomeUrl}}">Income</a></li>
     <li id="page-expenses"><a href="{{expensesUrl}}">Expenses</a></li>
     <li id="page-payments"><a href="{{paymentsUrl}}">Payments</a></li>
     <li id="page-tasks"><a href="{{tasksUrl}}">Tasks</a></li>
-    <li id="page-accounts"><a href="{{accountsUrl}}">Accounts</a></li>
   </ul>
 </template>
