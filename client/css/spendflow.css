@@ -2,3 +2,12 @@
 .alert {
   display: none;
 }
+
+/* line 2, ../scss/views/_accounts.scss */
+.account-list > table {
+  width: auto;
+}
+/* line 5, ../scss/views/_accounts.scss */
+.account-list > table td {
+  min-width: 6em;
+}

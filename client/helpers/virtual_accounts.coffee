@@ -4,7 +4,7 @@ Template.newAccountForm.events {
     event.preventDefault();
     accountType = $('[name="type"]').val()
     accountName = $('[name="name"]').val()
-    accountInitialBalance = if $('[name="initialBalance"]').val().toString() isnt "" then $('[name="initialBalance"]').val() else undefined
+    accountBalance = if $('[name="balance"]').val().toString() isnt "" then $('[name="balance"]').val() else undefined
 
     if not accountType or not accountName or (accountType is "payFrom" and (not accountInitialBalance or accountInitialBalance.toString() is ""))
       showAlert("Please select an account type and give it a name. If it's a Pay From account, enter an initial balance, even if that is 0.", $(errorAlertSelector))
@@ -14,7 +14,7 @@ Template.newAccountForm.events {
         owner: Meteor.userId()
         type: accountType
         name: accountName
-        initialBalance: accountInitialBalance
+        balance: accountBalance
       }, (error, result) ->
         if not error
           $('input, select', $('#new-account-form')).val("")
@@ -23,3 +23,6 @@ Template.newAccountForm.events {
           showAlert("There was a problem adding the new account. Please try again. If the problem persists, contact us.", $(errorAlertSelector))
           console.log error
 }
+
+Template.accountList.virtualAccounts = ->
+  VirtualAccounts.find().fetch()

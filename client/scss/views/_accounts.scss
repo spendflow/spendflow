@@ -1,0 +1,9 @@
+.account-list {
+  > table {
+    width: auto;
+
+    td {
+      min-width: 6em;
+    }
+  }
+}
