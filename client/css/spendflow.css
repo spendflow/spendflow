@@ -3,6 +3,11 @@
   display: none;
 }
 
+/* line 5, ../scss/spendflow.scss */
+#spendflow {
+  clear: both;
+}
+
 /* line 2, ../scss/views/_accounts.scss */
 .account-list > table {
   width: auto;
