@@ -5,17 +5,19 @@
 
 <template name="envelopeList">
   {{! LIST OF THE THINGS}}
-  <div class="envelope-list">
+  <div class="envelope-list record-list">
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Balance</th>
+          <th>Connected account</th>
+          <th>Amount</th>
+          <th>Enabled by default</th>
+          <th>Active?</th>
+          <th>&nbsp;</th>
         </tr>
       </thead>
       <tbody>
-        {{#each virtualEnvelopes}}
+        {{#each envelopes}}
           {{> envelope}}
         {{/each}}
       </tbody>
@@ -25,10 +27,12 @@
 
 <template name="envelope">
   {{! ROW OF THE THINGS}}
-  <tr>
-    <td>{{name}}</td>
-    <td>{{type}}</td>
-    <td>{{balance}}</td>
+  <tr data-target="{{_id}}">
+    <td>{{virtualAccount}}</td>
+    <td>{{rate}}</td>
+    <td>{{enabledByDefault}}</td>
+    <td>{{active}}</td>
+    <td><i class="remove-envelope cursor-pointer icon-trash"></i></td>
   </tr>
 </template>
 
@@ -41,18 +45,22 @@
     {{! FORM FIELDS}}
     <form id="new-envelope-form">
       <div>
-        <select name="type">
-          {{! TODO: Be sure to actually validate these values}}
-          <option value="">Select envelope type</option>
-          <option value="bank">Bank envelope (for receiving income)</option>
-          <option value="payFrom">Virtual/savings envelope for specific expenses (e.g. Eating Out)</option>
-          <option value="payTo">Envelopes to pay back (e.g. Credit Card)</option>
-        </select>
+        <div>Which account should be connected to this envelope? Money saved will go there automatically.</div>
+        <div>
+          <select name="virtualAccountId">
+            {{#each virtualAccounts}}
+              {{> selectOptions}}
+            {{/each}}
+          </select>
+        </div>
       </div>
-      <label>Name this envelope</label>
-      <input type="text" name="name"/>
-      <label>Initial envelope balance</label>
-      <input type="text" placeholder="0.00" name="balance" />
+      <label>How much income should be saved? (for 10%, enter 10. You can use decimals such as 10.5)</label>
+      <div class="input-append">
+        <input type="text" placeholder="30" name="rate" />
+        <span class="add-on">%</span>
+      </div>
+      <div><input type="checkbox" name="enabledByDefault" value="1" /> Check the box to put a portion of all new income into this envelope. <strong>You can still select and un-select it when you're creating the income.</strong> If you know some of most income will go into this envelope, check the box.</div>
+      <div><input type="checkbox" name="active" value="1" checked /> Un-check to deactivate this envelope. This won't affect past data.</div>
       <div><button type="submit" class="btn add-envelope">Add</button></div>
     </form>
   </div>
