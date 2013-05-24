@@ -2,8 +2,30 @@
   display: none;
 }
 
+body {
+  margin: 20px;
+}
+
+.nav-alert {
+  clear: both;
+}
+
 #spendflow {
   clear: both;
+}
+
+.record-list {
+  > table {
+    width: auto;
+
+    td {
+      min-width: 6em;
+    }
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 @import "views/_accounts";

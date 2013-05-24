@@ -4,15 +4,30 @@
 }
 
 /* line 5, ../scss/spendflow.scss */
+body {
+  margin: 20px;
+}
+
+/* line 9, ../scss/spendflow.scss */
+.nav-alert {
+  clear: both;
+}
+
+/* line 13, ../scss/spendflow.scss */
 #spendflow {
   clear: both;
 }
 
-/* line 2, ../scss/views/_accounts.scss */
-.account-list > table {
+/* line 18, ../scss/spendflow.scss */
+.record-list > table {
   width: auto;
 }
-/* line 5, ../scss/views/_accounts.scss */
-.account-list > table td {
+/* line 21, ../scss/spendflow.scss */
+.record-list > table td {
   min-width: 6em;
+}
+
+/* line 27, ../scss/spendflow.scss */
+.cursor-pointer {
+  cursor: pointer;
 }
