@@ -42,7 +42,7 @@ Template.newEnvelopeForm.events {
 
 Template.envelope.events {
   'click .remove-envelope': (event) ->
-    envelopeId = $(event.target).parents('tr').attr("data-target")
+    envelopeId = recordIdFromRow event
     Envelopes.remove envelopeId, (error) ->
       if not error
         showNavSuccess "Envelope removed."
