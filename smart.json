@@ -11,6 +11,8 @@
     "tags": {
       "git": "https://github.com/apendua/meteor-tags",
       "branch": "master"
-    }
+    },
+    "i18n": {},
+    "jquery-ui-bootstrap": {}
   }
 }

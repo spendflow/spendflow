@@ -13,7 +13,9 @@
       "tags": {
         "git": "https://github.com/apendua/meteor-tags",
         "branch": "master"
-      }
+      },
+      "i18n": {},
+      "jquery-ui-bootstrap": {}
     },
     "packages": {
       "router": {
@@ -41,10 +43,25 @@
         "branch": "master",
         "commit": "3251f840c919148a1033e65a227629a916dec886"
       },
+      "i18n": {
+        "git": "https://github.com/jerico-dev/meteor-i18n.git",
+        "tag": "v0.0.9",
+        "commit": "2cd6c72107a0d4afde57fb765ce9d57ad8ba43e2"
+      },
+      "jquery-ui-bootstrap": {
+        "git": "https://github.com/TimHeckel/meteor-jquery-ui-bootstrap.git",
+        "tag": "v0.1.2",
+        "commit": "fa742a85639307003e105898e15b631394b63509"
+      },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",
         "tag": "v1.3.5",
         "commit": "b99ed8380aefd10b2afc8f18d9eed4dd0d8ea9cb"
+      },
+      "jquery-ui": {
+        "git": "https://github.com/TimHeckel/meteor-jquery-ui.git",
+        "tag": "v1.9.2",
+        "commit": "c437d45edcf1367df8d5ffa8bad2867758030bd2"
       }
     }
   }
