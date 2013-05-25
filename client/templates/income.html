@@ -1,10 +1,28 @@
 <template name="income">
-  <button class="btn new-income-trigger" data-toggle="collapse" data-target="#new-income-form"><i class="icon-plus"></i>New income</button>
-  <div id="new-income-form" class="collapse">
-    Form goes here
-  </div>
+  {{> incomeList}}
+  {{> newIncomeForm}}
+</template>
 
-  <div class="income-table-wrapper">
+<template name="incomeList">
+  <div class="income-list">
     Table is going to go here
   </div>
+</template>
+
+<template name="incomeRecord">
+{{! Template name diverges from the norm to avoid a name conflict.}}
+
+</template>
+
+<template name="newIncomeForm">
+  <button class="btn btn-large new-income-trigger" data-toggle="collapse" data-target="#new-income-form"><i class="icon-plus"></i>New income</button>
+  <div id="new-income-form" class="collapse">
+    {{> incomeForm}}
+  </div>
+</template>
+
+<template name="incomeForm">
+  <form{{#if _id}} class="edit-record-form" data-target="{{_id}}"{{else}} class="add-record-form"{{/if}}>
+
+  </form>
 </template>
