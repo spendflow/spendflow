@@ -7,6 +7,8 @@
 @checkboxStateByName = (fieldName, $context = undefined) ->
   $("[name=\"#{fieldName}\"]", $context).is(':checked');
 
+@elementByName = (fieldName, $context = undefined) ->
+  $("[name=\"#{fieldName}\"]", $context);
 
 ### Wrapper functions for within Template.templateName.events ###
 

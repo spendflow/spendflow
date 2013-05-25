@@ -23,6 +23,7 @@
 
 <template name="incomeForm">
   <form{{#if _id}} class="edit-record-form" data-target="{{_id}}"{{else}} class="add-record-form"{{/if}}>
-
+    <label>Date when income can be used</label>
+    <input type="text" name="receiptDate" />
   </form>
 </template>
