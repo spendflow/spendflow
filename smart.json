@@ -8,8 +8,6 @@
     "stripe": {},
     "moment": {},
     "accounting": {},
-    "mongodb-aggregation": {},
-    "belt-flash": {},
     "tags": {
       "git": "https://github.com/apendua/meteor-tags",
       "branch": "master"
