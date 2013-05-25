@@ -17,7 +17,10 @@ Template.envelopeList.envelopes = ->
   Envelopes.find().fetch()
 
 Template.envelope.virtualAccount = ->
-  VirtualAccounts.findOne(this.virtualAccountId).name
+  virtualAccount = VirtualAccounts.findOne(this.virtualAccountId)
+  if virtualAccount
+    return virtualAccount.name
+  undefined
 
 Template.envelopeForm.events {
   'click .add-envelope': (event) ->
