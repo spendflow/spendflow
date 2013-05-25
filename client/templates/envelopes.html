@@ -23,16 +23,21 @@
       </tbody>
     </table>
   </div>
+  {{#with editingEnvelope}}
+    <fieldset>
+      {{> envelopeForm}}
+    </fieldset>
+  {{/with}}
 </template>
 
 <template name="envelope">
   {{! ROW OF THE THINGS}}
-  <tr data-target="{{_id}}">
+  <tr data-target="{{_id}}"{{#if thisRowBeingEdited}} class="being-edited"{{/if}}>
     <td>{{virtualAccount}}</td>
-    <td>{{rate}}</td>
+    <td>{{rate}}%</td>
     <td>{{enabledByDefault}}</td>
     <td>{{active}}</td>
-    <td><i class="remove-envelope cursor-pointer icon-trash"></i></td>
+    <td><i class="cursor-pointer edit-envelope icon-pencil"></i> <i class="remove-envelope cursor-pointer icon-trash"></i></td>
   </tr>
 </template>
 
@@ -42,12 +47,18 @@
     class="icon-plus"></i>New envelope
   </button>
   <div id="new-envelope-form" class="collapse">
+    {{> envelopeForm}}
+  </div>
+</template>
+
+<template name="envelopeForm">
     {{! FORM FIELDS}}
-    <form>
+    <form{{#if _id}} class="edit-record-form" data-target="{{_id}}"{{else}} class="add-record-form"{{/if}}>
       <div>
         <div>Which account should be connected to this envelope? Money saved will go there automatically.</div>
         <div>
           <select name="virtualAccountId">
+            <option value="">Select an account</option>
             {{#each virtualAccounts}}
               {{> selectOptions}}
             {{/each}}
@@ -56,12 +67,15 @@
       </div>
       <label>How much income should be saved? (for 10%, enter 10. You can use decimals such as 10.5)</label>
       <div class="input-append">
-        <input type="text" placeholder="30" name="rate" />
+        <input type="text" placeholder="30" name="rate"{{#if _id}} value="{{rate}}"{{/if}} />
         <span class="add-on">%</span>
       </div>
-      <div><input type="checkbox" name="enabledByDefault" value="1" /> Check the box to put a portion of all new income into this envelope. <strong>You can still select and un-select it when you're creating the income.</strong> If you know some of most income will go into this envelope, check the box.</div>
-      <div><input type="checkbox" name="active" value="1" checked /> Un-check to deactivate this envelope. This won't affect past data.</div>
-      <div><button type="submit" class="btn add-envelope">Add</button></div>
+      <div><input type="checkbox" name="enabledByDefault" value="1" {{#if _id}}{{#if enabledByDefault}}checked{{/if}}{{/if}} /> Check the box to put a portion of all new income into this envelope. <strong>You can still select and un-select it when you're creating the income.</strong> If you know some of most income will go into this envelope, check the box.</div>
+      <div><input type="checkbox" name="active" value="1" {{#if _id}}{{#if active}}checked{{/if}}{{else}}checked{{/if}} /> Un-check to deactivate this envelope. This won't affect past data.</div>
+      <div>
+        <button type="submit" class="btn {{#if _id}}save-envelope{{else}}add-envelope{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>
+        {{#if _id}}<button class="btn cancel-editing">Cancel</button>{{/if}}
+      </div>
     </form>
   </div>
 </template>

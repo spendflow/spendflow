@@ -28,5 +28,10 @@ body {
   cursor: pointer;
 }
 
+.being-edited {
+  font-weight: bold;
+  color: #00f;
+}
+
 @import "views/_accounts";
 @import "views/_envelopes";
