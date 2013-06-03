@@ -86,3 +86,13 @@ Template.account.events {
         showNavError "I couldn't remove the account for some reason. Try again, and contact us if problems persist."
         console.log error
 }
+
+@getAccountSelector = (virtualAccounts = getVirtualAccounts()) ->
+  self = this
+
+  for virtualAccount in virtualAccounts
+    {
+    optionValue: virtualAccount._id
+    optionText: virtualAccount.name
+    selected: if virtualAccount._id is self.virtualAccountId then true else false
+    }

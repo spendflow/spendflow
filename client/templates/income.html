@@ -15,8 +15,8 @@
 </template>
 
 <template name="newIncomeForm">
-  <button class="btn btn-large new-income-trigger" data-toggle="collapse" data-target="#new-income-form"><i class="icon-plus"></i>New income</button>
-  <div id="new-income-form" class="collapse">
+  <button class="btn btn-large new-income-trigger" data-toggle="collapse" data-target="#new-income-form"><i class="icon-plus"></i> New income</button>
+  <div id="new-income-form"{{#if incomesCount}} class="collapse"{{/if}}>
     {{> incomeForm}}
   </div>
 </template>
@@ -25,5 +25,46 @@
   <form{{#if _id}} class="edit-record-form" data-target="{{_id}}"{{else}} class="add-record-form"{{/if}}>
     <label>Date when income can be used</label>
     <input type="text" name="receiptDate" />
+
+    <label>Briefly describe the income</label>
+    <input type="text" name="description" />
+
+    <label>Amount</label>
+    <input type="text" name="amount" />
+
+    {{! TODO: Add tags using meteor-tags}}
+
+    <label>Select any envelopes that should receive some of this income</label>
+    <fieldset>
+      {{#each envelopes}}
+        <input type="checkbox" name="envelopes[]" value="{{_id}}" {{#unless ../_id}}{{#if enabledByDefault}} checked{{/if}}{{else}}{{#if envelopeInUse}} checked{{/if}}{{/unless}} />
+          {{rate}}% -> {{virtualAccount}}
+          <fieldset><label>If you need to specify exactly how much should be put into the envelope, specify it here. (It's better to just create a new Envelope if you want to change the <em>rate</em>.</label>
+            <input type="text" name="envelopeAmounts[]" />
+          </fieldset>
+      {{/each}}
+    </fieldset>
+
+    <label>Have you transferred this income? (This means physically moving it into the accounts, usually bank accounts, that you'll use to pay the expenses you've scheduled against this income.)</label>
+    <input type="checkbox" name="transferred" />
+
+    <label>Is this business income? (This is used for the calculation that tells you how much of this income to transfer to your personal account.)</label>
+    <input type="checkbox" name="business" />
+
+    <label>Into which physical account will this income be received/deposited?</label>
+    <select name="depositAccountId">
+      <option value="">Select an account</option>
+      {{#each bankAccounts}}
+        {{> selectOptions}}
+      {{/each}}
+    </select>
+
+    <label>If you'd like to include any notes to yourself about this income, enter them here.</label>
+    <textarea class="notes" name="notes"></textarea>
+
+    <div>
+      <button type="submit" class="btn {{#if _id}}save-income{{else}}add-income{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>
+      {{#if _id}}<button class="btn cancel-editing">Cancel</button>{{/if}}
+    </div>
   </form>
 </template>

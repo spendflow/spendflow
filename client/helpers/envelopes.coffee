@@ -1,13 +1,6 @@
 Template.envelopeForm.virtualAccounts = ->
-  virtualAccounts = getVirtualAccounts()
-  self = this
-
-  selectOptions = for virtualAccount in virtualAccounts
-    {
-      optionValue: virtualAccount._id
-      optionText: virtualAccount.name
-      selected: if virtualAccount._id is self.virtualAccountId then true else false
-    }
+  virtualAccounts = getVirtualAccounts undefined, undefined, { type: "payFrom" }
+  getAccountSelector virtualAccounts
 
 Template.envelopeList.editingEnvelope = ->
   envelope = Envelopes.findOne(Session.get 'editingEnvelope') if Session.get 'editingEnvelope'
@@ -17,10 +10,7 @@ Template.envelopeList.envelopes = ->
   Envelopes.find().fetch()
 
 Template.envelope.virtualAccount = ->
-  virtualAccount = VirtualAccounts.findOne(this.virtualAccountId)
-  if virtualAccount
-    return virtualAccount.name
-  undefined
+  getVirtualAccountName this.virtualAccountId
 
 Template.envelopeForm.events {
   'click .add-envelope': (event) ->

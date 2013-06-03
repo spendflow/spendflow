@@ -37,3 +37,9 @@ body {
   font-weight: bold;
   color: #00f;
 }
+
+/* line 2, ../scss/views/_incomes.scss */
+.income .notes {
+  width: 38em;
+  height: 7em;
+}
