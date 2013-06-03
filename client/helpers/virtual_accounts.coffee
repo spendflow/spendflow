@@ -92,7 +92,7 @@ Template.account.events {
 
   for virtualAccount in virtualAccounts
     {
-    optionValue: virtualAccount._id
-    optionText: virtualAccount.name
-    selected: if virtualAccount._id is self.virtualAccountId then true else false
+      optionValue: virtualAccount._id
+      optionText: virtualAccount.name
+      selected: if virtualAccount._id is self.virtualAccountId then true else false
     }
