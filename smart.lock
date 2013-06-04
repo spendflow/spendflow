@@ -15,7 +15,8 @@
         "branch": "master"
       },
       "i18n": {},
-      "jquery-ui-bootstrap": {}
+      "jquery-ui-bootstrap": {},
+      "collection-hooks": {}
     },
     "packages": {
       "router": {
@@ -52,6 +53,11 @@
         "git": "https://github.com/TimHeckel/meteor-jquery-ui-bootstrap.git",
         "tag": "v0.1.2",
         "commit": "fa742a85639307003e105898e15b631394b63509"
+      },
+      "collection-hooks": {
+        "git": "https://github.com/matb33/meteor-collection-hooks.git",
+        "tag": "v0.2.2",
+        "commit": "f35d9209e2828ed97c69ea6c39dde5bd8a7805e8"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",
