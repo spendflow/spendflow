@@ -4,19 +4,63 @@
 </template>
 
 <template name="incomeList">
-  <div class="income-list">
-    Table is going to go here
+  <div class="income-list record-list">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Usable date</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Envelope amounts</th>
+          <th>Transferred</th>
+          <th>Biz</th>
+          <th>Deposit account</th>
+          <th>Notes</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each incomes}}
+          {{> incomeRecord}}
+        {{/each}}
+      </tbody>
+    </table>
   </div>
+  {{#with editingIncome}}
+    {{!TODO: Put all fieldsets in wells, or something}}
+    <fieldset class="well">
+      {{> incomeForm}}
+    </fieldset>
+  {{/with}}
 </template>
 
 <template name="incomeRecord">
-{{! Template name diverges from the norm to avoid a name conflict.}}
-
+  {{! Template name diverges from the norm to avoid a name conflict.}}
+  {{! ROW OF THE THINGS}}
+  <tr data-target="{{_id}}"{{#if thisRowBeingEdited}} class="being-edited"{{/if}}>
+    <td>{{receiptDate}}</td>
+    <td>{{description}}</td>
+    <td>{{amount}}</td>
+    <td>
+      {{#if envelopeAmounts}}
+        <ul class="envelope-amounts">
+        {{#each envelopeAmounts}}
+          <li>{{envelopeAmount}} -> {{envelopeName}} ({{envelopeRate}}%)</li>
+        {{/each}}
+        </ul>
+      {{/if}}
+    </td>
+    <td>{{transferred}}</td>
+    <td>{{business}}</td>
+    <td>{{depositAccount}}</td>
+    <td>{{notes}}</td>
+    <td><i class="cursor-pointer edit-income icon-pencil"></i> <i class="remove-income cursor-pointer icon-trash"></i></td>
+  </tr>
 </template>
 
 <template name="newIncomeForm">
   <button class="btn btn-large new-income-trigger" data-toggle="collapse" data-target="#new-income-form"><i class="icon-plus"></i> New income</button>
-  <div id="new-income-form"{{#if incomesCount}} class="collapse"{{/if}}>
+  <div id="new-income-form" class="{{#unless incomesCount}}in {{/unless}}collapse">
     {{> incomeForm}}
   </div>
 </template>
@@ -24,13 +68,13 @@
 <template name="incomeForm">
   <form{{#if _id}} class="edit-record-form" data-target="{{_id}}"{{else}} class="add-record-form"{{/if}}>
     <label>Date when income can be used</label>
-    <input type="text" name="receiptDate" />
+    <input type="text" name="receiptDate"{{#if _id}} value="{{receiptDate}}"{{/if}} />
 
     <label>Briefly describe the income</label>
-    <input type="text" name="description" />
+    <input type="text" name="description"{{#if _id}} value="{{description}}"{{/if}} />
 
     <label>Amount</label>
-    <input type="text" name="amount" />
+    <input type="text" name="amount"{{#if _id}} value="{{amount}}"{{/if}} />
 
     {{! TODO: Add tags using meteor-tags}}
 
@@ -46,21 +90,22 @@
     </fieldset>
 
     <label>Have you transferred this income? (This means physically moving it into the accounts, usually bank accounts, that you'll use to pay the expenses you've scheduled against this income.)</label>
-    <input type="checkbox" name="transferred" />
+    <input type="checkbox" name="transferred"{{#if _id}}{{#if transferred}} checked{{/if}}{{/if}} />
 
     <label>Is this business income? (This is used for the calculation that tells you how much of this income to transfer to your personal account.)</label>
-    <input type="checkbox" name="business" />
+    <input type="checkbox" name="business"{{#if _id}}{{#if business}} checked{{/if}}{{/if}} />
 
     <label>Into which physical account will this income be received/deposited?</label>
     <select name="depositAccountId">
       <option value="">Select an account</option>
+      {{!TODO: Make this work}}
       {{#each bankAccounts}}
         {{> selectOptions}}
       {{/each}}
     </select>
 
     <label>If you'd like to include any notes to yourself about this income, enter them here.</label>
-    <textarea class="notes" name="notes"></textarea>
+    <textarea class="notes" name="notes">{{#if _id}}{{notes}}{{/if}}</textarea>
 
     <div>
       <button type="submit" class="btn {{#if _id}}save-income{{else}}add-income{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>

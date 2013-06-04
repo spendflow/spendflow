@@ -24,3 +24,9 @@ Incomes
 if Meteor.isClient
   Deps.autorun =>
     Meteor.subscribe 'spendflowIncomes'
+
+# Hooks
+@Incomes.before "insert", (userId, doc) ->
+  userId = getCurrentUserId(this) if not userId
+
+  doc.owner = userId if doc.owner isnt userId
