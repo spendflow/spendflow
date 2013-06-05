@@ -12,6 +12,14 @@ Template.incomeRecord.events {
   'click .edit-income': (event) ->
     incomeId = recordIdFromRow event
     Session.set 'editingIncome', incomeId
+  'click .remove-income': (event) ->
+    incomeId = recordIdFromRow event
+    Incomes.remove incomeId, (error) ->
+      if not error
+        showNavSuccess "Income removed."
+      else
+        showNavError "I couldn't remove the income for some reason. Try again, and contact us if problems persist."
+        console.log error
 }
 
 Template.newIncomeForm.incomesCount = ->
@@ -25,7 +33,13 @@ Template.incomeForm.rendered = ->
 # TODO: Make sure that enveloeps being used in the currently-edited record (or anywhere the active flag is checked) always are returned.
 Template.incomeForm.envelopes = ->
   massaged = []
-  getActiveEnvelopes().forEach((envelope) ->
+  envelopesInUse = if @envelopes then @envelopes else {}
+  getActiveEnvelopes(undefined, undefined, envelopesInUse).forEach((envelope) =>
+    # Not the same as envelopesInUse above
+    envelopeInUse = @envelopes and @envelopes[envelope._id]
+    if envelopeInUse
+      envelope.envelopeInUse = true
+      envelope.envelopeAmount = @envelopes[envelope._id].amountOverride || ""
     envelope.virtualAccount = getVirtualAccountName envelope.virtualAccountId
     massaged.push envelope
   )
@@ -45,6 +59,11 @@ Template.incomeForm.events {
         type: 'manual'
       },
       parseIncomeForm $context
+    )
+
+    # Prep envelopes
+    _.each(incomeValues.envelopes, (env) ->
+      env.paid = false
     )
 
     # Sanitize the data a bit
@@ -78,7 +97,7 @@ parseIncomeForm = ($context) ->
   ifp = new FormProcessor $context
 
   # TODO: Set up the envelopes object appropriately
-  envelopes = {};
+  envelopes = parseEnvelopes ifp
 
   parsedForm = {
     receiptDate: ifp.valByName('receiptDate')
@@ -91,3 +110,20 @@ parseIncomeForm = ($context) ->
     notes: ifp.valByName('notes')
   }
   parsedForm
+
+parseEnvelopes = (formProcessor) ->
+  envelopes = {}
+
+  _.each(formProcessor.selectedCheckboxValues("envelopes"), (env) ->
+    envelopes[env] = {
+      _id: env
+      amountOverride: null
+    }
+
+    amountOverride = $("##{env}").find("[name=\"envelopeAmounts\\[\\]\"]:eq(0)", formProcessor.$context).attr('value')
+
+    if amountOverride then envelopes[env].amountOverride = amountOverride
+  )
+
+  envelopes
+
