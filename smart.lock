@@ -56,8 +56,8 @@
       },
       "collection-hooks": {
         "git": "https://github.com/matb33/meteor-collection-hooks.git",
-        "tag": "v0.2.2",
-        "commit": "f35d9209e2828ed97c69ea6c39dde5bd8a7805e8"
+        "tag": "v0.2.3",
+        "commit": "0250c8a6e08fe28f44ec3b89274b127799437dbc"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",
