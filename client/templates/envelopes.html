@@ -72,9 +72,9 @@
         <span class="add-on">%</span>
       </div>
 
-      <div><input type="checkbox" name="enabledByDefault" value="1" {{#if _id}}{{#if enabledByDefault}}checked{{/if}}{{/if}} /> Check the box to put a portion of all new income into this envelope. <strong>You can still select and un-select it when you're creating the income.</strong> If you know some of most income will go into this envelope, check the box.</div>
+      <div><input type="checkbox" name="enabledByDefault" value="1" {{#if _id}}{{#if enabledByDefault}}checked{{/if}}{{/if}} /> <strong>Enabled by default.</strong> Check the box to put a portion of all new income into this envelope. <strong>You can still select and un-select it when you're creating the income.</strong> If you know some of most income will go into this envelope, check the box.</div>
 
-      <div><input type="checkbox" name="active" value="1" {{#if _id}}{{#if active}}checked{{/if}}{{else}}checked{{/if}} /> Un-check to deactivate this envelope. This won't affect past data.</div>
+      <div><input type="checkbox" name="active" value="1" {{#if _id}}{{#if active}}checked{{/if}}{{else}}checked{{/if}} /> <strong>Active.</strong> Un-check to deactivate this envelope. This won't affect past data.</div>
 
       <div>
         <button type="submit" class="btn {{#if _id}}save-envelope{{else}}add-envelope{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>
