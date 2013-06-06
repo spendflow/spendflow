@@ -51,7 +51,7 @@ Template.envelopeForm.events {
     if not virtualAccountId or not rate
       showNavError "Please pick an account and enter a rate."
     else
-      Envelopes.update envelopeId, {
+      Envelopes.update(envelopeId, {
         $set: {
           virtualAccountId: virtualAccountId
           rate: rate
@@ -66,6 +66,7 @@ Template.envelopeForm.events {
         else
           showNavError "There was a problem updating the envelope. Please try again. If the problem persists, contact us."
           console.log error
+      )
   'click .cancel-editing': (event) ->
     event.preventDefault()
     Session.set 'editingEnvelope', null
