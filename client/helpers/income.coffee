@@ -88,6 +88,51 @@ Template.incomeForm.events {
       else
         showNavError "There was a problem adding the new income. Please try again. If the problem persists, contact us."
         console.log error
+  'click .save-income': (event) ->
+    event.preventDefault()
+    $context = $(event.target).parents('.edit-record-form')
+    incomeId = recordIdFromForm event
+
+    incomeValues = _.extend(
+      {
+        type: 'manual'
+      },
+      parseIncomeForm $context
+    )
+
+    # Prep new envelopes
+    _.each(incomeValues.envelopes, (env) ->
+      env.paid = false if not env.paid
+    )
+
+    # Sanitize the data a bit
+    incomeValues.amount = +incomeValues.amount
+
+    # Initialize system-managed fields
+    # TODO: Recalculate the below when saving an update
+    incomeValues.amountRemaining = incomeValues.amount if not incomeValues.amountRemaining
+    incomeValues.pendingPaymentTotal = 0.0 if not incomeValues.pendingPaymentTotal
+    incomeValues.nonBusinessTotal = 0.0 if not incomeValues.nonBusinessTotal
+
+    # TODO: Don't forget about the tags!
+
+    # Validate
+    if not incomeValues.receiptDate or not incomeValues.description or not incomeValues.amount or isNaN incomeValues.amount
+      showNavError("To add an income entry, you have to fill out the date from which it can be used, describe it, and enter an amount. Most of the time, you should pick the physical account where the income will arrive as well.")
+      return
+
+    # TODO: MVP / QUIT COPYING THIS! MAKE A COMMON FORM-SAVING PATTERN!
+    Incomes.update incomeId, {
+      $set: incomeValues
+    }, (error, result) ->
+      if not error
+        $('input, select, textarea', $('.edit-record-form')).val("")
+        showNavSuccess "<em>#{incomeValues.description}</em> updated."
+        Session.set 'editingIncome', null
+      else
+        showNavError "There was a problem updating <em>#{incomeValues.description}</em>. Please try again. If the problem persists, contact us."
+        console.log error
+
   'click .cancel-editing': (event) ->
     event.preventDefault()
     Session.set 'editingIncome', null
