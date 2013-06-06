@@ -1,6 +1,6 @@
 Template.envelopeForm.virtualAccounts = ->
   virtualAccounts = getVirtualAccounts undefined, undefined, { type: "payFrom" }
-  getAccountSelector virtualAccounts
+  getAccountSelector virtualAccounts, this.virtualAccountId
 
 Template.envelopeList.editingEnvelope = ->
   envelope = Envelopes.findOne(Session.get 'editingEnvelope') if Session.get 'editingEnvelope'

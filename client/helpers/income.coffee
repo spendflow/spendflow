@@ -34,7 +34,7 @@ Template.incomeForm.rendered = ->
 Template.incomeForm.envelopes = ->
   massaged = []
   envelopesInUse = if @envelopes then @envelopes else {}
-  getActiveEnvelopes(undefined, undefined, envelopesInUse).forEach((envelope) =>
+  getActiveEnvelopes(undefined, undefined, Object.keys envelopesInUse).forEach((envelope) =>
     # Not the same as envelopesInUse above
     envelopeInUse = @envelopes and @envelopes[envelope._id]
     if envelopeInUse
@@ -47,7 +47,7 @@ Template.incomeForm.envelopes = ->
 
 Template.incomeForm.bankAccounts = ->
   virtualAccounts = getVirtualAccounts undefined, undefined, { type: "bank" }
-  getAccountSelector virtualAccounts
+  getAccountSelector virtualAccounts, this.depositAccountId
 
 Template.incomeForm.events {
   'click .add-income': (event) ->

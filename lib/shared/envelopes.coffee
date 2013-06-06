@@ -4,6 +4,12 @@
 
   data = Envelopes.find({
     owner: userId
+    $or: [
+      { active: true }
+      _id: { $in: envelopeIdsInUse }
+    ]
   }).fetch()
+
+  # TODO: Make envelopeIdsInUse work
 
   data
