@@ -33,6 +33,12 @@ body {
   color: #00f;
 }
 
+.main-amount {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: green;
+}
+
 @import "views/_accounts";
 @import "views/_envelopes";
 @import "views/_incomes";

@@ -13,3 +13,6 @@
   # TODO: Make envelopeIdsInUse work
 
   data
+
+@calculateEnvelopeAmount = (rate, amount, amountOverride) ->
+  if not amountOverride then (+rate/100 * +amount) else amountOverride

@@ -38,6 +38,13 @@ body {
   color: #00f;
 }
 
+/* line 36, ../scss/spendflow.scss */
+.main-amount {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: green;
+}
+
 /* line 2, ../scss/views/_incomes.scss */
 .income .notes {
   width: 38em;

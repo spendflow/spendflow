@@ -4,9 +4,30 @@ Template.incomeList.incomes = ->
 Template.incomeList.editingIncome = ->
   income = Incomes.findOne(Session.get 'editingIncome') if Session.get 'editingIncome'
   income
-  
+
 Template.incomeRecord.thisRowBeingEdited = ->
   Session.equals('editingIncome', this._id)
+
+Template.incomeRecord.amount = ->
+  accounting.formatMoney @amount
+
+Template.incomeRecord.envelopeAmounts = ->
+  envelopeAmounts = []
+  _.each(@envelopes, (env, envId) =>
+    envData = Envelopes.findOne envId || {}
+    va = VirtualAccounts.findOne(envData.virtualAccountId)
+    envelopeAmounts.push {
+      envelopeAmount: accounting.formatNumber(calculateEnvelopeAmount envData.rate, @amount, env.amountOverride, { precision: spendflowPrecision })
+      envelopeName: if va then va.name else "(unnamed account)"
+      envelopeRate: envData.rate
+      amountOverridden: !! env.amountOverride
+    }
+  )
+  envelopeAmounts
+
+Template.incomeRecord.depositAccount = ->
+  virtualAccount = VirtualAccounts.findOne this.depositAccountId
+  virtualAccount.name if virtualAccount
 
 Template.incomeRecord.events {
   'click .edit-income': (event) ->

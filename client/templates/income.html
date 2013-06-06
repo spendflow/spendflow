@@ -40,12 +40,12 @@
   <tr data-target="{{_id}}"{{#if thisRowBeingEdited}} class="being-edited"{{/if}}>
     <td>{{receiptDate}}</td>
     <td>{{description}}</td>
-    <td>{{amount}}</td>
+    <td class="main-amount">{{amount}}</td>
     <td>
       {{#if envelopeAmounts}}
         <ul class="envelope-amounts">
         {{#each envelopeAmounts}}
-          <li>{{envelopeAmount}} -> {{envelopeName}} ({{envelopeRate}}%)</li>
+          <li>{{#if amountOverridden}}<em>{{/if}}<strong>{{envelopeAmount}}</strong>{{#if amountOverridden}}</em>{{/if}} -> {{envelopeName}} ({{envelopeRate}}%)</li>
         {{/each}}
         </ul>
       {{/if}}
