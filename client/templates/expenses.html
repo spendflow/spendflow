@@ -1,0 +1,92 @@
+<template name="expenses">
+  {{> expenseList}}
+  {{> newExpenseForm}}
+</template>
+
+<template name="expenseList">
+  <div class="expense-list record-list">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Due date</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Biz</th>
+          <th>One-time</th>
+          <th>Owed account</th>
+          <th>Notes</th>
+          <th>Paid with</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each expenses}}
+          {{> expense}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  {{#with editingExpense}}
+    {{!TODO: Put all fieldsets in wells, or something}}
+    <fieldset class="well">
+      {{> expenseForm}}
+    </fieldset>
+  {{/with}}
+</template>
+
+<template name="expense">
+  {{! Template name diverges from the norm to avoid a name conflict.}}
+  {{! ROW OF THE THINGS}}
+  <tr data-target="{{_id}}"{{#if thisRowBeingEdited}} class="being-edited"{{/if}}>
+    <td>{{dueDate}}</td>
+    <td>{{description}}</td>
+    <td class="main-amount">{{amount}}</td>
+    <td>{{business}}</td>
+    <td>{{oneTime}}</td>
+    <td>{{payToVirtualAccount}}</td>
+    <td>
+      {{#if payFromVirtualAccounts}}
+        <ul class="pay-from">
+        {{#each payFromVirtualAccounts}}
+          <li>{{virtualAccountName}}</li>
+        {{/each}}
+        </ul>
+      {{/if}}
+    </td>
+    <td>{{notes}}</td>
+    <td><i class="cursor-pointer edit-expense icon-pencil"></i> <i class="remove-expense cursor-pointer icon-trash"></i></td>
+  </tr>
+</template>
+
+<template name="newExpenseForm">
+  <button class="btn btn-large new-expense-trigger" data-toggle="collapse" data-target="#new-expense-form"><i class="icon-plus"></i> New expense</button>
+  <div id="new-expense-form" class="{{#unless expensesCount}}in {{/unless}}collapse">
+    {{> expenseForm}}
+  </div>
+</template>
+
+<template name="expenseForm">
+  <form{{#if _id}} class="edit-record-form" data-target="{{_id}}"{{else}} class="add-record-form"{{/if}}>
+    <label>Date by which expense must be paid</label>
+    <input type="text" name="receiptDate"{{#if _id}} value="{{receiptDate}}"{{/if}} />
+
+    <label>Briefly describe the expense</label>
+    <input type="text" name="description"{{#if _id}} value="{{description}}"{{/if}} />
+
+    <label>Amount</label>
+    <input type="text" name="amount"{{#if _id}} value="{{amount}}"{{/if}} />
+
+    {{! TODO: Add tags using meteor-tags}}
+
+    <label>Is this a business expense? (This is used for the calculation that tells you how much of the income you commit to this you should transfer to your personal account.)</label>
+    <input type="checkbox" name="business"{{#if _id}}{{#if business}} checked{{/if}}{{/if}} />
+
+    <label>If you'd like to include any notes to yourself about this expense, enter them here.</label>
+    <textarea class="notes" name="notes">{{#if _id}}{{notes}}{{/if}}</textarea>
+
+    <div>
+      <button type="submit" class="btn {{#if _id}}save-expense{{else}}add-expense{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>
+      {{#if _id}}<button class="btn cancel-editing">Cancel</button>{{/if}}
+    </div>
+  </form>
+</template>

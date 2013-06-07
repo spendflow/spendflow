@@ -39,6 +39,14 @@ body {
   color: green;
 }
 
+// Styles for income and expenses
+.income, .expenses {
+  .notes {
+    width: 38em;
+    height: 7em;
+  }
+}
+
 @import "views/_accounts";
 @import "views/_envelopes";
 @import "views/_incomes";

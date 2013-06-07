@@ -45,8 +45,8 @@ body {
   color: green;
 }
 
-/* line 2, ../scss/views/_incomes.scss */
-.income .notes {
+/* line 44, ../scss/spendflow.scss */
+.income .notes, .expenses .notes {
   width: 38em;
   height: 7em;
 }
