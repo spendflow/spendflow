@@ -13,7 +13,8 @@
       "branch": "master"
     },
     "i18n": {},
+    "collection-hooks": {},
     "jquery-ui-bootstrap": {},
-    "collection-hooks": {}
+    "scss": {}
   }
 }
