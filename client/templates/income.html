@@ -82,8 +82,10 @@
     <fieldset>
       {{#each envelopes}}
         <span id="{{_id}}">
-          <input type="checkbox" name="envelopes[]" value="{{_id}}" {{#unless ../_id}}{{#if enabledByDefault}} checked{{/if}}{{else}}{{#if envelopeInUse}} checked{{/if}}{{/unless}} />
-          {{rate}}% -> {{virtualAccount}}
+          <label class="checkbox">
+            <input type="checkbox" name="envelopes[]" value="{{_id}}" {{#unless ../_id}}{{#if enabledByDefault}} checked{{/if}}{{else}}{{#if envelopeInUse}} checked{{/if}}{{/unless}} />
+            {{rate}}% -> {{virtualAccount}}
+          </label>
           <fieldset><label>If you need to specify exactly how much should be put into the envelope, specify it here. (It's better to just create a new Envelope if you want to change the <em>rate</em>.</label>
             <input type="text" name="envelopeAmounts[]"{{#if envelopeInUse}} value="{{envelopeAmount}}"{{/if}} />
           </fieldset>
@@ -91,11 +93,13 @@
       {{/each}}
     </fieldset>
 
-    <label>Have you transferred this income? (This means physically moving it into the accounts, usually bank accounts, that you'll use to pay the expenses you've scheduled against this income.)</label>
-    <input type="checkbox" name="transferred"{{#if _id}}{{#if transferred}} checked{{/if}}{{/if}} />
+    <label class="checkbox">
+      <input type="checkbox" name="transferred"{{#if _id}}{{#if transferred}} checked{{/if}}{{/if}} /> Have you transferred this income? (This means physically moving it into the accounts, usually bank accounts, that you'll use to pay the expenses you've scheduled against this income.)
+    </label>
 
-    <label>Is this business income? (This is used for the calculation that tells you how much of this income to transfer to your personal account.)</label>
-    <input type="checkbox" name="business"{{#if _id}}{{#if business}} checked{{/if}}{{/if}} />
+    <label class="checkbox">
+      <input type="checkbox" name="business"{{#if _id}}{{#if business}} checked{{/if}}{{/if}} /> Is this business income? (This is used for the calculation that tells you how much of this income to transfer to your personal account.)
+    </label>
 
     <label>Into which physical account will this income be received/deposited?</label>
     <select name="depositAccountId">

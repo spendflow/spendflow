@@ -60,7 +60,8 @@
     </div>
     <label>Name this account</label>
     <input type="text" name="name"{{#if _id}} value="{{name}}"{{/if}} />
-    <label>Initial account balance</label>
+    {{!TODO: Don't allow changing balance directly if automated calculations have worked upon it}}
+    <label>Current account balance (be careful when changing this!)</label>
     <input type="text" placeholder="0.00" name="balance"{{#if _id}} value="{{balance}}"{{/if}} />
     <div>
       <button type="submit" class="btn {{#if _id}}save-account{{else}}add-account{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>

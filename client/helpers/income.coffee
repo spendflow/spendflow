@@ -51,7 +51,6 @@ Template.incomeForm.rendered = ->
   $receiptDate = (elementByName 'receiptDate', $context)
   $receiptDate.datepicker()
 
-# TODO: Make sure that enveloeps being used in the currently-edited record (or anywhere the active flag is checked) always are returned.
 Template.incomeForm.envelopes = ->
   massaged = []
   envelopesInUse = if @envelopes then @envelopes else {}

@@ -47,6 +47,11 @@ body {
   }
 }
 
+// Forms
+.add-record-form, .edit-record-form {
+  padding-left: 1px; // Cuz of weird Bootstrap option button thing
+}
+
 @import "views/_accounts";
 @import "views/_envelopes";
 @import "views/_incomes";
