@@ -6,7 +6,11 @@ class @FormProcessor
   # Wrapper for getting form field value (<input> and <select>)
   # For checkboxes, use @checkboxStateByName
   valByName: (fieldName) ->
-    $("[name=\"#{fieldName}\"]", @$context).val();
+    $field = $("[name=\"#{fieldName}\"]", @$context)
+
+    switch $field.attr 'type'
+      when 'radio' then $field.filter(':checked').val()
+      else $field.val()
 
   # Wrapper for getting an array of values from a multi-value form element (checkboxes)
   #

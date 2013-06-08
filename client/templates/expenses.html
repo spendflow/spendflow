@@ -14,8 +14,9 @@
           <th>Biz</th>
           <th>One-time</th>
           <th>Owed account</th>
-          <th>Notes</th>
           <th>Paid with</th>
+          <th>Priority</th>
+          <th>Notes</th>
           <th>&nbsp;</th>
         </tr>
       </thead>
@@ -43,16 +44,17 @@
     <td class="main-amount">{{amount}}</td>
     <td>{{business}}</td>
     <td>{{oneTime}}</td>
-    <td>{{payToVirtualAccount}}</td>
+    <td>{{destinationAccount}}</td>
     <td>
-      {{#if payFromVirtualAccounts}}
+      {{#if payFromAccounts}}
         <ul class="pay-from">
-        {{#each payFromVirtualAccounts}}
-          <li>{{virtualAccountName}}</li>
+        {{#each payFromAccounts}}
+          <li>{{accountName}}</li>
         {{/each}}
         </ul>
       {{/if}}
     </td>
+    <td>{{priority}}</td>
     <td>{{notes}}</td>
     <td><i class="cursor-pointer edit-expense icon-pencil"></i> <i class="remove-expense cursor-pointer icon-trash"></i></td>
   </tr>
@@ -68,7 +70,7 @@
 <template name="expenseForm">
   <form{{#if _id}} class="edit-record-form" data-target="{{_id}}"{{else}} class="add-record-form"{{/if}}>
     <label>Date by which expense must be paid</label>
-    <input type="text" name="receiptDate"{{#if _id}} value="{{receiptDate}}"{{/if}} />
+    <input type="text" name="dueDate"{{#if _id}} value="{{dueDate}}"{{/if}} />
 
     <label>Briefly describe the expense</label>
     <input type="text" name="description"{{#if _id}} value="{{description}}"{{/if}} />
@@ -78,8 +80,58 @@
 
     {{! TODO: Add tags using meteor-tags}}
 
-    <label>Is this a business expense? (This is used for the calculation that tells you how much of the income you commit to this you should transfer to your personal account.)</label>
-    <input type="checkbox" name="business"{{#if _id}}{{#if business}} checked{{/if}}{{/if}} />
+    <label class="checkbox">Is this a <strong>business</strong> expense? (This is used for the calculation that tells you how much of the income you commit to this you should transfer to your personal account.)
+      <input type="checkbox" name="business"{{#if _id}}{{#if business}} checked{{/if}}{{/if}} />
+    </label>
+
+    <label class="checkbox">
+      <input type="checkbox" name="oneTime"{{#if _id}}{{#if oneTime}} checked{{/if}}{{/if}} /> Is this a <strong>one-time</strong> expense? If you budgeted for this, don't check this.
+    </label>
+
+    <label>Optionally select an account if this expense represents a <strong>payment to another account</strong> (credit card payment, savings deposit, paying back yourself)</label>
+    <select name="destinationAccountId">
+      <option value="">Select an account</option>
+      {{!TODO: Make this work}}
+      {{#each destinationAccounts}}
+        {{> selectOptions}}
+      {{/each}}
+    </select>
+
+    {{!TODO: Hide me if there are none at all}}
+    <label>If you are paying this expense from <strong>money you've saved</strong> (rather than general income), pick the virtual account(s) representing that money.</label>
+    <fieldset>
+      {{#each payFromAccounts}}
+        <span id="{{_id}}">
+          <label class="checkbox">
+            <input type="checkbox" name="payFromAccounts[]" value="{{_id}}"{{#if accountInUse}} checked{{/if}} /> {{virtualAccount}}
+          </label>
+        </span>
+      {{/each}}
+    </fieldset>
+
+    <label class="expense-priority"><strong>Priority</strong> (when committing income automatically, lower priority numbers get it first)</label>
+    <label class="radio inline">
+      <input type="radio" name="priority" value="1"{{#if _id}}{{#if equal priority "1"}} checked{{/if}}{{/if}}} /> 1
+    </label>
+    <label class="radio inline">
+      <input type="radio" name="priority" value="2"{{#if _id}}{{#if equal priority "2"}} checked{{/if}}{{/if}}} /> 2
+    </label>
+    <label class="radio inline">
+      <input type="radio" name="priority" value="3"{{#unless _id}} checked{{/unless}}{{#if _id}}{{#if equal priority "3"}} checked{{/if}}{{/if}}} /> 3
+    </label>
+    <label class="radio inline">
+      <input type="radio" name="priority" value="4"{{#if _id}}{{#if equal priority "4"}} checked{{/if}}{{/if}}} /> 4 (won't be committed to automatically)
+    </label>
+
+    {{!-- TODO: jquery-ui/bootstrap conflicts make this not work :( --}}
+    <!--<div class="btn-toolbar">-->
+      <!--<div class="btn-group expense-priority" data-toggle="buttons-radio">-->
+        <!--<button type="button" class="btn{{#if _id}}{{#if equal priority 1}} active{{/if}}{{/if}}}">1</button>-->
+        <!--<button type="button" class="btn{{#if _id}}{{#if equal priority 2}} active{{/if}}{{/if}}">2</button>-->
+        <!--<button type="button" class="btn{{#if _id}}{{#if equal priority 3}} active{{/if}}{{/if}}">3</button>-->
+        <!--<button type="button" class="btn{{#unless _id}} active{{else}}{{#if equal priority 4}} active{{/if}}{{/unless}}" >4</button>-->
+      <!--</div>-->
+    <!--</div>-->
 
     <label>If you'd like to include any notes to yourself about this expense, enter them here.</label>
     <textarea class="notes" name="notes">{{#if _id}}{{notes}}{{/if}}</textarea>
