@@ -5,6 +5,9 @@ Template.expenseList.editingExpense = ->
   expense = Expenses.findOne(Session.get 'editingExpense') if Session.get 'editingExpense'
   expense
 
+Template.expense.thisRowBeingEdited = ->
+  Session.equals('editingExpense', this._id)
+  
 Template.expense.amount = ->
   accounting.formatMoney @amount
 

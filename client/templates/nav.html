@@ -1,15 +1,14 @@
 <template name="nav">
+  <ul class="nav nav-pills pull-left">
+    <li id="page-income" class="{{incomeActive}}"><a href="{{incomeUrl}}">Income</a></li>
+    <li id="page-expenses" class="{{expensesActive}}"><a href="{{expensesUrl}}">Expenses</a></li>
+    <li id="page-payments" class="{{paymentsActive}}"><a href="{{paymentsUrl}}">Payments</a></li>
+  </ul>
+
   {{! Put these into a Settings dropdown or something}}
   <ul class="nav nav-pills pull-right">
     <li id="page-accounts" class="{{accountsActive}}"><a href="{{accountsUrl}}">Accounts</a></li>
     <li id="page-envelopes" class="{{envelopesActive}}"><a href="{{envelopesUrl}}">Envelopes</a></li>
     <li class="login-buttons">{{loginButtons}}</li>
-  </ul>
-
-  <ul class="nav nav-pills pull-left">
-    <li id="page-income" class="{{incomeActive}}"><a href="{{incomeUrl}}">Income</a></li>
-    <li id="page-expenses" class="{{expensesActive}}"><a href="{{expensesUrl}}">Expenses</a></li>
-    <li id="page-payments" class="{{paymentsActive}}"><a href="{{paymentsUrl}}">Payments</a></li>
-    <li id="page-tasks" class="{{tasksActive}}"><a href="{{tasksUrl}}">Tasks</a></li>
   </ul>
 </template>
