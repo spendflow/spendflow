@@ -88,9 +88,4 @@ Template.account.events {
 }
 
 @getAccountSelector = (virtualAccounts = getVirtualAccounts(), selectedId) ->
-  for virtualAccount in virtualAccounts
-    {
-      optionValue: virtualAccount._id
-      optionText: virtualAccount.name
-      selected: if virtualAccount._id is selectedId then true else false
-    }
+  getCollectionSelector(virtualAccounts, selectedId)

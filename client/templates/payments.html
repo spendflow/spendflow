@@ -1,0 +1,89 @@
+<template name="payments">
+  {{> paymentList}}
+  {{> newPaymentForm}}
+</template>
+
+<template name="paymentList">
+  <div class="payment-list record-list">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Expense</th>
+          <th>Income</th>
+          <th>Amount</th>
+          <th>Paid</th>
+          <th>Notes</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each payments}}
+          {{> payment}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  {{#with editingPayment}}
+  {{!TODO: Put all fieldsets in wells, or something}}
+    <fieldset class="well">
+      {{> paymentForm}}
+    </fieldset>
+  {{/with}}
+</template>
+
+<template name="payment">
+  {{! Template name diverges from the norm to avoid a name conflict.}}
+  {{! ROW OF THE THINGS}}
+  <tr data-target="{{_id}}"{{#if thisRowBeingEdited}} class="being-edited"{{/if}}>
+    <td>{{expense}}</td>
+    <td>{{income}}</td>
+    <td class="main-amount">{{amount}}</td>
+    <td>{{paid}}</td>
+    <td>{{notes}}</td>
+    <td><i class="cursor-pointer edit-payment icon-pencil"></i> <i class="remove-payment cursor-pointer icon-trash"></i></td>
+  </tr>
+</template>
+
+<template name="newPaymentForm">
+  <button class="btn btn-large new-payment-trigger" data-toggle="collapse" data-target="#new-payment-form"><i class="icon-plus"></i> New payment</button>
+  <div id="new-payment-form" class="{{#unless paymentsCount}}in {{/unless}}collapse">
+    {{> paymentForm}}
+  </div>
+</template>
+
+<template name="paymentForm">
+  <form{{#if _id}} class="edit-record-form" data-target="{{_id}}"{{else}} class="add-record-form"{{/if}}>
+    <label>Which expense are you paying?</label>
+    <select name="expenseId">
+      <option value="">Select an expense</option>
+      {{!TODO: Make this work}}
+      {{#each expenses}}
+        {{> selectOptions}}
+      {{/each}}
+    </select>
+
+    <label>Which income are you paying it with?</label>
+    <select name="incomeId">
+      <option value="">Select income</option>
+      {{!TODO: Make this work}}
+      {{#each incomes}}
+        {{> selectOptions}}
+      {{/each}}
+    </select>
+
+    <label>Amount</label>
+    <input type="text" name="amount"{{#if _id}} value="{{amount}}"{{/if}} />
+
+    <label class="checkbox"><strong>Paid</strong> (payment has physically been made)
+      <input type="checkbox" name="paid"{{#if _id}}{{#if paid}} checked{{/if}}{{/if}} />
+    </label>
+
+    <label>If you'd like to include any notes to yourself about this payment, enter them here.</label>
+    <textarea class="notes" name="notes">{{#if _id}}{{notes}}{{/if}}</textarea>
+
+    <div>
+      <button type="submit" class="btn {{#if _id}}save-payment{{else}}add-payment{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>
+      {{#if _id}}<button class="btn cancel-editing">Cancel</button>{{/if}}
+    </div>
+  </form>
+</template>

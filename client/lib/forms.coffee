@@ -29,3 +29,11 @@ class @FormProcessor
 
   elementByName: (fieldName) ->
     $("[name=\"#{fieldName}\"]", @$context);
+
+@getCollectionSelector = (records, selectedId, nameProperty = "name") ->
+  for record in records
+    {
+      optionValue: record._id
+      optionText: record[nameProperty]
+      selected: if record._id is selectedId then true else false
+    }
