@@ -11,6 +11,9 @@ Template.expense.thisRowBeingEdited = ->
 Template.expense.amount = ->
   accounting.formatMoney @amount
 
+Template.expense.amountRemaining = ->
+  accounting.formatMoney @amountRemaining
+
 Template.expense.destinationAccount = ->
   getVirtualAccountName(@destinationAccountId)
 

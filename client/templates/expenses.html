@@ -41,7 +41,10 @@
   <tr data-target="{{_id}}"{{#if thisRowBeingEdited}} class="being-edited"{{/if}}>
     <td>{{dueDate}}</td>
     <td>{{description}}</td>
-    <td class="main-amount">{{amount}}</td>
+    <td>
+      <div class="main-amount">{{amount}}</div>
+      <div class="amount-remaining">{{amountRemaining}} left</div>
+    </td>
     <td>{{business}}</td>
     <td>{{oneTime}}</td>
     <td>{{destinationAccount}}</td>

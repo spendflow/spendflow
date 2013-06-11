@@ -73,6 +73,9 @@ Template.accountList.editingAccount = ->
 Template.account.thisRowBeingEdited = ->
   Session.equals('editingAccount', this._id)
 
+Template.account.balance = ->
+  if @type is "payFrom" and @balance then accounting.formatMoney @balance else ""
+
 Template.account.events {
   'click .edit-account': (event) ->
     accountId = recordIdFromRow event

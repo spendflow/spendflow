@@ -15,4 +15,4 @@
   data
 
 @calculateEnvelopeAmount = (rate, amount, amountOverride) ->
-  if not amountOverride then (+rate/100 * +amount) else amountOverride
+  if not amountOverride then SpendflowMath.roundUpCents((+rate/100) * +amount) else amountOverride

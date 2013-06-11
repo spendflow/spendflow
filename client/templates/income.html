@@ -14,7 +14,7 @@
           <th>Envelope amounts</th>
           <th>Transferred</th>
           <th>Biz</th>
-          <th>Deposit account</th>
+          <th>Deposit account<br />Commitments</th>
           <th>Notes</th>
           <th>&nbsp;</th>
         </tr>
@@ -40,7 +40,10 @@
   <tr data-target="{{_id}}"{{#if thisRowBeingEdited}} class="being-edited"{{/if}}>
     <td>{{receiptDate}}</td>
     <td>{{description}}</td>
-    <td class="main-amount">{{amount}}</td>
+    <td>
+      <div class="main-amount">{{amount}}</div>
+      <div class="amount-remaining">{{amountRemaining}} left</div>
+    </td>
     <td>
       {{#if envelopeAmounts}}
         <ul class="envelope-amounts">
@@ -52,7 +55,12 @@
     </td>
     <td>{{transferred}}</td>
     <td>{{business}}</td>
-    <td>{{depositAccount}}</td>
+    <td>
+      <div>{{depositAccount}}</div>
+      <div><b>Biz:</b> {{bizTotal}}</div>
+      <div><b>Personal:</b> {{nonBizTotal}}</div>
+      <div><b>Uncommitted:</b> {{uncommittedTotal}}</div>
+    </td>
     <td>{{notes}}</td>
     <td><i class="cursor-pointer edit-income icon-pencil"></i> <i class="remove-income cursor-pointer icon-trash"></i></td>
   </tr>

@@ -11,6 +11,9 @@ Template.incomeRecord.thisRowBeingEdited = ->
 Template.incomeRecord.amount = ->
   accounting.formatMoney @amount
 
+Template.incomeRecord.amountRemaining = ->
+  accounting.formatMoney @amountRemaining
+
 Template.incomeRecord.envelopeAmounts = ->
   envelopeAmounts = []
   _.each(@envelopes, (env, envId) =>
@@ -28,6 +31,15 @@ Template.incomeRecord.envelopeAmounts = ->
 Template.incomeRecord.depositAccount = ->
   virtualAccount = VirtualAccounts.findOne this.depositAccountId
   virtualAccount.name if virtualAccount
+
+Template.incomeRecord.bizTotal = ->
+  accounting.formatMoney getIncomeBusinessTotal(@)
+
+Template.incomeRecord.nonBizTotal = ->
+  accounting.formatMoney getIncomePersonalTotal(@)
+
+Template.incomeRecord.uncommittedTotal = ->
+  accounting.formatMoney @amount - getIncomeBusinessTotal(@) - getIncomePersonalTotal(@)
 
 Template.incomeRecord.events {
   'click .edit-income': (event) ->

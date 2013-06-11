@@ -12,3 +12,13 @@ parentContext is basically the server publish function context (this).
 @getExpenseDescription = (expenseId) ->
   expense = Expenses.findOne(expenseId) || {}
   expense.description
+
+@calculateExpenseRemaining = (expense) ->
+  # Simply subtract all payments where the expense is used from the amount
+  expensePayments = _.pluck(Payments.find({ expenseId: expense._id }).fetch(), 'amount')
+  if expensePayments.length
+    expense.amount - (_.reduce(expensePayments, (memo, num) ->
+      +memo + +num
+    ));
+  else
+    expense.amount
