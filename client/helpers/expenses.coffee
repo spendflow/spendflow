@@ -42,6 +42,9 @@ Template.expense.events {
         console.log error
 }
 
+Template.newExpenseForm.expensesCount = ->
+  !! Expenses.find().count()
+
 Template.expenseForm.rendered = ->
   $context = $ @firstNode
   $dueDate = (elementByName 'dueDate', $context)

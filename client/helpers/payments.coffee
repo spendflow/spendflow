@@ -32,6 +32,9 @@ Template.payment.events {
         console.log error
 }
 
+Template.newPaymentForm.paymentsCount = ->
+  !! Payments.find().count()
+
 Template.paymentForm.expenses = ->
   expenses = getExpenses undefined, undefined, {
     $or: [
