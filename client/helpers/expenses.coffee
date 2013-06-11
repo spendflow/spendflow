@@ -37,12 +37,16 @@ Template.expense.events {
 
   'click .remove-expense': (event) ->
     expenseId = recordIdFromRow event
-    Expenses.remove expenseId, (error) ->
-      if not error
-        showNavSuccess "Expense removed."
-      else
-        showNavError "I couldn't remove the expense for some reason. Try again, and contact us if the problems persist."
-        console.log error
+    description = Expenses.findOne(expenseId).description
+
+    alertify.confirm "Are you sure you want to remove <em>#{description}</em>?", (event) ->
+      if event
+        Expenses.remove expenseId, (error) ->
+          if not error
+            showNavSuccess "Expense removed."
+          else
+            showNavError "I couldn't remove the expense for some reason. Try again, and contact us if the problems persist."
+            console.log error
 }
 
 Template.newExpenseForm.expensesCount = ->

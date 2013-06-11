@@ -24,12 +24,21 @@ Template.payment.events {
 
   'click .remove-payment': (event) ->
     paymentId = recordIdFromRow event
-    Payments.remove paymentId, (error) ->
-      if not error
-        showNavSuccess "Payment removed."
-      else
-        showNavError "I couldn't remove the payment for some reason. Try again, and contact us if the problems persist."
-        console.log error
+    payment = Payments.findOne(paymentId)
+    expense = Expenses.findOne(payment.expenseId)
+    income = Incomes.findOne(payment.incomeId)
+    paymentAmount = accounting.formatMoney payment.amount
+    expenseDescription = expense.description
+    incomeDescription = income.description
+
+    alertify.confirm "Are you sure you want to remove this payment of #{paymentAmount} from <em>#{incomeDescription}</em> for <em>#{expenseDescription}</em>?", (event) ->
+      if event
+        Payments.remove paymentId, (error) ->
+          if not error
+            showNavSuccess "Payment removed."
+          else
+            showNavError "I couldn't remove the payment for some reason. Try again, and contact us if the problems persist."
+            console.log error
 }
 
 Template.newPaymentForm.paymentsCount = ->

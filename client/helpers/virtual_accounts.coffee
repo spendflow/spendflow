@@ -82,12 +82,17 @@ Template.account.events {
     Session.set 'editingAccount', accountId
   'click .remove-account': (event) ->
     accountId = recordIdFromRow event
-    VirtualAccounts.remove accountId, (error) ->
-      if not error
-        showNavSuccess "Account removed."
-      else
-        showNavError "I couldn't remove the account for some reason. Try again, and contact us if problems persist."
-        console.log error
+
+    recordName = VirtualAccounts.findOne(accountId).name
+
+    alertify.confirm "Are you sure you want to remove <em>#{recordName}</em>?", (event) ->
+      if event
+        VirtualAccounts.remove accountId, (error) ->
+          if not error
+            showNavSuccess "Account removed."
+          else
+            showNavError "I couldn't remove the account for some reason. Try again, and contact us if problems persist."
+            console.log error
 }
 
 @getAccountSelector = (virtualAccounts = getVirtualAccounts(), selectedId) ->

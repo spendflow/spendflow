@@ -47,12 +47,16 @@ Template.incomeRecord.events {
     Session.set 'editingIncome', incomeId
   'click .remove-income': (event) ->
     incomeId = recordIdFromRow event
-    Incomes.remove incomeId, (error) ->
-      if not error
-        showNavSuccess "Income removed."
-      else
-        showNavError "I couldn't remove the income for some reason. Try again, and contact us if problems persist."
-        console.log error
+    description = Incomes.findOne(incomeId).description
+
+    alertify.confirm "Are you sure you want to remove <em>#{description}</em>?", (event) ->
+      if event
+        Incomes.remove incomeId, (error) ->
+          if not error
+            showNavSuccess "Income removed."
+          else
+            showNavError "I couldn't remove the income for some reason. Try again, and contact us if problems persist."
+            console.log error
 }
 
 Template.newIncomeForm.incomesCount = ->

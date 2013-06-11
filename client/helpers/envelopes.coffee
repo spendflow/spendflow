@@ -81,10 +81,13 @@ Template.envelope.events {
     Session.set 'editingEnvelope', envelopeId
   'click .remove-envelope': (event) ->
     envelopeId = recordIdFromRow event
-    Envelopes.remove envelopeId, (error) ->
-      if not error
-        showNavSuccess "Envelope removed."
-      else
-        showNavError "I couldn't remove the envelope for some reason. Try again, and contact us if problems persist."
-        console.log error
+
+    alertify.confirm "Are you sure you want to remove this envelope?", (event) ->
+      if event
+        Envelopes.remove envelopeId, (error) ->
+          if not error
+            showNavSuccess "Envelope removed."
+          else
+            showNavError "I couldn't remove the envelope for some reason. Try again, and contact us if problems persist."
+            console.log error
 }
