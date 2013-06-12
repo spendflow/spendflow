@@ -7,6 +7,7 @@ Template.newAccountForm.events {
     accountType = valByName 'type', $context
     accountName = valByName 'name', $context
     accountBalance = if (valByName 'balance', $context).toString() isnt "" then valByName('balance', $context) else undefined
+    business = checkboxStateByName('business', $context)
 
     if not accountType or not accountName or (accountType is "payFrom" and (not accountBalance or accountBalance.toString() is ""))
       showNavError "Please select an account type and give it a name. If it's a Pay From account, enter a balance, even if that is 0."
@@ -18,6 +19,7 @@ Template.newAccountForm.events {
         type: accountType
         name: accountName
         balance: accountBalance
+        business: business
       }, (error, result) ->
         if not error
           $('input, select', $context).val("")
@@ -41,6 +43,7 @@ Template.accountForm.events {
     accountType = valByName 'type', $context
     accountName = valByName 'name', $context
     accountBalance = if (valByName 'balance', $context).toString() isnt "" then valByName('balance', $context) else undefined
+    business = checkboxStateByName('business', $context)
 
     if not accountType or not accountName or (accountType is "payFrom" and (not accountBalance or accountBalance.toString() is ""))
       showNavError "Please select an account type and give it a name. If it's a Pay From account, enter a balance, even if that is 0."
@@ -51,6 +54,7 @@ Template.accountForm.events {
           type: accountType
           name: accountName
           balance: accountBalance
+          business: business
         }
       }, (error, result) ->
         if not error

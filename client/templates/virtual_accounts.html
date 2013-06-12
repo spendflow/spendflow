@@ -11,6 +11,7 @@
           <th>Name</th>
           <th>Type</th>
           <th>Balance</th>
+          <th>Biz</th>
           <th>&nbsp;</th>
         </tr>
       </thead>
@@ -33,6 +34,7 @@
     <td>{{name}}</td>
     <td>{{type}}</td>
     <td>{{balance}}</td>
+    <td>{{business}}</td>
     <td><i class="cursor-pointer edit-account icon-pencil"></i> <i class="remove-account cursor-pointer icon-trash"></i></td>
   </tr>
 </template>
@@ -63,6 +65,11 @@
     {{!TODO: Don't allow changing balance directly if automated calculations have worked upon it}}
     <label>Current account balance (be careful when changing this!)</label>
     <input type="text" placeholder="0.00" name="balance"{{#if _id}} value="{{balance}}"{{/if}} />
+
+    <label class="checkbox">Is this a <strong>business</strong> account? (This is used to mark system-created Expenses and Incomes as business.)
+      <input type="checkbox" name="business"{{#if _id}}{{#if business}} checked{{/if}}{{/if}} />
+    </label>
+
     <div>
       <button type="submit" class="btn {{#if _id}}save-account{{else}}add-account{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>
       {{#if _id}}<button class="btn cancel-editing">Cancel</button>{{/if}}
