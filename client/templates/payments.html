@@ -38,7 +38,7 @@
     <td>{{expense}}</td>
     <td>{{income}}</td>
     <td class="main-amount">{{amount}}</td>
-    <td>{{paid}}</td>
+    <td>{{paid}} <a title="Mark {{#if paid}}unpaid{{else}}paid{{/if}}" href="#" class="mark-paid"><i class="{{#if paid}} icon-ok-sign{{else}}icon-ok{{/if}}"></i></a></td>
     <td>{{notes}}</td>
     <td><i class="cursor-pointer edit-payment icon-pencil"></i> <i class="remove-payment cursor-pointer icon-trash"></i></td>
   </tr>

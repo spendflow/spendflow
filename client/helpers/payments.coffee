@@ -39,6 +39,16 @@ Template.payment.events {
           else
             showNavError "I couldn't remove the payment for some reason. Try again, and contact us if the problems persist."
             console.log error
+  'click .mark-paid': (event) ->
+    payment = Payments.findOne(recordIdFromRow event)
+    Payments.update payment._id, {
+      $set: {
+        paid: ! payment.paid
+      }
+    }, (error, result) ->
+      if error
+        showNavError "Something went wrong marking that paid. Try again, and contact us if it keeps happening."
+        console.log error
 }
 
 Template.newPaymentForm.paymentsCount = ->
