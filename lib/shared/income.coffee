@@ -18,11 +18,11 @@ parentContext is basically the server publish function context (this).
   incomePayments = _.pluck(Payments.find({ incomeId: income._id }).fetch(), 'amount')
 
   if incomePayments.length
-    income.amount - (_.reduce(incomePayments, (memo, num) ->
+    +income.amount - _.reduce(incomePayments, ((memo, num) ->
       +memo + +num
-    ));
+    ), 0)
   else
-    income.amount
+    +income.amount
 
 @getIncomeBusinessTotal = (income) ->
   bizTotal = +0.0
@@ -31,7 +31,7 @@ parentContext is basically the server publish function context (this).
     expense = Expenses.findOne payment.expenseId
 
     # If it's business, add to the bizTotal
-    if expense.business then bizTotal += payment.amount
+    if expense.business then bizTotal += +payment.amount
   )
   bizTotal
 
@@ -42,6 +42,6 @@ parentContext is basically the server publish function context (this).
     expense = Expenses.findOne payment.expenseId
 
     # If it's business, add to the bizTotal
-    if not expense.business then total += payment.amount
+    if not expense.business then total += +payment.amount
   )
   total

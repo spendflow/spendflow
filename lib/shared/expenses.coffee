@@ -17,8 +17,8 @@ parentContext is basically the server publish function context (this).
   # Simply subtract all payments where the expense is used from the amount
   expensePayments = _.pluck(Payments.find({ expenseId: expense._id }).fetch(), 'amount')
   if expensePayments.length
-    expense.amount - (_.reduce(expensePayments, (memo, num) ->
+    +expense.amount - _.reduce(expensePayments, ((memo, num) ->
       +memo + +num
-    ));
+    ), 0)
   else
-    expense.amount
+    +expense.amount

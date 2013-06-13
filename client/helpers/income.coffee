@@ -29,7 +29,7 @@ Template.incomeRecord.envelopeAmounts = ->
   envelopeAmounts
 
 Template.incomeRecord.depositAccount = ->
-  virtualAccount = VirtualAccounts.findOne this.depositAccountId
+  virtualAccount = VirtualAccounts.findOne @depositAccountId
   virtualAccount.name if virtualAccount
 
 Template.incomeRecord.bizTotal = ->

@@ -15,7 +15,7 @@
   data
 
 @calculateEnvelopeAmount = (rate, amount, amountOverride) ->
-  if not amountOverride then SpendflowMath.roundUpCents((+rate/100) * +amount) else amountOverride
+  if not amountOverride then SpendflowMath.roundUpCents((+rate/100) * +amount) else +amountOverride
 
-@getEnvelopeAmount = (envelope, amount) ->
-  calculateEnvelopeAmount envelope.rate, amount, envelope.amountOverride
+@getEnvelopeAmount = (income, envelope) ->
+  calculateEnvelopeAmount envelope.rate, income.amount, income.envelopes[envelope._id].amountOverride
