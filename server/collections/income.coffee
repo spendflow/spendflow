@@ -19,6 +19,14 @@ Incomes.after "update", (userId, selector, modifier, options, previous, callback
       # updateIncomeEnvelopes(income, previousIncome)
     )
 
+Incomes.before "remove", (userId, selector, previous) ->
+  # Remove automatically-created Envelope expenses/payments
+  # We only need to remove Expenses because those automatically remove associated Payments.
+  _.each(Incomes.find(selector).fetch(), (income) ->
+    # fromRecordId varies, but relatedRecord is always the Income
+    Expenses.remove { 'systemMeta.relatedRecordId': income._id }
+  )
+
 @updateIncomeCalculations = (income) ->
   # Update amountRemaining and hope it doesn't loop forever
   Incomes.update(income._id, {
@@ -72,7 +80,7 @@ Incomes.after "update", (userId, selector, modifier, options, previous, callback
     va = getVirtualAccounts(envelope.owner, undefined, { _id: envelope.virtualAccountId })[0]
 
     # Get the envelope amount
-    amount = getEnvelopeAmount(envelope, income.amount)
+    amount = getEnvelopeAmount(income, envelope)
 
     # Get if the VirtualAccount is business or not
     business = va.business

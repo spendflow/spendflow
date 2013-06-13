@@ -15,9 +15,9 @@ Expenses.after "update", (userId, selector, modifier, options, previous, callbac
 
 Expenses.before "remove", (userId, selector, previous) ->
   # Remove payments referencing this Expense
-  expense = Expenses.findOne selector
-
-  Payments.remove({ expenseId: expense._id })
+  _.each(Expenses.find(selector).fetch(), (expense) ->
+    Payments.remove({ expenseId: expense._id })
+  )
 
 @updateExpenseCalculations = (expense) ->
   # Update amountRemaining and hope it doesn't loop forever

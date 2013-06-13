@@ -25,6 +25,9 @@ Payments.after "remove", (userId, selector, previous) ->
   )
 
 updatePaymentTargets = (payment) ->
-  updateIncomeCalculations(Incomes.findOne payment.incomeId)
+  # The payment might be getting deleted as part of another action, so make sure the Income and Expense still actually exist before trying to remove them.
+  income = Incomes.findOne(payment.incomeId)
+  updateIncomeCalculations(income) if income isnt null
   # TODO: Update income envelopes that are marked paid
-  updateExpenseCalculations(Expenses.findOne payment.expenseId)
+  expense = Expenses.findOne(payment.expenseId)
+  updateExpenseCalculations(expense) if expense isnt null
