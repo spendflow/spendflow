@@ -26,4 +26,5 @@ Payments.after "remove", (userId, selector, previous) ->
 
 updatePaymentTargets = (payment) ->
   updateIncomeCalculations(Incomes.findOne payment.incomeId)
+  # TODO: Update income envelopes that are marked paid
   updateExpenseCalculations(Expenses.findOne payment.expenseId)
