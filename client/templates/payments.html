@@ -35,12 +35,12 @@
   {{! Template name diverges from the norm to avoid a name conflict.}}
   {{! ROW OF THE THINGS}}
   <tr data-target="{{_id}}"{{#if thisRowBeingEdited}} class="being-edited"{{/if}}>
-    <td>{{expense}}</td>
+    <td>{{#if equal systemMeta.from "envelope"}}<i class="icon-envelope"></i> {{/if}}{{expense}}</td>
     <td>{{income}}</td>
     <td class="main-amount">{{amount}}</td>
     <td>{{paid}} <a title="Mark {{#if paid}}unpaid{{else}}paid{{/if}}" href="#" class="mark-paid"><i class="{{#if paid}} icon-ok-sign{{else}}icon-ok{{/if}}"></i></a></td>
     <td>{{notes}}</td>
-    <td><a href="#" class="edit-payment"><i class="icon-pencil"></i></a> <a href="#" class="remove-payment"><i class="icon-trash"></i></a></td>
+    <td>{{#unless equal systemMeta.from "envelope"}}<a href="#" class="edit-payment"><i class="icon-pencil"></i></a> <a href="#" class="remove-payment"><i class="icon-trash"></i></a>{{/unless}}</td>
   </tr>
 </template>
 

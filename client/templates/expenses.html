@@ -40,7 +40,7 @@
   {{! ROW OF THE THINGS}}
   <tr data-target="{{_id}}"{{#if thisRowBeingEdited}} class="being-edited"{{/if}}>
     <td>{{dueDate}}</td>
-    <td>{{description}}</td>
+    <td>{{#if equal systemMeta.from "envelope"}}<i class="icon-envelope"></i> {{/if}}{{description}}</td>
     <td>
       <div class="main-amount">{{amount}}</div>
       <div class="amount-remaining">{{amountRemaining}} left</div>
@@ -59,7 +59,7 @@
     </td>
     <td>{{priority}}</td>
     <td>{{notes}}</td>
-    <td><a href="#" class="edit-expense"><i class="icon-pencil"></i></a> <a href="#" class="remove-expense"><i class="icon-trash"></i></a></td>
+    <td>{{#unless equal systemMeta.from "envelope"}}<a href="#" class="edit-expense"><i class="icon-pencil"></i></a> <a href="#" class="remove-expense"><i class="icon-trash"></i></a>{{/unless}}</td>
   </tr>
 </template>
 
