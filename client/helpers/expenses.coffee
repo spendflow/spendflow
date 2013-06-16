@@ -60,7 +60,7 @@ Template.expenseForm.rendered = ->
 Template.expenseForm.destinationAccounts = ->
   virtualAccounts = getVirtualAccounts undefined, undefined, {
     type: {
-      $in: [ "payFrom", "payTo" ]
+      $in: [ "payFrom", "payTo", "bank" ]
     }
   }
   getAccountSelector virtualAccounts, this.destinationAccountId
