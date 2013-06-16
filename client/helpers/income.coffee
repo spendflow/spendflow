@@ -129,6 +129,8 @@ Template.incomeForm.events {
     $context = $(event.target).parents('.edit-record-form')
     incomeId = recordIdFromForm event
 
+    income = Incomes.findOne incomeId
+
     incomeValues = _.extend(
       {
         type: 'manual'
@@ -146,9 +148,9 @@ Template.incomeForm.events {
 
     # Initialize system-managed fields
     # TODO: Recalculate the below when saving an update
-    incomeValues.amountRemaining = incomeValues.amount if not incomeValues.amountRemaining
-    incomeValues.pendingPaymentTotal = 0.0 if not incomeValues.pendingPaymentTotal
-    incomeValues.nonBusinessTotal = 0.0 if not incomeValues.nonBusinessTotal
+    incomeValues.amountRemaining = incomeValues.amount if not income.amountRemaining
+    incomeValues.pendingPaymentTotal = 0.0 if not income.pendingPaymentTotal
+    incomeValues.nonBusinessTotal = 0.0 if not income.nonBusinessTotal
 
     # TODO: Don't forget about the tags!
 
