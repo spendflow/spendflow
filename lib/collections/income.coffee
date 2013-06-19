@@ -1,4 +1,4 @@
-"""
+###
 Incomes
   - type: (manual|system) — system ones are created when allocating money directly from Accounts to Expenses. At Expense creation time I'd say.
   - receiptDate
@@ -17,16 +17,13 @@ Incomes
   - amountRemaining
   - pendingPaymentTotal
   - nonBusinessTotal
-"""
+###
 
 @Incomes = new Meteor.Collection 'incomes'
 
 if Meteor.isClient
   Deps.autorun =>
-    Meteor.subscribe 'spendflowIncomes'
+    Meteor.subscribe 'spendflowIncomes', getCurrentProfile()
 
 # Hooks
-@Incomes.before "insert", (userId, doc) ->
-  userId = getCurrentUserId(this) if not userId
-
-  doc.owner = userId if doc.owner isnt userId
+@Incomes.before "insert", ensureCommonMetadata

@@ -1,14 +1,29 @@
 <template name="nav">
-  <ul class="nav nav-pills pull-left">
-    <li id="page-income" class="{{incomeActive}}"><a href="{{incomeUrl}}">Income</a></li>
-    <li id="page-expenses" class="{{expensesActive}}"><a href="{{expensesUrl}}">Expenses</a></li>
-    <li id="page-payments" class="{{paymentsActive}}"><a href="{{paymentsUrl}}">Payments</a></li>
-  </ul>
+  {{#if profileId}}
+    <ul class="nav nav-pills pull-left">
+      <li id="page-income" class="{{incomeActive}}"><a href="{{incomeUrl profileId}}">Income</a></li>
+      <li id="page-expenses" class="{{expensesActive}}"><a href="{{expensesUrl profileId}}">Expenses</a></li>
+      <li id="page-payments" class="{{paymentsActive}}"><a href="{{paymentsUrl profileId}}">Payments</a></li>
+    </ul>
+  {{/if}}
 
   {{! Put these into a Settings dropdown or something}}
   <ul class="nav nav-pills pull-right">
-    <li id="page-accounts" class="{{accountsActive}}"><a href="{{accountsUrl}}">Accounts</a></li>
-    <li id="page-envelopes" class="{{envelopesActive}}"><a href="{{envelopesUrl}}">Envelopes</a></li>
+    {{#if profileId}}
+      <li id="page-accounts" class="{{accountsActive}}"><a href="{{accountsUrl profileId}}">Accounts</a></li>
+      <li id="page-envelopes" class="{{envelopesActive}}"><a href="{{envelopesUrl profileId}}">Envelopes</a></li>
+    {{/if}}
     <li class="login-buttons">{{loginButtons}}</li>
+    <li id="page-profiles-wrapper" class="dropdown {{profilesActive}}">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{#if profile}}{{profile.name}}{{else}}Profiles{{/if}} <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        {{#each profiles}}
+          <li><a href="#" class="switch-profile" id="{{_id}}">{{name}}</a></li>
+        {{/each}}
+        {{#if profiles}}
+          <li class="divider"></li>
+        {{/if}}
+        <li id="page-profiles"><a href="{{profilesUrl}}">Manage Profiles</a></li>
+      </ul>
   </ul>
 </template>

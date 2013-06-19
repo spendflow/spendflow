@@ -1,24 +1,63 @@
-Meteor.Router.add({
-  '/': 'index'
-  '/income': 'income'
-  '/expenses': 'expenses'
-  '/payments': 'payments'
-  '/tasks': 'tasks'
-  '/accounts': 'accounts'
-  '/envelopes': 'envelopes'
-})
+@applyProfile = (template) ->
+  # Return a callback that takes the profileId and either shows the index page (if it's invalid) or the page we wanted
+  return (profileId) ->
+    # Profile exists?
+    profile = Profiles.findOne profileId
+
+    if not profile
+      return 'index'
+
+    Session.set "currentProfile", profileId
+    template
 
 Meteor.Router.filters({
   checkLoggedIn: (page) =>
     if Meteor.loggingIn()
-      return 'loading'
+      'loading'
     else if Meteor.user()
-      return page
+      page
     else
-      return 'public'
+      'public'
+
+  hasProfile: (page) =>
+    if Meteor.user()
+      if Profiles.findOne()
+        return page
+      else
+        return 'profiles'
+    page
 })
 
 Meteor.Router.filter('checkLoggedIn')
+Meteor.Router.filter('hasProfile')
+
+Meteor.Router.add({
+  '/': 'index'
+  '/:profileId/income': {
+    as: 'income'
+    to: applyProfile('income')
+  }
+  '/:profileId/expenses': {
+    as: 'expenses'
+    to: applyProfile('expenses')
+  }
+  '/:profileId/payments': {
+    as: 'payments'
+    to: applyProfile('payments')
+  }
+  '/:profileId/accounts': {
+    as: 'accounts'
+    to: applyProfile('accounts')
+  }
+  '/:profileId/envelopes': {
+    as: 'envelopes'
+    to: applyProfile('envelopes')
+  }
+  '/profiles': {
+    as: 'profiles'
+    to: 'profiles'
+  }
+})
 
 # Define some generally-useful stuff
 @successAlertSelector = "#nav-flash-success"
@@ -29,12 +68,3 @@ Meteor.Router.filter('checkLoggedIn')
 
 @showNavError = (message) ->
   showAlert(message, $(errorAlertSelector))
-
-@spendflowPrecision = 2
-
-# TODO: Allow changing accounting.js settings from a UI
-accounting.settings.currency.symbol = ""
-
-accounting.settings.currency.precision = 2
-
-accounting.settings.number.precision = 2

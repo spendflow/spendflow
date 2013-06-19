@@ -5,7 +5,7 @@ spendflowRoutes = [
   'income'
   'expenses'
   'payments'
-  'tasks'
+  'profiles'
 ]
 
 spendflowRoutes.forEach (route) ->
@@ -15,3 +15,27 @@ spendflowRoutes.forEach (route) ->
       return "active"
     else
       return ""
+
+Template.nav.profileId = ->
+  getCurrentProfile()
+
+Template.nav.profile = ->
+  Profiles.findOne getCurrentProfile()
+
+Template.nav.profiles = ->
+  Profiles.find().fetch()
+
+Template.nav.events {
+  'click .switch-profile': (event) ->
+    $elem = $(event.target)
+    newProfileId = $elem.attr('id')
+
+    # Ensure it exists
+    profile = Profiles.findOne(newProfileId)
+
+    if profile
+      Session.set('currentProfile', newProfileId)
+      # Route to same page we're on but with new profile
+      Meteor.Router.to(Meteor.Router.page(), newProfileId)
+    # Just gets ignored otherwise
+}

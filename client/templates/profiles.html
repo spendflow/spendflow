@@ -1,0 +1,56 @@
+<template name="profiles">
+  {{> profileList}}
+  {{> newProfileForm}}
+</template>
+
+<template name="profileList">
+  <div class="profile-list record-list">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each profiles}}
+          {{> profile}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  {{#with editingProfile}}
+    <fieldset>
+      {{> profileForm}}
+    </fieldset>
+  {{/with}}
+</template>
+
+<template name="profile">
+  {{! We deviated from the normal naming convention here to avoid conflicting with something unknown, though it doesn't seem to have been necessary.}}
+  <tr data-target="{{_id}}"{{#if thisRowBeingEdited}} class="being-edited"{{/if}}>
+    <td>{{name}}</td>
+    <td><a href="#" class="edit-profile"><i class="icon-pencil"></i></a> {{#if allowDelete}}<a href="#" class="remove-profile"><i class="icon-trash"></i></a>{{/if}}</td>
+  </tr>
+</template>
+
+<template name="newProfileForm">
+  <button class="btn btn-large new-profile-trigger" data-toggle="collapse" data-target="#new-profile-form"><i
+    class="icon-plus"></i> New profile
+  </button>
+  <div id="new-profile-form" class="collapse{{#unless profilesCount}} in{{/unless}}">
+    {{> profileForm}}
+  </div>
+</template>
+
+<template name="profileForm">
+  <form{{#if _id}} class="edit-record-form" data-target="{{_id}}"{{else}} class="add-record-form"{{/if}}>
+    <label>Name this profile</label>
+    <input type="text" name="name"{{#if _id}} value="{{name}}"{{/if}} />
+
+    <div>
+      <button type="submit" class="btn {{#if _id}}save-profile{{else}}add-profile{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>
+      {{#if _id}}<button class="btn cancel-editing">Cancel</button>{{/if}}
+    </div>
+  </form>
+</template>

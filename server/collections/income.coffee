@@ -1,7 +1,11 @@
 Incomes.allow allowViewOwn
+Incomes.deny denyIfInvalidProfile
 
-Meteor.publish 'spendflowIncomes', ->
-  data = Incomes.find { owner: @userId }
+Meteor.publish 'spendflowIncomes', (profileId = -1) ->
+  data = Incomes.find {
+    owner: @userId
+    profileId: profileId
+  }
   data
 
 Incomes.after "insert", (userId, doc) ->
@@ -92,7 +96,8 @@ Incomes.before "remove", (userId, selector, previous) ->
     if not existingExpense
       # Create an expense for that amount
       expenseId = Expenses.insert {
-        type: 'system',
+        profileId: income.profileId
+        type: 'system'
         systemMeta: {
           from: 'envelope'
           fromRecordId: envelope._id
@@ -129,6 +134,7 @@ Incomes.before "remove", (userId, selector, previous) ->
 
     if not existingPayment
       Payments.insert {
+        profileId: income.profileId
         type: 'system'
         systemMeta: {
           from: 'envelope'

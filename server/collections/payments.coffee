@@ -1,7 +1,11 @@
 Payments.allow allowViewOwn
+Payments.deny denyIfInvalidProfile
 
-Meteor.publish 'spendflowPayments', ->
-  data = Payments.find { owner: @userId }
+Meteor.publish 'spendflowPayments', (profileId = -1) ->
+  data = Payments.find {
+    owner: @userId
+    profileId: profileId
+  }
   data
 
 Payments.after "insert", (userId, doc) ->

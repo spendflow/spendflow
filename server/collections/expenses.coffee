@@ -1,7 +1,11 @@
 Expenses.allow allowViewOwn
+Expenses.deny denyIfInvalidProfile
 
-Meteor.publish 'spendflowExpenses', ->
-  data = Expenses.find { owner: @userId }
+Meteor.publish 'spendflowExpenses', (profileId = -1) ->
+  data = Expenses.find {
+    owner: @userId
+    profileId: profileId
+  }
   data
 
 Expenses.after "update", (userId, selector, modifier, options, previous, callback) ->

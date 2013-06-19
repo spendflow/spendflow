@@ -1,0 +1,2 @@
+@getCurrentProfile = ->
+  Session.get('currentProfile')
