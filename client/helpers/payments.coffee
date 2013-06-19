@@ -107,7 +107,7 @@ Template.paymentForm.events {
 
     Payments.insert paymentValues, (error, result) ->
       if not error
-        $('input, select, textarea', $('.add-record-form')).val("")
+        clearFormFields $context
         showNavSuccess "New payment added."
       else
         showNavError "There was a problem adding the new payment. Please try again. If the problem persists, contact us."
@@ -134,7 +134,7 @@ Template.paymentForm.events {
       $set: paymentValues
     }, (error, result) ->
       if not error
-        $('input, select, textarea', $('.add-record-form')).val("")
+        clearFormFields $context
         showNavSuccess "Payment updated."
         Session.set 'editingPayment', null
       else

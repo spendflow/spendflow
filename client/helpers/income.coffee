@@ -119,7 +119,7 @@ Template.incomeForm.events {
     
     Incomes.insert incomeValues, (error, result) ->
       if not error
-        $('input, select, textarea', $('.add-record-form')).val("")
+        clearFormFields $context
         showNavSuccess "New income added."
       else
         showNavError "There was a problem adding the new income. Please try again. If the problem persists, contact us."
@@ -164,7 +164,7 @@ Template.incomeForm.events {
       $set: incomeValues
     }, (error, result) ->
       if not error
-        $('input, select, textarea', $('.edit-record-form')).val("")
+        clearFormFields $context
         showNavSuccess "<em>#{incomeValues.description}</em> updated."
         Session.set 'editingIncome', null
       else

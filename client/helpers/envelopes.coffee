@@ -33,7 +33,7 @@ Template.envelopeForm.events {
         active: active
       }, (error, result) ->
         if not error
-          $('input, select', $('.add-record-form')).val("")
+          clearFormFields $context
           showNavSuccess "New envelope added."
         else
           showNavError "There was a problem adding the new envelope. Please try again. If the problem persists, contact us."
@@ -60,7 +60,7 @@ Template.envelopeForm.events {
         }
       }, (error, result) ->
         if not error
-          $('input, select', $('.edit-record-form')).val("")
+          clearFormFields $context
           showNavSuccess "Envelope updated."
           Session.set 'editingEnvelope', null
         else

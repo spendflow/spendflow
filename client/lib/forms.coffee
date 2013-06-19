@@ -37,3 +37,7 @@ class @FormProcessor
       optionText: record[nameProperty]
       selected: if record._id is selectedId then true else false
     }
+
+@clearFormFields = ($context) ->
+  $('select, textarea, input[type="text"]', $context).val("")
+  $('input[type="checkbox"], input[type="radio"]', $context).removeAttr('checked')

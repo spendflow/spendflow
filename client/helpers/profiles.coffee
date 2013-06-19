@@ -48,7 +48,7 @@ Template.profileForm.events {
 
     Profiles.insert profileValues, (error, result) ->
       if not error
-        $('input, select, textarea', $('.add-record-form')).val("")
+        clearFormFields $context
         showNavSuccess "New profile added."
       else
         showNavError "There was a problem adding the new profile. Please try again. If the problem persists, contact us."
@@ -65,7 +65,7 @@ Template.profileForm.events {
       $set: profileValues
     }, (error, result) ->
       if not error
-        $('input, select, textarea', $('.add-record-form')).val("")
+        clearFormFields $context
         showNavSuccess "Profile updated."
         Session.set 'editingProfile', null
       else

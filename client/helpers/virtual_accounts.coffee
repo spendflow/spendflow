@@ -22,7 +22,7 @@ Template.newAccountForm.events {
         business: business
       }, (error, result) ->
         if not error
-          $('input, select', $context).val("")
+          clearFormFields $context
           showNavSuccess "New account added."
         else
           showNavError "There was a problem adding the new account. Please try again. If the problem persists, contact us."
@@ -58,7 +58,7 @@ Template.accountForm.events {
         }
       }, (error, result) ->
         if not error
-          $('input, select', $context).val("")
+          clearFormFields $context
           showNavSuccess "<i>#{accountName}</i> updated."
           Session.set 'editingAccount', null
         else
