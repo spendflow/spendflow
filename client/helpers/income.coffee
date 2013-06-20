@@ -57,6 +57,17 @@ Template.incomeRecord.events {
           else
             showNavError "I couldn't remove the income for some reason. Try again, and contact us if problems persist."
             console.log error
+  'click .mark-transferred': (event) ->
+    event.preventDefault()
+    income = Incomes.findOne(recordIdFromRow event)
+    Incomes.update income._id, {
+      $set: {
+        transferred: ! income.transferred
+      }
+    }, (error, result) ->
+      if error
+        showNavError "Something went wrong marking that transferred. Try again, and contact us if it keeps happening."
+        console.log error
 }
 
 Template.newIncomeForm.incomesCount = ->
