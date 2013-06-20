@@ -32,10 +32,12 @@ Template.expense.payFromAccounts = ->
 
 Template.expense.events {
   'click .edit-expense': (event) ->
+    event.preventDefault()
     expenseId = recordIdFromRow event
     Session.set 'editingExpense', expenseId
 
   'click .remove-expense': (event) ->
+    event.preventDefault()
     expenseId = recordIdFromRow event
     description = Expenses.findOne(expenseId).description
 
