@@ -34,7 +34,7 @@
 <template name="payment">
   {{! Template name diverges from the norm to avoid a name conflict.}}
   {{! ROW OF THE THINGS}}
-  <tr data-target="{{_id}}"{{#if thisRowBeingEdited}} class="being-edited"{{/if}}>
+  <tr data-target="{{_id}}" class="{{#if thisRowBeingEdited}} being-edited {{/if}}{{#if paid}} muted {{/if}}">
     <td>{{#if equal systemMeta.from "envelope"}}<i class="icon-envelope"></i> {{/if}}{{expense}}</td>
     <td>{{income}}</td>
     <td class="main-amount">{{amount}}</td>
