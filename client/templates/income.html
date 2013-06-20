@@ -37,7 +37,7 @@
 <template name="incomeRecord">
   {{! Template name diverges from the norm to avoid a name conflict.}}
   {{! ROW OF THE THINGS}}
-  <tr data-target="{{_id}}"{{#if thisRowBeingEdited}} class="being-edited"{{/if}}>
+  <tr data-target="{{_id}}" class="{{#if thisRowBeingEdited}} being-edited {{/if}}{{#if transferred}} muted {{/if}}">
     <td>{{receiptDate}}</td>
     <td>{{description}}</td>
     <td>
