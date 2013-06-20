@@ -70,7 +70,7 @@ Template.paymentForm.expenses = ->
     ea = accounting.formatMoney expense.amount
     {
       optionValue: expense._id
-      optionText: "#{expense.description} (#{ear} of #{ea} remaining)"
+      optionText: "#{expense.dueDate} — #{expense.description} (#{ear} of #{ea} remaining)"
       selected: if expense._id is @expenseId then true else false
     }
 
@@ -87,7 +87,7 @@ Template.paymentForm.incomes = ->
     ia = accounting.formatMoney income.amount
     {
       optionValue: income._id
-      optionText: "#{income.description} (#{iar} of #{ia} remaining)"
+      optionText: "#{income.receiptDate} — #{income.description} (#{iar} of #{ia} remaining)"
       selected: if income._id is @incomeId then true else false
     }
 
