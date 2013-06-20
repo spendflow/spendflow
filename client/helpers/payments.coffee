@@ -12,10 +12,14 @@ Template.payment.amount = ->
   accounting.formatMoney @amount
 
 Template.payment.expense = ->
-  Expenses.findOne @expenseId
+  expense = Expenses.findOne @expenseId
+  expense.destinationAccount = getVirtualAccountName(expense.destinationAccountId)
+  expense
 
 Template.payment.income = ->
-  Incomes.findOne @incomeId
+  income = Incomes.findOne @incomeId
+  income.depositAccount = getVirtualAccountName(income.depositAccountId)
+  income
 
 Template.payment.events {
   'click .edit-payment': (event) ->

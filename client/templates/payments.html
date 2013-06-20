@@ -36,16 +36,16 @@
   {{! ROW OF THE THINGS}}
   <tr data-target="{{_id}}" class="{{#if thisRowBeingEdited}} being-edited {{/if}}{{#if paid}} muted {{/if}}{{#unless income.transferred}} muted {{/unless}}">
     <td>
-      {{#if equal systemMeta.from "envelope"}}<i class="icon-envelope"></i> {{/if}}{{expense.dueDate}} — {{expense.description}}
-      {{#if expense.notes}}<br />{{expense.notes}}{{/if}}
+      {{#if equal systemMeta.from "envelope"}}<i class="icon-envelope"></i> {{/if}}{{expense.dueDate}} — {{#if expense.business}}<i class="icon-briefcase"></i> {{/if}}{{expense.description}}{{#if expense.destinationAccountId}} <i class="icon-arrow-right"></i> {{expense.destinationAccount}}{{/if}}
+      {{#if expense.notes}}{{#unless equal systemMeta.from "envelope"}}<br />{{expense.notes}}{{/unless}}{{/if}}
     </td>
     <td>
-      {{#if income.transferred}}<i class="icon-thumbs-up"></i>{{else}}<i class="icon-remove"></i>{{/if}} {{income.receiptDate}} — {{income.description}}
-      {{#if income.notes}}<br />{{income.notes}}{{/if}}
+      {{#if income.transferred}}<i class="icon-thumbs-up"></i>{{else}}<i class="icon-remove"></i>{{/if}} {{income.receiptDate}} — {{income.description}}{{#if income.depositAccountId}} <i class="icon-arrow-right"></i> {{income.depositAccount}}{{/if}}
+      {{#if income.notes}}<br />{{#unless equal systemMeta.from "envelope"}}{{income.notes}}{{/unless}}{{/if}}
     </td>
     <td class="main-amount">{{amount}}</td>
     <td>{{paid}} <a title="Mark {{#if paid}}unpaid{{else}}paid{{/if}}" href="#" class="mark-paid"><i class="{{#if paid}} icon-ok-sign{{else}}icon-ok{{/if}}"></i></a></td>
-    <td>{{notes}}</td>
+    <td>{{#unless equal systemMeta.from "envelope"}}{{notes}}{{/unless}}</td>
     <td>{{#unless equal systemMeta.from "envelope"}}<a href="#" class="edit-payment"><i class="icon-pencil"></i></a> <a href="#" class="remove-payment"><i class="icon-trash"></i></a>{{/unless}}</td>
   </tr>
 </template>
