@@ -48,6 +48,10 @@ body {
 // Forms
 .add-record-form, .edit-record-form {
   padding-left: 1px; // Cuz of weird Bootstrap option button thing
+
+  select {
+    width: auto;
+  }
 }
 
 @import "views/_accounts";
