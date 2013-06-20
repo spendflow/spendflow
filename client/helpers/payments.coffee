@@ -19,10 +19,12 @@ Template.payment.income = ->
 
 Template.payment.events {
   'click .edit-payment': (event) ->
+    event.preventDefault()
     paymentId = recordIdFromRow event
     Session.set 'editingPayment', paymentId
 
   'click .remove-payment': (event) ->
+    event.preventDefault()
     paymentId = recordIdFromRow event
     payment = Payments.findOne(paymentId)
     expense = Expenses.findOne(payment.expenseId)
@@ -40,6 +42,7 @@ Template.payment.events {
             showNavError "I couldn't remove the payment for some reason. Try again, and contact us if the problems persist."
             console.log error
   'click .mark-paid': (event) ->
+    event.preventDefault()
     payment = Payments.findOne(recordIdFromRow event)
     Payments.update payment._id, {
       $set: {
