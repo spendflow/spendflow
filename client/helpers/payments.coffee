@@ -55,7 +55,7 @@ Template.payment.events {
 }
 
 Template.newPaymentForm.paymentsCount = ->
-  !! Payments.find().count()
+  !! Payments.find({}, { reactive: false }).count()
 
 Template.paymentForm.expenses = ->
   expenses = getExpenses undefined, undefined, {
