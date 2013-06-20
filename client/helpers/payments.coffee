@@ -12,10 +12,10 @@ Template.payment.amount = ->
   accounting.formatMoney @amount
 
 Template.payment.expense = ->
-  getExpenseDescription @expenseId
+  Expenses.findOne @expenseId
 
 Template.payment.income = ->
-  getIncomeDescription @incomeId
+  Incomes.findOne @incomeId
 
 Template.payment.events {
   'click .edit-payment': (event) ->
