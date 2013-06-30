@@ -8,6 +8,9 @@ Template.incomeList.editingIncome = ->
 Template.incomeRecord.thisRowBeingEdited = ->
   Session.equals('editingIncome', this._id)
 
+Template.incomeRecord.receiptDate = ->
+  formatDate @receiptDate
+
 Template.incomeRecord.amount = ->
   accounting.formatMoney @amount
 
@@ -77,6 +80,9 @@ Template.incomeForm.rendered = ->
   $context = $ this.firstNode
   $receiptDate = (elementByName 'receiptDate', $context)
   $receiptDate.datepicker()
+
+Template.incomeForm.receiptDate = ->
+  moment(@receiptDate).format("MM/DD/YYYY")
 
 Template.incomeForm.envelopes = ->
   massaged = []
@@ -194,7 +200,8 @@ parseIncomeForm = ($context) ->
   envelopes = parseEnvelopes ifp
 
   parsedForm = {
-    receiptDate: ifp.valByName('receiptDate')
+    receiptDate: if ifp.valByName('receiptDate') then moment(ifp.valByName('receiptDate'), "MM/DD/YYYY").toDate() else "" # So that validation still works
+    # TODO: Make datepicker use user settings, expenses too
     description: ifp.valByName('description')
     amount: ifp.valByName('amount')
     envelopes: envelopes

@@ -13,11 +13,13 @@ Template.payment.amount = ->
 
 Template.payment.expense = ->
   expense = Expenses.findOne @expenseId
+  expense.dueDate = formatDate expense.dueDate
   expense.destinationAccount = getVirtualAccountName(expense.destinationAccountId)
   expense
 
 Template.payment.income = ->
   income = Incomes.findOne @incomeId
+  income.receiptDate = formatDate(income.receiptDate)
   income.depositAccount = getVirtualAccountName(income.depositAccountId)
   income
 

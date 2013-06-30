@@ -7,6 +7,9 @@ Template.expenseList.editingExpense = ->
 
 Template.expense.thisRowBeingEdited = ->
   Session.equals('editingExpense', this._id)
+
+Template.expense.dueDate = ->
+  formatDate @dueDate
   
 Template.expense.amount = ->
   accounting.formatMoney @amount
@@ -58,6 +61,9 @@ Template.expenseForm.rendered = ->
   $context = $ @firstNode
   $dueDate = (elementByName 'dueDate', $context)
   $dueDate.datepicker()
+
+Template.expenseForm.dueDate = ->
+  moment(@dueDate).format("MM/DD/YYYY")
 
 Template.expenseForm.destinationAccounts = ->
   virtualAccounts = getVirtualAccounts undefined, undefined, {
@@ -167,7 +173,7 @@ parseExpenseForm = ($context) ->
   payFromAccounts = parsePayFromAccounts ifp
 
   parsedForm = {
-    dueDate: ifp.valByName('dueDate')
+    dueDate: if ifp.valByName('dueDate') then moment(ifp.valByName('dueDate'), "MM/DD/YYYY").toDate() else "" # So that validation still works
     description: ifp.valByName('description')
     amount: ifp.valByName('amount')
     business: ifp.checkboxStateByName('business')
