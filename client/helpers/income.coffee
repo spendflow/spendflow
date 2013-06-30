@@ -1,5 +1,5 @@
 Template.incomeList.incomes = ->
-  Incomes.find().fetch()
+  Incomes.find({}, { sort: { transferred: 1, receiptDate: 1 } }).fetch()
 
 Template.incomeList.editingIncome = ->
   income = Incomes.findOne(Session.get 'editingIncome') if Session.get 'editingIncome'
