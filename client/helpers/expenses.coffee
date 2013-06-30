@@ -1,5 +1,5 @@
 Template.expenseList.expenses = ->
-  Expenses.find({ 'systemMeta.from': { $ne: 'envelope' } }).fetch()
+  Expenses.find({ 'systemMeta.from': { $ne: 'envelope' } }, { sort: { dueDate:1 } }).fetch()
 
 Template.expenseList.editingExpense = ->
   expense = Expenses.findOne(Session.get 'editingExpense') if Session.get 'editingExpense'
