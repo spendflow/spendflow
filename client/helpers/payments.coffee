@@ -1,5 +1,14 @@
 Template.paymentList.payments = ->
-  Payments.find({}, { sort: { paid: 1 } }).fetch()
+  payments = Payments.find(
+    {},
+    { sort:
+      {
+        paid: 1
+        _incomeTransferred: -1
+        _expenseDueDate: 1
+        _incomeReceiptDate: 1
+      }
+    }).fetch()
 
 Template.paymentList.editingPayment = ->
   payment = Payments.findOne(Session.get 'editingPayment') if Session.get 'editingPayment'

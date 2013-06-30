@@ -25,6 +25,8 @@ Incomes.after "update", (userId, selector, modifier, options, previous, callback
         income: income
         previous: previousIncome
       }, "update")
+
+      updatePaymentsUsingIncome(income._id)
     )
 
 Incomes.before "remove", (userId, selector, previous) ->
@@ -166,3 +168,18 @@ Incomes.before "remove", (userId, selector, previous) ->
       'systemMeta.relatedRecordId': income._id
     }
   )
+
+@updatePaymentsUsingIncome = (incomeId) ->
+  newPayments = []
+  Payments.find({ incomeId: incomeId }).forEach((payment) ->
+    addPaymentMetadata(payment)
+    newPayments.push payment
+  )
+
+  # Update just the metadata fields to avoid race conditions, at least somewhat
+  for np in newPayments
+    setArguments = {}
+    for sa in paymentIncomeFields
+      setArguments[sa] = np[sa]
+
+    Payments.update np._id, { $set: setArguments }, { spendflowSkipAfterHooks: true }
