@@ -1,12 +1,13 @@
 """
 parentContext is basically the server publish function context (this).
 """
-@getExpenses = (userId, parentContext, extraCriteria = {}) ->
+@getExpenses = (userId, parentContext, extraCriteria = {}, options = { sort: { dueDate: 1 } }) ->
   if not userId then userId = getCurrentUserId(parentContext)
 
   criteria = _.extend { owner: userId }, extraCriteria
 
-  data = Expenses.find(criteria).fetch()
+  data = Expenses.find(criteria, options).fetch()
+
   data
 
 @getExpenseDescription = (expenseId) ->

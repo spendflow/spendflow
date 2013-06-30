@@ -81,6 +81,7 @@ Template.paymentForm.expenses = ->
   }
   # TODO: Make this use some function with customizable optionText (perhaps via a callback)
   for expense in expenses
+    expense.dueDate = formatDate expense.dueDate
     ear = accounting.formatMoney expense.amountRemaining
     ea = accounting.formatMoney expense.amount
     {
@@ -98,6 +99,7 @@ Template.paymentForm.incomes = ->
   }
   # TODO: Make this use some function with customizable optionText (perhaps via a callback)
   for income in incomes
+    income.receiptDate = formatDate income.receiptDate
     iar = accounting.formatMoney income.amountRemaining
     ia = accounting.formatMoney income.amount
     {
