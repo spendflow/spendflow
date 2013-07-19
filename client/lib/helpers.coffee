@@ -4,3 +4,9 @@ Handlebars.registerHelper "equal", (lvalue, rvalue, options) ->
     false
   else
     true
+
+Handlebars.registerHelper "multiline", (text) ->
+  text = Handlebars.Utils.escapeExpression(text)
+  text = text.toString()
+  text = text.replace(/(\r\n|\n|\r)/g, "<br>")
+  new Handlebars.SafeString(text)
