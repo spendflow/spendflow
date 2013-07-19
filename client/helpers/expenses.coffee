@@ -55,7 +55,7 @@ Template.expense.events {
 }
 
 Template.newExpenseForm.expensesCount = ->
-  !! Expenses.find().count()
+  !! Expenses.find({}, { reactive: false }).count()
 
 Template.expenseForm.rendered = ->
   $context = $ @firstNode

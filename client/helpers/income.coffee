@@ -74,7 +74,7 @@ Template.incomeRecord.events {
 }
 
 Template.newIncomeForm.incomesCount = ->
-  !! Incomes.find().count()
+  !! Incomes.find({}, { reactive: false }).count()
 
 Template.incomeForm.rendered = ->
   $context = $ this.firstNode

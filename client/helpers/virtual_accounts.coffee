@@ -67,6 +67,9 @@ Template.accountForm.events {
       )
 }
 
+Template.accountList.virtualAccountsCount = ->
+  VirtualAccounts.find({}, { reactive: false }).fetch()
+
 Template.accountList.virtualAccounts = ->
   VirtualAccounts.find().fetch()
 
