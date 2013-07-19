@@ -22,8 +22,8 @@
     "packages": {
       "router": {
         "git": "https://github.com/tmeasday/meteor-router.git",
-        "tag": "v0.5.1",
-        "commit": "32e377c7703bb119acccc859fc7296882903cbe7"
+        "tag": "v0.5.3",
+        "commit": "7bd3a1bdd1099625bb8b49406d9b8f961d6f4a17"
       },
       "stripe": {
         "git": "https://github.com/appleifreak/stripe-meteor.git",
@@ -62,8 +62,8 @@
       },
       "scss": {
         "git": "https://github.com/fourseven/meteor-scss.git",
-        "tag": "v0.5.1.1",
-        "commit": "6b142df6fc11f026e4bff1d6828055b3d84ce608"
+        "tag": "v0.5.3",
+        "commit": "d3438b652f90ff2b418ac143fc3a746be2772e4b"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",
