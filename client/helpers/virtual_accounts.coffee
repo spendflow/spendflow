@@ -85,9 +85,11 @@ Template.account.balance = ->
 
 Template.account.events {
   'click .edit-account': (event) ->
+    event.preventDefault()
     accountId = recordIdFromRow event
     Session.set 'editingAccount', accountId
   'click .remove-account': (event) ->
+    event.preventDefault()
     accountId = recordIdFromRow event
 
     recordName = VirtualAccounts.findOne(accountId).name

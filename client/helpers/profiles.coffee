@@ -17,10 +17,12 @@ Template.profile.allowDelete = ->
 
 Template.profile.events {
   'click .edit-profile': (event) ->
+    event.preventDefault()
     profileId = recordIdFromRow event
     Session.set 'editingProfile', profileId
 
   'click .remove-profile': (event) ->
+    event.preventDefault()
     profileId = recordIdFromRow event
     profile = Profiles.findOne(profileId)
 

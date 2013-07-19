@@ -46,9 +46,11 @@ Template.incomeRecord.uncommittedTotal = ->
 
 Template.incomeRecord.events {
   'click .edit-income': (event) ->
+    event.preventDefault()
     incomeId = recordIdFromRow event
     Session.set 'editingIncome', incomeId
   'click .remove-income': (event) ->
+    event.preventDefault()
     incomeId = recordIdFromRow event
     description = Incomes.findOne(incomeId).description
 

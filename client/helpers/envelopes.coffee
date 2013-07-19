@@ -77,9 +77,11 @@ Template.envelope.thisRowBeingEdited = ->
 
 Template.envelope.events {
   'click .edit-envelope': (event) ->
+    event.preventDefault()
     envelopeId = recordIdFromRow event
     Session.set 'editingEnvelope', envelopeId
   'click .remove-envelope': (event) ->
+    event.preventDefault()
     envelopeId = recordIdFromRow event
 
     alertify.confirm "Are you sure you want to remove this envelope?", (event) ->
