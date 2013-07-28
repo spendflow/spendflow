@@ -12,6 +12,8 @@
     "collection-hooks": {},
     "jquery-ui-bootstrap": {},
     "scss": {},
-    "jquery-scrollintoview": {}
+    "jquery-scrollintoview": {},
+    "managedUsers": {},
+    "accounts-ui-bootstrap-dropdown": {}
   }
 }

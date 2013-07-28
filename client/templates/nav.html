@@ -1,6 +1,7 @@
 <template name="nav">
   {{#if profileId}}
     <ul class="nav nav-pills pull-left">
+      <li id="page-index" class="{{indexActive}}"><a href="{{indexUrl profileId}}"><i class="icon-home"></i></a></li>
       <li id="page-income" class="{{incomeActive}}"><a href="{{incomeUrl profileId}}">Income</a></li>
       <li id="page-expenses" class="{{expensesActive}}"><a href="{{expensesUrl profileId}}">Expenses</a></li>
       <li id="page-payments" class="{{paymentsActive}}"><a href="{{paymentsUrl profileId}}">Payments</a></li>

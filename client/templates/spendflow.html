@@ -24,7 +24,12 @@
 </template>
 
 <template name="index">
-  <div>Some sort of fantastic dashboard will go here.</div>
+  <div>
+    Some sort of fantastic dashboard will go here.
+    {{#if isAdmin}}
+      {{> managedUsers}}
+    {{/if}}
+  </div>
 </template>
 
 <template name="errorAlert">
