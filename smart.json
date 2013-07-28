@@ -11,6 +11,7 @@
     "i18n": {},
     "collection-hooks": {},
     "jquery-ui-bootstrap": {},
-    "scss": {}
+    "scss": {},
+    "jquery-scrollintoview": {}
   }
 }

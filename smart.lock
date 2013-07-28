@@ -13,7 +13,8 @@
       "i18n": {},
       "collection-hooks": {},
       "jquery-ui-bootstrap": {},
-      "scss": {}
+      "scss": {},
+      "jquery-scrollintoview": {}
     },
     "packages": {
       "router": {
@@ -60,6 +61,11 @@
         "git": "https://github.com/fourseven/meteor-scss.git",
         "tag": "v0.5.3",
         "commit": "d3438b652f90ff2b418ac143fc3a746be2772e4b"
+      },
+      "jquery-scrollintoview": {
+        "git": "https://github.com/WeekdayFiller/meteor-jquery.scrollintoview",
+        "tag": "v1.8.0",
+        "commit": "2adb657b6f6c09728d726b26d6b3d1de85b41f9a"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",

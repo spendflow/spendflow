@@ -30,6 +30,20 @@ class @FormProcessor
   elementByName: (fieldName) ->
     $("[name=\"#{fieldName}\"]", @$context);
 
+  # Form population helpers
+  setValByName: (fieldName, value) ->
+    $field = $("[name=\"#{fieldName}\"]", @$context)
+
+    switch $field.attr('type')
+      when 'radio'
+        $specificField = $field.filter("[value=\"#{value}\"]")
+        if value then $specificField.attr('checked', '')
+        else $field.removeAttr('checked')
+      when 'checkbox'
+        if value then $field.attr('checked', '')
+        else $field.removeAttr('checked')
+      else $field.val(value)
+
 @getCollectionSelector = (records, selectedId, nameProperty = "name") ->
   for record in records
     {

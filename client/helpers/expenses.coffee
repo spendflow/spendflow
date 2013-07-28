@@ -39,6 +39,25 @@ Template.expense.events {
     expenseId = recordIdFromRow event
     Session.set 'editingExpense', expenseId
 
+  'click .copy-expense': (event) ->
+    event.preventDefault()
+    expenseId = recordIdFromRow event
+    # Copy the expense fields to the form
+    $form = $('#new-expense-form')
+
+    continueExpenseCopy = =>
+      expense = Expenses.findOne expenseId
+
+      $form.scrollintoview({
+        complete: ->
+          populateExpenseForm($form, expense)
+      })
+
+    if (! $form.hasClass('in'))
+      $form.collapse('show').on('shown', continueExpenseCopy)
+    else
+      continueExpenseCopy()
+
   'click .remove-expense': (event) ->
     event.preventDefault()
     expenseId = recordIdFromRow event
@@ -195,3 +214,21 @@ parsePayFromAccounts = (formProcessor) ->
   )
 
   payFromAccounts
+
+populateExpenseForm = ($context, expense) ->
+  ifp = new FormProcessor $context
+
+  ifp.setValByName('dueDate', moment(expense.dueDate).format('MM/DD/YYYY'))
+  ifp.setValByName('description', expense.description)
+  ifp.setValByName('amount', expense.amount)
+  ifp.setValByName('business', expense.business)
+  ifp.setValByName('oneTime', expense.oneTime)
+  ifp.setValByName('destinationAccountId', expense.destinationAccountId)
+
+  _.each(expense.payFromAccounts or {}, (value, index) =>
+    $pfa = $('[name="payFromAccounts[]"][value="' + index + '"]')
+    $pfa.attr('checked', '')
+  )
+
+  ifp.setValByName('priority', expense.priority)
+  ifp.setValByName('notes', expense.notes)
