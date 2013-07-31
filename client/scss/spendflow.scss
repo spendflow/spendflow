@@ -58,6 +58,11 @@ body {
   }
 }
 
+// Login
+.login-buttons-dropdown-align-left {
+  display: inline-block;
+}
+
 @import "views/_accounts";
 @import "views/_envelopes";
 @import "views/_incomes";
