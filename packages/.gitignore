@@ -7,8 +7,8 @@ i18n
 collection-hooks
 jquery-ui-bootstrap
 scss
-page-js-ie-support
-jquery-ui
 jquery-scrollintoview
 managedUsers
-accounts-ui-bootstrap-dropdown
+page-js-ie-support
+accounts-testing
+jquery-ui

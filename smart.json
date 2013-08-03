@@ -1,7 +1,6 @@
 {
   "packages": {
     "router": {},
-    "stripe": {},
     "moment": {},
     "accounting": {},
     "tags": {
@@ -13,7 +12,6 @@
     "jquery-ui-bootstrap": {},
     "scss": {},
     "jquery-scrollintoview": {},
-    "managedUsers": {},
-    "accounts-ui-bootstrap-dropdown": {}
+    "managedUsers": {}
   }
 }
