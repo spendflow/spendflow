@@ -80,15 +80,18 @@ Template.paymentForm.expenses = ->
     ]
   }
   # TODO: Make this use some function with customizable optionText (perhaps via a callback)
+  selectExpenses = []
   for expense in expenses
-    expense.dueDate = formatDate expense.dueDate
-    ear = accounting.formatMoney expense.amountRemaining
-    ea = accounting.formatMoney expense.amount
-    {
-      optionValue: expense._id
-      optionText: "#{expense.dueDate} — #{expense.description} (#{ear} of #{ea} remaining)"
-      selected: if expense._id is @expenseId then true else false
-    }
+    if Math.abs(accounting.formatMoney(expense.amountRemaining)) isnt 0.00
+      expense.dueDate = formatDate expense.dueDate
+      ear = accounting.formatMoney expense.amountRemaining
+      ea = accounting.formatMoney expense.amount
+      selectExpenses.push {
+        optionValue: expense._id
+        optionText: "#{expense.dueDate} — #{expense.description} (#{ear} of #{ea} remaining)"
+        selected: if expense._id is @expenseId then true else false
+      }
+  selectExpenses
 
 Template.paymentForm.incomes = ->
   incomes = getIncomes undefined, undefined, {
@@ -98,15 +101,18 @@ Template.paymentForm.incomes = ->
     ]
   }
   # TODO: Make this use some function with customizable optionText (perhaps via a callback)
+  selectIncomes = []
   for income in incomes
-    income.receiptDate = formatDate income.receiptDate
-    iar = accounting.formatMoney income.amountRemaining
-    ia = accounting.formatMoney income.amount
-    {
-      optionValue: income._id
-      optionText: "#{income.receiptDate} — #{income.description} (#{iar} of #{ia} remaining)"
-      selected: if income._id is @incomeId then true else false
-    }
+    if Math.abs(accounting.formatMoney(income.amountRemaining)) isnt 0.00
+      income.receiptDate = formatDate income.receiptDate
+      iar = accounting.formatMoney income.amountRemaining
+      ia = accounting.formatMoney income.amount
+      selectIncomes.push {
+        optionValue: income._id
+        optionText: "#{income.receiptDate} — #{income.description} (#{iar} of #{ia} remaining)"
+        selected: if income._id is @incomeId then true else false
+      }
+  selectIncomes
 
 Template.paymentForm.events {
   'click .add-payment': (event) ->
