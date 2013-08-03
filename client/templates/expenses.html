@@ -123,7 +123,7 @@
       <input type="radio" name="priority" value="3"{{#unless _id}} checked{{/unless}}{{#if _id}}{{#if equal priority "3"}} checked{{/if}}{{/if}}} /> 3
     </label>
     <label class="radio inline">
-      <input type="radio" name="priority" value="4"{{#if _id}}{{#if equal priority "4"}} checked{{/if}}{{/if}}} /> 4 (won't be committed to automatically)
+      <input type="radio" name="priority" value="4"{{#if _id}}{{#if equal priority "4"}} checked{{/if}}{{/if}}} /> 4 {{! (won't be committed to automatically)}}
     </label>
 
     {{!-- TODO: jquery-ui/bootstrap conflicts make this not work :( --}}
