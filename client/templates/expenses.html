@@ -112,7 +112,7 @@
       {{/each}}
     </fieldset>
 
-    <label class="expense-priority"><strong>Priority</strong> (when committing income automatically, lower priority numbers get it first)</label>
+    <label class="expense-priority"><strong>Priority</strong></label>{{! (when committing income automatically, lower priority numbers get it first)</label>}}
     <label class="radio inline">
       <input type="radio" name="priority" value="1"{{#if _id}}{{#if equal priority "1"}} checked{{/if}}{{/if}}} /> 1
     </label>
