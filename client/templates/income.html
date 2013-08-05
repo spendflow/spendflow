@@ -94,7 +94,7 @@
             <input type="checkbox" name="envelopes[]" value="{{_id}}" {{#unless ../_id}}{{#if enabledByDefault}} checked{{/if}}{{else}}{{#if envelopeInUse}} checked{{/if}}{{/unless}} />
             {{rate}}% -> {{virtualAccount}}
           </label>
-          <fieldset><label>If you need to specify exactly how much should be put into the envelope, specify it here. (It's better to just create a new Envelope if you want to change the <em>rate</em>.</label>
+          <fieldset><label>If you need to specify exactly how much should be put into the envelope, specify it here. (It's better to just create a new Envelope if you want to change the <em>rate</em>.)</label>
             <input type="text" name="envelopeAmounts[]"{{#if envelopeInUse}} value="{{envelopeAmount}}"{{/if}} />
           </fieldset>
         </span>
