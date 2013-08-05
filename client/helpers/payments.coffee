@@ -21,16 +21,22 @@ Template.payment.amount = ->
   accounting.formatMoney @amount
 
 Template.payment.expense = ->
-  expense = Expenses.findOne @expenseId
-  expense.dueDate = formatDate expense.dueDate
-  expense.destinationAccount = getVirtualAccountName(expense.destinationAccountId)
-  expense
+  if @expenseId
+    expense = Expenses.findOne @expenseId
+    if expense
+      expense.dueDate = formatDate expense.dueDate
+      expense.destinationAccount = getVirtualAccountName(expense.destinationAccountId)
+      expense
+    else {}
 
 Template.payment.income = ->
-  income = Incomes.findOne @incomeId
-  income.receiptDate = formatDate(income.receiptDate)
-  income.depositAccount = getVirtualAccountName(income.depositAccountId)
-  income
+  if @incomeId
+    income = Incomes.findOne @incomeId
+    if income
+      income.receiptDate = formatDate(income.receiptDate)
+      income.depositAccount = getVirtualAccountName(income.depositAccountId)
+      income
+    else {}
 
 Template.payment.events {
   'click .edit-payment': (event) ->
