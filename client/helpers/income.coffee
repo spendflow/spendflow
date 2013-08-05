@@ -21,13 +21,14 @@ Template.incomeRecord.envelopeAmounts = ->
   envelopeAmounts = []
   _.each(@envelopes, (env, envId) =>
     envData = Envelopes.findOne envId || {}
-    va = VirtualAccounts.findOne(envData.virtualAccountId)
-    envelopeAmounts.push {
-      envelopeAmount: accounting.formatNumber(calculateEnvelopeAmount envData.rate, @amount, env.amountOverride, { precision: spendflowPrecision })
-      envelopeName: if va then va.name else "(unnamed account)"
-      envelopeRate: envData.rate
-      amountOverridden: !! env.amountOverride
-    }
+    if envData
+      va = VirtualAccounts.findOne(envData.virtualAccountId)
+      envelopeAmounts.push {
+        envelopeAmount: accounting.formatNumber(calculateEnvelopeAmount envData.rate, @amount, env.amountOverride, { precision: spendflowPrecision })
+        envelopeName: if va then va.name else "(unnamed account)"
+        envelopeRate: envData.rate
+        amountOverridden: !! env.amountOverride
+      }
   )
   envelopeAmounts
 
@@ -36,13 +37,16 @@ Template.incomeRecord.depositAccount = ->
   virtualAccount.name if virtualAccount
 
 Template.incomeRecord.bizTotal = ->
-  accounting.formatMoney getIncomeBusinessTotal(@)
+  if @
+    accounting.formatMoney getIncomeBusinessTotal(@)
 
 Template.incomeRecord.nonBizTotal = ->
-  accounting.formatMoney getIncomePersonalTotal(@)
+  if @
+    accounting.formatMoney getIncomePersonalTotal(@)
 
 Template.incomeRecord.uncommittedTotal = ->
-  accounting.formatMoney @amount - getIncomeBusinessTotal(@) - getIncomePersonalTotal(@)
+  if @
+    accounting.formatMoney @amount - getIncomeBusinessTotal(@) - getIncomePersonalTotal(@)
 
 Template.incomeRecord.events {
   'click .edit-income': (event) ->

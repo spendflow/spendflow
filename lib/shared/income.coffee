@@ -31,8 +31,9 @@ parentContext is basically the server publish function context (this).
     # Get the expense
     expense = Expenses.findOne payment.expenseId
 
-    # If it's business, add to the bizTotal
-    if expense.business then bizTotal += +payment.amount
+    if expense
+      # If it's business, add to the bizTotal
+      if expense.business then bizTotal += +payment.amount
   )
   bizTotal
 
@@ -42,7 +43,8 @@ parentContext is basically the server publish function context (this).
     # Get the expense
     expense = Expenses.findOne payment.expenseId
 
-    # If it's business, add to the bizTotal
-    if not expense.business then total += +payment.amount
+    if expense
+      # If it's business, add to the bizTotal
+      if not expense.business then total += +payment.amount
   )
   total
