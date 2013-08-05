@@ -114,6 +114,7 @@ Template.paymentForm.incomes = ->
       }
   selectIncomes
 
+_filledPaymentAmount = undefined
 Template.paymentForm.events {
   'click .add-payment': (event) ->
     event.preventDefault()
@@ -170,6 +171,31 @@ Template.paymentForm.events {
   'click .cancel-editing': (event) ->
     event.preventDefault();
     Session.set 'editingPayment', null
+
+  'change [name="incomeId"], change [name="expenseId"]': (event) ->
+    $context = $(event.target).parents('.add-record-form')
+    expenseId = valByName('expenseId', $context)
+    incomeId = valByName('incomeId', $context)
+    currentAmount = valByName('amount', $context)
+    $amount = elementByName('amount', $context)
+
+    if expenseId then expense = Expenses.findOne expenseId
+    if incomeId then income = Incomes.findOne incomeId
+
+    # Only fill in an amount if either we filled it in last time
+    # (what we stored for the previous selection is the same
+    # as what's in there)
+    # or there is nothing currently filled in
+    if expense and income
+      elementByName('amount', $context).focus()
+
+      if currentAmount and currentAmount isnt _filledPaymentAmount
+        # Bail.
+        return;
+
+      maxAmount = accounting.toFixed(getPayableAmount expense, income)
+
+      $amount.val(_filledPaymentAmount = maxAmount)
 }
 
 parsePaymentForm = ($context) ->
