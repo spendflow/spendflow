@@ -58,7 +58,7 @@
 </template>
 
 <template name="paymentForm">
-  <form{{#if _id}} class="edit-record-form" data-target="{{_id}}"{{else}} class="add-record-form"{{/if}}>
+  <form{{#if _id}} class="edit-record-form" data-target="{{_id}}" id="edit-payment-{{_id}}"{{else}} class="add-record-form" id="add-payment-form"{{/if}}>
     <label>Which expense are you paying?</label>
     <select name="expenseId">
       <option value="">Select an expense</option>
