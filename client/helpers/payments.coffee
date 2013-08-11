@@ -142,6 +142,21 @@ Template.paymentForm.events {
       if not error
         clearFormFields $context
         showNavSuccess "New payment added."
+
+        # Set up the form for the next payment to be created, if applicable
+        $expense = elementByName('expenseId', $context)
+        newPayment = Payments.findOne result
+        paymentExpense = Expenses.findOne newPayment.expenseId
+        console.log "Expense: #{paymentExpense}. Remaining: #{paymentExpense.amountRemaining}"
+        if paymentExpense
+          if (Math.abs(accounting.formatMoney paymentExpense.amountRemaining)) isnt 0.00
+            $expense.val(paymentExpense._id)
+            # Focus on income since we'll be wanting to add a payment with a different income
+            (elementByName 'incomeId', $context).focus()
+            return;
+
+        # Focus on expense if we haven't early-returned
+        $expense.focus()
       else
         showNavError "There was a problem adding the new payment. Please try again. If the problem persists, contact us."
         console.log error
@@ -177,6 +192,13 @@ Template.paymentForm.events {
   'click .cancel-editing': (event) ->
     event.preventDefault();
     Session.set 'editingPayment', null
+
+  'change [name="expenseId"]': (event) ->
+    $context = $(event.target).parents('.add-record-form')
+    expenseId = valByName('expenseId', $context)
+    incomeId = valByName('incomeId', $context)
+    # Jump to income dropdown if not chosen yet
+    if expenseId and not incomeId then (elementByName 'incomeId', $context).focus()
 
   'change [name="incomeId"], change [name="expenseId"]': (event) ->
     $context = $(event.target).parents('.add-record-form')
