@@ -1,0 +1,131 @@
+<template name="index">
+  <div class="help">
+    <h1>Welcome to the Spendflow Pre-Release!</h1>
+
+    <p>This page aims to give you a rundown of what this app is all about. Better instructions will come over time.</p>
+
+    <p><strong>Spendflow's goal is to help you eliminate financial surprises and give you the confidence
+      to use money you might have otherwise left sitting in your account.</strong></p>
+
+    <h2>The Spendflow Principles</h2>
+    <ul>
+      <li>Budgeting <em>actual</em> income (not future income) should be easier</li>
+      <li>Managing spending should be doable in under an hour a week</li>
+      <li>It should be easier to figure out if you're behind or ahead of your expenses</li>
+    </ul>
+
+    Spendflow isn't there yet, but that is the aim.
+
+    <h2>Setting Up Spendflow </h2>
+
+    <p>Spendflow is pretty quick to set up, and how you set it up depends a lot on how you manage your money.
+      What follows is an explanation of the setup screens.</p>
+
+    <p>The best thing about the initial setup is that <strong>it is all optional</strong>. You can still use
+      Spendflow even if you don't use Accounts or Envelopes. It just won't be as exciting.</p>
+
+    <h3>- <a href="{{accountsUrl profileId}}">Add your accounts</a></h3>
+
+    <p>Accounts in Spendflow <em>represent</em> your bank, credit card, and savings accounts. The <strong>Current
+      account balance</strong> doesn't do anything yet, but in the future it will help you track balances in your
+      virtual accounts.</p>
+
+    <p>Here is when you should choose each type of account:</p>
+
+    <ul>
+      <li>
+        <strong>Bank account:</strong> Corresponds to an actual bank account. You can receive income into these,
+        and you can pay them back via expenses if you borrow money from yourself or otherwise owe money to a
+        specific bank account.
+      </li>
+      <li>
+        <strong>Virtual savings account:</strong> Corresponds to an amount of money that you set aside for specific
+        purposes. You can create <em>Envelopes</em> to automatically commit some of your income to these. In the future,
+        the system will keep track of the balance for you, but you have to do it on your own for now. Kevin uses these
+        for automatically saving a percentage of client income for taxes, business R&D, and other business expenses. He
+        also has a virtual account for vacation savings, but he manually creates expenses for that one since it's a
+        fixed amount and might be paid partially from several incomes.
+      </li>
+      <li>
+        <strong>Account to pay back:</strong> Use this type of account for accounts you <em>only</em> pay back, such
+        as loans and credit cards. You can set up expenses against them.
+      </li>
+    </ul>
+
+    <h3>- <a href="{{envelopesUrl profileId}}">Add envelopes (rules for where part of your income should go)</a></h3>
+
+    <p>The Envelopes dashboard is inspired by the envelope method, although Kevin still isn't sure if he understands
+      what that is. He has a few rules set up in there, and when he adds income, he can choose if he wants to, for
+      example, set aside money for Tax, Business Savings, R&D, and similar things. He doesn't do this for <em>all</em>
+      income, e.g. if he is "withdrawing" money from his Time Off Fund. In that case, the income that the Time Off Fund
+      came from was already partially put into those categories, so there is no need to do it again.</p>
+
+    <h3>- <a href="{{profilesUrl}}">Add additional profiles</a></h3>
+
+    <p>Most people only need one profile.</p>
+
+    <p>Kevin uses two, though — one for his financial picture in the US, and
+      one for the Norwegian side of things. If you are helping someone else manage their money, you might want to
+      add more profiles too.</p>
+
+    <h2>The Spendflow Workflow</h2>
+
+    {{#unless profileId}}
+      <p class="required">
+        {{#unless profiles}}
+          <a href="{{profilesUrl}}">Create a profile</a> first. (Kudos for somehow managing to see this! It should be
+          impossible).
+        {{else}}
+          Use the dropdown at the top-right to select a profile first.
+        {{/unless}}
+      </p>
+    {{else}}
+      <h3>1. <a href="{{incomeUrl profileId}}">Add income</a></h3>
+
+      <p>Add any upcoming income. Kevin uses this to add income he <em>knows</em> is coming. In his case, that means
+        money he's invoiced clients for, money family gives him, money from other business activities, etc. — anything
+        he wants to track within this system.</p>
+
+      <h3>2. <a href="{{expensesUrl profileId}}">Add expenses</a></h3>
+
+      <p>Add any upcoming expenses. Kevin tends to add non-recurring expenses as soon as he's aware of them (and
+        gets around to doing so) and adds recurring expenses up until the end of the current or next month. When adding
+        recurring expenses for a new month, he uses the <i class="icon-repeat"></i> icon to pre-fill the
+        New Expense form with the same information as an existing copy.</p>
+
+      <h3>3. Bring it all together, and <a href="{{paymentsUrl profileId}}">add payments</a>!</h3>
+
+      <p>Now we come to the core of Spendflow. Use your remaining income to plan how you're going to pay your
+        expenses. You'll quickly see if you have enough or not. <strong>Remember, this is just a
+          planning step; don't forget to actually pay the expenses in whatever way you normally do.
+          You can then mark them Paid by clicking <i class="icon-ok"></i></strong>.</p>
+
+      <h3>4. When you get paid, transfer your income (if necessary) and mark it transferred
+        (click <i class="icon-ok"></i> on <a href="{{incomeUrl profileId}}">Income</a> dashboard).</h3>
+
+      <p>Kevin usually receives income into business accounts, but he likes to keep business and personal funds
+        separate. He looks at the totals in the <strong>Commitments</strong> column and transferred the
+        <strong>Personal</strong> amounts from the account that received the income to his personal account.
+        While he's at it, he usually transfers the <strong>Envelope amounts</strong> to the accounts where he keeps
+        those savings as well. He's kind of jumping the gun, there, but it'll all work out, as we'll see...now.</p>
+
+      <h3>5. <a href="{{paymentsUrl profileId}}">Pay your expenses</a> and mark them <i class="icon-ok"></i> paid!</h3>
+
+      <p>You're almost done. Pay your expenses (including Envelopes), mark them paid, and call it a day (or an
+        evening).</p>
+
+      <p>At this point, Kevin has usually already taken care of <i class="icon-envelope"></i> Envelope payments, and
+        marks them all
+        paid right away. He then does all kinds of stuff (online bill pay in his online banking, transferring
+        money to Norway, just updating a spreadsheet to represent money moved around, transferring money among
+        accounts in online banking, paying bills on the biller's own site, etc.) and marks each payment done as he
+        goes along.</p>
+
+      <p>That should be enough to get you going. You'll discover other neat things as you go along.
+        Get in touch if you have any questions!</p>
+    {{/unless}}
+    {{#if isAdmin}}
+      {{> managedUsers}}
+    {{/if}}
+  </div>
+</template>
