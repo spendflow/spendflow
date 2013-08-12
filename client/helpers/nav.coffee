@@ -17,15 +17,6 @@ spendflowRoutes.forEach (route) ->
     else
       return ""
 
-Template.nav.profileId = ->
-  getCurrentProfile()
-
-Template.nav.profile = ->
-  Profiles.findOne getCurrentProfile()
-
-Template.nav.profiles = ->
-  Profiles.find().fetch()
-
 Template.nav.events {
   'click .switch-profile': (event) ->
     $elem = $(event.target)

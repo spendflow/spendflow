@@ -10,3 +10,12 @@ Handlebars.registerHelper "multiline", (text) ->
   text = text.toString()
   text = text.replace(/(\r\n|\n|\r)/g, "<br>")
   new Handlebars.SafeString(text)
+
+Handlebars.registerHelper "profileId", ->
+  getCurrentProfile()
+
+Handlebars.registerHelper "profile", ->
+  if getCurrentProfile() then Profiles.findOne getCurrentProfile() else return null;
+
+Handlebars.registerHelper "profiles", ->
+  Profiles.find().fetch()
