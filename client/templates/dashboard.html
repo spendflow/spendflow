@@ -24,52 +24,6 @@
     <p>The best thing about the initial setup is that <strong>it is all optional</strong>. You can still use
       Spendflow even if you don't use Accounts or Envelopes. It just won't be as exciting.</p>
 
-    <h3>- <a href="{{accountsUrl profileId}}">Add your accounts</a></h3>
-
-    <p>Accounts in Spendflow <em>represent</em> your bank, credit card, and savings accounts. The <strong>Current
-      account balance</strong> doesn't do anything yet, but in the future it will help you track balances in your
-      virtual accounts.</p>
-
-    <p>Here is when you should choose each type of account:</p>
-
-    <ul>
-      <li>
-        <strong>Bank account:</strong> Corresponds to an actual bank account. You can receive income into these,
-        and you can pay them back via expenses if you borrow money from yourself or otherwise owe money to a
-        specific bank account.
-      </li>
-      <li>
-        <strong>Virtual savings account:</strong> Corresponds to an amount of money that you set aside for specific
-        purposes. You can create <em>Envelopes</em> to automatically commit some of your income to these. In the future,
-        the system will keep track of the balance for you, but you have to do it on your own for now. Kevin uses these
-        for automatically saving a percentage of client income for taxes, business R&D, and other business expenses. He
-        also has a virtual account for vacation savings, but he manually creates expenses for that one since it's a
-        fixed amount and might be paid partially from several incomes.
-      </li>
-      <li>
-        <strong>Account to pay back:</strong> Use this type of account for accounts you <em>only</em> pay back, such
-        as loans and credit cards. You can set up expenses against them.
-      </li>
-    </ul>
-
-    <h3>- <a href="{{envelopesUrl profileId}}">Add envelopes (rules for where part of your income should go)</a></h3>
-
-    <p>The Envelopes dashboard is inspired by the envelope method, although Kevin still isn't sure if he understands
-      what that is. He has a few rules set up in there, and when he adds income, he can choose if he wants to, for
-      example, set aside money for Tax, Business Savings, R&D, and similar things. He doesn't do this for <em>all</em>
-      income, e.g. if he is "withdrawing" money from his Time Off Fund. In that case, the income that the Time Off Fund
-      came from was already partially put into those categories, so there is no need to do it again.</p>
-
-    <h3>- <a href="{{profilesUrl}}">Add additional profiles</a></h3>
-
-    <p>Most people only need one profile.</p>
-
-    <p>Kevin uses two, though — one for his financial picture in the US, and
-      one for the Norwegian side of things. If you are helping someone else manage their money, you might want to
-      add more profiles too.</p>
-
-    <h2>The Spendflow Workflow</h2>
-
     {{#unless profileId}}
       <p class="required">
         {{#unless profiles}}
@@ -80,6 +34,55 @@
         {{/unless}}
       </p>
     {{else}}
+      <h3>- <a href="{{accountsUrl profileId}}">Add your accounts</a></h3>
+
+      <p>Accounts in Spendflow <em>represent</em> your bank, credit card, and savings accounts. The <strong>Current
+        account balance</strong> doesn't do anything yet, but in the future it will help you track balances in your
+        virtual accounts.</p>
+
+      <p>Here is when you should choose each type of account:</p>
+
+      <ul>
+        <li>
+          <strong>Bank account:</strong> Corresponds to an actual bank account. You can receive income into these,
+          and you can pay them back via expenses if you borrow money from yourself or otherwise owe money to a
+          specific bank account.
+        </li>
+        <li>
+          <strong>Virtual savings account:</strong> Corresponds to an amount of money that you set aside for specific
+          purposes. You can create <em>Envelopes</em> to automatically commit some of your income to these. In the
+          future,
+          the system will keep track of the balance for you, but you have to do it on your own for now. Kevin uses these
+          for automatically saving a percentage of client income for taxes, business R&D, and other business expenses.
+          He
+          also has a virtual account for vacation savings, but he manually creates expenses for that one since it's a
+          fixed amount and might be paid partially from several incomes.
+        </li>
+        <li>
+          <strong>Account to pay back:</strong> Use this type of account for accounts you <em>only</em> pay back, such
+          as loans and credit cards. You can set up expenses against them.
+        </li>
+      </ul>
+
+      <h3>- <a href="{{envelopesUrl profileId}}">Add envelopes (rules for where part of your income should go)</a></h3>
+
+      <p>The Envelopes dashboard is inspired by the envelope method, although Kevin still isn't sure if he understands
+        what that is. He has a few rules set up in there, and when he adds income, he can choose if he wants to, for
+        example, set aside money for Tax, Business Savings, R&D, and similar things. He doesn't do this for <em>all</em>
+        income, e.g. if he is "withdrawing" money from his Time Off Fund. In that case, the income that the Time Off
+        Fund
+        came from was already partially put into those categories, so there is no need to do it again.</p>
+
+      <h3>- <a href="{{profilesUrl}}">Add additional profiles</a></h3>
+
+      <p>Most people only need one profile.</p>
+
+      <p>Kevin uses two, though — one for his financial picture in the US, and
+        one for the Norwegian side of things. If you are helping someone else manage their money, you might want to
+        add more profiles too.</p>
+
+      <h2>The Spendflow Workflow</h2>
+
       <h3>1. <a href="{{incomeUrl profileId}}">Add income</a></h3>
 
       <p>Add any upcoming income. Kevin uses this to add income he <em>knows</em> is coming. In his case, that means
