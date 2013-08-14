@@ -1,5 +1,5 @@
 Template.envelopeForm.virtualAccounts = ->
-  virtualAccounts = getVirtualAccounts undefined, undefined, { type: "payFrom" }
+  virtualAccounts = getVirtualAccounts undefined, undefined
   getAccountSelector virtualAccounts, this.virtualAccountId
 
 Template.envelopeList.editingEnvelope = ->
