@@ -71,6 +71,7 @@ ENDPATCH
 # Pull in sensitive environment variables such as MAIL_URL
 source ${APP_DIR}/.environment
 export MAIL_URL=${MAIL_URL}
+export METEOR_SETTINGS=${METEOR_SETTINGS}
 forever start bundle/main.js
 popd
 ENDSSH
