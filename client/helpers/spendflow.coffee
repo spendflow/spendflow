@@ -68,3 +68,22 @@ Meteor.Router.add({
 
 @showNavError = (message) ->
   showAlert(message, $(errorAlertSelector))
+
+Meteor.startup ->
+  # Send metadata to stuff
+  analytics.initialize {
+    'Errorception': {
+      meta: true
+    }
+  }
+
+Deps.autorun ->
+  currentUser = Meteor.user()
+  if currentUser
+    identity = {}
+    identity.email = currentUser.emails[0].address if currentUser.emails.length
+    identity.name = if currentUser.profile.name then currentUser.profile.name else currentUser.username
+    identity.username = currentUser.username if currentUser.username
+    identity.created = moment(currentUser.createdAt).toDate() if currentUser.createdAt
+
+    analytics.identify Meteor.userId(), identity
