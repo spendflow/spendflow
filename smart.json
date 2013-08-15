@@ -3,15 +3,13 @@
     "router": {},
     "moment": {},
     "accounting": {},
-    "tags": {
-      "git": "https://github.com/apendua/meteor-tags",
-      "branch": "master"
-    },
     "i18n": {},
     "collection-hooks": {},
     "jquery-ui-bootstrap": {},
     "scss": {},
     "jquery-scrollintoview": {},
-    "managedUsers": {}
+    "managedUsers": {},
+    "smart-collections": {},
+    "analyticsjs": {}
   }
 }
