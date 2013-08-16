@@ -33,9 +33,11 @@ Template.profile.events {
         Profiles.remove profileId, (error) ->
           if not error
             showNavSuccess "Profile removed."
+            SpendflowStats.track "Profile removed."
           else
             showNavError "I couldn't remove the profile for some reason. Try again, and contact us if the problems persist."
             console.log error
+            SpendflowStats.track "Removing profile failed.",  { profile: profile }
 }
 
 Template.newProfileForm.profilesCount = ->
@@ -52,9 +54,11 @@ Template.profileForm.events {
       if not error
         clearFormFields $context
         showNavSuccess "New profile added."
+        SpendflowStats.track "Created new profile.", { record: Profiles.findOne result }
       else
         showNavError "There was a problem adding the new profile. Please try again. If the problem persists, contact us."
         console.log error
+        SpendflowStats.track "New profile creation failed.", { error: error }
 
   'click .save-profile': (event) ->
     event.preventDefault()
