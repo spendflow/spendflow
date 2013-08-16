@@ -69,13 +69,14 @@ Meteor.Router.add({
 @showNavError = (message) ->
   showAlert(message, $(errorAlertSelector))
 
-Meteor.startup ->
-  # Send metadata to stuff
-  analytics.initialize {
-    'Errorception': {
-      meta: true
-    }
-  }
+# Race condition? Removed for now, opened
+#Meteor.startup ->
+#  # Send metadata to stuff
+#  analytics.initialize {
+#    'Errorception': {
+#      meta: true
+#    }
+#  }
 
 Deps.autorun ->
   currentUser = Meteor.user()
