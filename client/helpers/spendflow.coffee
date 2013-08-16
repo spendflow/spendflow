@@ -86,4 +86,4 @@ Deps.autorun ->
     identity.username = currentUser.username if currentUser.username
     identity.created = moment(currentUser.createdAt).toDate() if currentUser.createdAt
 
-    analytics.identify Meteor.userId(), identity
+    SpendflowStats.identify Meteor.userId(), identity
