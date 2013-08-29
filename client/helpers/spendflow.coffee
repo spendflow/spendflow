@@ -33,6 +33,10 @@ Meteor.Router.filter('hasProfile')
 
 Meteor.Router.add({
   '/': 'index'
+  '/:profileId/dashboard': {
+    as: 'dashboard',
+    to: applyProfile('dashboard')
+  }
   '/:profileId/income': {
     as: 'income'
     to: applyProfile('income')

@@ -1,6 +1,7 @@
-# TODO: Make this use info in meteor-router
+# TODO: Make this use info in meteor-router, if possible
 spendflowRoutes = [
   'index'
+  'dashboard'
   'accounts'
   'envelopes'
   'income'

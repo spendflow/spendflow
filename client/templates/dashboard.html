@@ -1,3 +1,16 @@
+<template name="dashboard">
+  {{#unless envelopeAmounts}}
+    <h2>Nothing to report, sir.</h2>
+  {{else}}
+    <h2>You can pay all your envelopes by moving money as follows:</h2>
+    {{#each envelopeAmounts}}
+      <div class="envelope">
+        <strong>{{title}}:</strong> <span class="main-amount">{{total}}</span> {{!<a href="#" class="mark-all-paid" alt="Mark all these Envelope Payments paid" title="Mark all these Envelope Payments paid"><i class="icon-ok"></i></a>}}
+      </div>
+    {{/each}}
+  {{/unless}}
+</template>
+
 <template name="index">
   <div class="help">
     <h1>Welcome to the Spendflow Pre-Release!</h1>
