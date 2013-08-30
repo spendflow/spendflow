@@ -12,7 +12,8 @@
       "jquery-scrollintoview": {},
       "managedUsers": {},
       "smart-collections": {},
-      "analyticsjs": {}
+      "analyticsjs": {},
+      "canonical": {}
     },
     "packages": {
       "router": {
@@ -62,13 +63,18 @@
       },
       "smart-collections": {
         "git": "https://github.com/arunoda/meteor-smart-collections.git",
-        "tag": "v0.2.15",
-        "commit": "12645b99a7f196a571302b1b3e17e774528c16e3"
+        "tag": "v0.3.2",
+        "commit": "c497bdc8fcec8bfe45b456c28822d80466f1b798"
       },
       "analyticsjs": {
         "git": "https://github.com/nate-strauser/meteor-analyticsjs.git",
-        "tag": "v0.1.1",
-        "commit": "9016e87ebdb4c94ce7925eada3d74f84a0725a1d"
+        "tag": "v0.1.2",
+        "commit": "aded6d80df1f801d02076adbb3d64685ebb00f00"
+      },
+      "canonical": {
+        "git": "https://github.com/projectricochet/meteor-canonical.git",
+        "tag": "v0.0.5",
+        "commit": "faba863fbf336c67264f79446578f484077e28bc"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",
