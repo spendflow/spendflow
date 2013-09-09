@@ -29,14 +29,6 @@
 
     Spendflow isn't there yet, but that is the aim.
 
-    <h2>Setting Up Spendflow </h2>
-
-    <p>Spendflow is pretty quick to set up, and how you set it up depends a lot on how you manage your money.
-      What follows is an explanation of the setup screens.</p>
-
-    <p>The best thing about the initial setup is that <strong>it is all optional</strong>. You can still use
-      Spendflow even if you don't use Accounts or Envelopes. It just won't be as exciting.</p>
-
     {{#unless profileId}}
       <p class="required">
         {{#unless profiles}}
@@ -47,6 +39,7 @@
         {{/unless}}
       </p>
     {{else}}
+      <h2><a href="{{profilesUrl}}">Let's get started.</a></h2>
       <h3>- <a href="{{accountsUrl profileId}}">Add your accounts</a></h3>
 
       <p>Accounts in Spendflow <em>represent</em> your bank, credit card, and savings accounts. The <strong>Current
@@ -144,4 +137,8 @@
       {{> managedUsers}}
     {{/if}}
   </div>
+</template>
+
+<template name="notFound">
+  <h1>Not found.</h1>
 </template>

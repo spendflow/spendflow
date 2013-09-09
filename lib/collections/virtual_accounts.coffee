@@ -11,4 +11,4 @@ if Meteor.isClient
   Deps.autorun =>
     Meteor.subscribe 'spendflowAccounts', getCurrentProfile()
 
-@VirtualAccounts.before "insert", ensureCommonMetadata
+@VirtualAccounts.before.insert ensureCommonMetadata

@@ -9,8 +9,10 @@
     "scss": {},
     "jquery-scrollintoview": {},
     "managedUsers": {},
-    "smart-collections": {},
     "analyticsjs": {},
-    "canonical": {}
+    "canonical": {},
+    "jquery-autosize": {
+      "path": "/Users/kevin/Source/meteor-jquery-autosize"
+    }
   }
 }

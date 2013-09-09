@@ -19,8 +19,8 @@ if Meteor.isClient
     Meteor.subscribe 'spendflowPayments', getCurrentProfile()
 
 # Hooks
-@Payments.before "insert", ensureCommonMetadata
-@Payments.before "insert", (userId, doc) ->
+@Payments.before.insert ensureCommonMetadata
+@Payments.before.insert (userId, doc) ->
   addPaymentMetadata doc
 
 # Also updates

@@ -22,4 +22,4 @@ if Meteor.isClient
     Meteor.subscribe 'spendflowExpenses', getCurrentProfile()
 
 # Hooks
-@Expenses.before "insert", ensureCommonMetadata
+@Expenses.before.insert ensureCommonMetadata

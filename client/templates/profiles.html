@@ -1,4 +1,14 @@
 <template name="profiles">
+  {{#unless setupComplete}}
+    <h2>Setting Up Spendflow </h2>
+
+    <p>Spendflow is pretty quick to set up, and how you set it up depends a lot on how you manage your money.
+      What follows is an explanation of the setup screens.</p>
+
+    <p>The best thing about the initial setup is that <strong>it is all optional</strong>. You can still use
+      Spendflow even if you don't use Accounts or Envelopes. It just won't be as exciting.</p>
+  {{/unless}}
+
   {{> newProfileForm}}
   {{> profileList}}
 </template>

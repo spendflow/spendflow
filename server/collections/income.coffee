@@ -8,34 +8,30 @@ Meteor.publish 'spendflowIncomes', (profileId = -1) ->
   }
   data
 
-Incomes.after "insert", (userId, doc) ->
+Incomes.after.insert (userId, doc) ->
   updateIncomeEnvelopes({ income: doc })
 
 # Calculations
-Incomes.after "update", (userId, selector, modifier, options, previous, callback) ->
+Incomes.after.update (userId, doc, fieldNames, modifier, options) ->
   # Don't run this if we're already inside the hook
   options = options or {}
   if not options.spendflowSkipAfterHooks
-    # Get the IDs of updated records
-    Incomes.find(selector).forEach((income) ->
-      updateIncomeCalculations(income)
+    updateIncomeCalculations(doc)
 
-      previousIncome = _.where(previous, { _id: income._id })[0];
-      updateIncomeEnvelopes({
-        income: income
-        previous: previousIncome
-      }, "update")
+    previousIncome = this.previous
+    updateIncomeEnvelopes({
+      income: doc
+      previous: previousIncome
+    }, "update")
 
-      updatePaymentsUsingIncome(income._id)
-    )
+    updatePaymentsUsingIncome(doc._id)
 
-Incomes.before "remove", (userId, selector, previous) ->
+Incomes.before.remove (userId, doc) ->
   # Remove automatically-created Envelope expenses/payments
   # We only need to remove Expenses because those automatically remove associated Payments.
-  _.each(Incomes.find(selector).fetch(), (income) ->
-    # fromRecordId varies, but relatedRecord is always the Income
-    Expenses.remove { 'systemMeta.relatedRecordId': income._id }
-  )
+
+  # fromRecordId varies, but relatedRecord is always the Income
+  Expenses.remove { 'systemMeta.relatedRecordId': doc._id }
 
 @updateIncomeCalculations = (income) ->
   # Update amountRemaining and hope it doesn't loop forever

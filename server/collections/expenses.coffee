@@ -8,21 +8,17 @@ Meteor.publish 'spendflowExpenses', (profileId = -1) ->
   }
   data
 
-Expenses.after "update", (userId, selector, modifier, options, previous, callback) ->
+Expenses.after.update (userId, doc, fieldNames, modifier, options) ->
   # Don't run this if we're already inside the hook
   options = options or {}
   if not options.spendflowSkipAfterHooks
     # Get the IDs of updated records
-    Expenses.find(selector).forEach((expense) ->
-      updateExpenseCalculations(expense)
-      updatePaymentsUsingExpense(expense._id)
-    )
+    updateExpenseCalculations(doc)
+    updatePaymentsUsingExpense(doc._id)
 
-Expenses.before "remove", (userId, selector, previous) ->
+Expenses.before.remove (userId, doc) ->
   # Remove payments referencing this Expense
-  _.each(Expenses.find(selector).fetch(), (expense) ->
-    Payments.remove({ expenseId: expense._id })
-  )
+  Payments.remove({ expenseId: doc._id })
 
 @updateExpenseCalculations = (expense) ->
   # Update amountRemaining and hope it doesn't loop forever

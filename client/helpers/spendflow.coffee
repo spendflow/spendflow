@@ -1,14 +1,41 @@
-@applyProfile = (template) ->
-  # Return a callback that takes the profileId and either shows the index page (if it's invalid) or the page we wanted
-  return (profileId) ->
-    # Profile exists?
-    profile = Profiles.findOne profileId
+Deps.autorun ->
+  currentUser = Meteor.user()
+  if currentUser
+    identity = {}
+    identity.email = currentUser.emails[0].address if currentUser.emails.length
+    identity.name = if currentUser.profile.name then currentUser.profile.name else currentUser.username
+    identity.username = currentUser.username if currentUser.username
+    identity.created = moment(currentUser.createdAt).toDate() if currentUser.createdAt
 
-    if not profile
-      return 'index'
+    SpendflowStats.identify Meteor.userId(), identity
 
-    Session.set "currentProfile", profileId
-    template
+    # Set the profileId if it isn't set
+    if not Session.get "currentProfile" then Session.set "currentProfile", getLatestProfileId()
+
+
+Deps.autorun ->
+  currentProfile = Session.get "currentProfile"
+
+  if (currentProfile) then Meteor.users.update(Meteor.userId(), { $set: { 'profile.latestProfile': currentProfile } })
+
+@applyProfile = (template, profileId = null) ->
+  if not profileId
+    # Return a callback that takes the profileId and either shows the index page (if it's invalid) or the page we wanted
+    return (profileId) ->
+      applyProfileCheck template, profileId
+  else
+    # Call it directly
+    applyProfileCheck template, profileId
+
+@applyProfileCheck = (template, profileId) ->
+  # Profile exists?
+  profile = Profiles.findOne profileId
+
+  if not profile
+    return 'index'
+
+  Session.set "currentProfile", profileId
+  template
 
 Meteor.Router.filters({
   checkLoggedIn: (page) =>
@@ -22,9 +49,9 @@ Meteor.Router.filters({
   hasProfile: (page) =>
     if Meteor.user()
       if Profiles.findOne()
-        return page
+        return page;
       else
-        return 'profiles'
+        return 'profiles';
     page
 })
 
@@ -36,6 +63,21 @@ Meteor.Router.add({
   '/:profileId/dashboard': {
     as: 'dashboard',
     to: applyProfile('dashboard')
+  }
+  '/:profileId/sessions': {
+    as: 'sessions',
+    to: applyProfile('financeSessions')
+  }
+  '/:profileId/sessions/:sessionId/edit': {
+    as: 'editSession',
+    to: (profileId, sessionId) ->
+      sessionsReady = Session.equals("financeSessionsReady", true)
+      if (sessionsReady)
+        financeSession = FinanceSessions.findOne(sessionId, { reactive: false })
+        if financeSession
+          Session.set "currentFinanceSession", financeSession
+          return applyProfile('editSession', profileId);
+      return applyProfile("notFound", profileId)
   }
   '/:profileId/income': {
     as: 'income'
@@ -73,7 +115,7 @@ Meteor.Router.add({
 @showNavError = (message) ->
   showAlert(message, $(errorAlertSelector))
 
-# Race condition? Removed for now, opened
+# Race condition? Removed for now, opened issue
 #Meteor.startup ->
 #  # Send metadata to stuff
 #  analytics.initialize {
@@ -81,14 +123,3 @@ Meteor.Router.add({
 #      meta: true
 #    }
 #  }
-
-Deps.autorun ->
-  currentUser = Meteor.user()
-  if currentUser
-    identity = {}
-    identity.email = currentUser.emails[0].address if currentUser.emails.length
-    identity.name = if currentUser.profile.name then currentUser.profile.name else currentUser.username
-    identity.username = currentUser.username if currentUser.username
-    identity.created = moment(currentUser.createdAt).toDate() if currentUser.createdAt
-
-    SpendflowStats.identify Meteor.userId(), identity

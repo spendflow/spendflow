@@ -26,4 +26,4 @@ if Meteor.isClient
     Meteor.subscribe 'spendflowIncomes', getCurrentProfile()
 
 # Hooks
-@Incomes.before "insert", ensureCommonMetadata
+@Incomes.before.insert ensureCommonMetadata

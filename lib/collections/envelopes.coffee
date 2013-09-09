@@ -13,4 +13,4 @@ if Meteor.isClient
   Deps.autorun =>
     Meteor.subscribe 'spendflowEnvelopes', getCurrentProfile()
 
-@Envelopes.before "insert", ensureCommonMetadata
+@Envelopes.before.insert ensureCommonMetadata

@@ -88,7 +88,7 @@ Template.paymentForm.expenses = ->
   # TODO: Make this use some function with customizable optionText (perhaps via a callback)
   selectExpenses = []
   for expense in expenses
-    if Math.abs(accounting.formatMoney(expense.amountRemaining)) isnt 0.00
+    if Math.abs(accounting.formatMoney(expense.amountRemaining)) isnt 0.00 or expense._id is @expenseId
       expense.dueDate = formatDate expense.dueDate
       ear = accounting.formatMoney expense.amountRemaining
       ea = accounting.formatMoney expense.amount
@@ -109,7 +109,7 @@ Template.paymentForm.incomes = ->
   # TODO: Make this use some function with customizable optionText (perhaps via a callback)
   selectIncomes = []
   for income in incomes
-    if Math.abs(accounting.formatMoney(income.amountRemaining)) isnt 0.00
+    if Math.abs(accounting.formatMoney(income.amountRemaining)) isnt 0.00 or income._id is @incomeId
       income.receiptDate = formatDate income.receiptDate
       iar = accounting.formatMoney income.amountRemaining
       ia = accounting.formatMoney income.amount

@@ -2,6 +2,7 @@
 spendflowRoutes = [
   'index'
   'dashboard'
+  'financeSessions'
   'accounts'
   'envelopes'
   'income'
@@ -28,7 +29,13 @@ Template.nav.events {
 
     if profile
       Session.set('currentProfile', newProfileId)
-      # Route to same page we're on but with new profile
-      Meteor.Router.to(Meteor.Router.page(), newProfileId)
-    # Just gets ignored otherwise
+
+      currentPage = Meteor.Router.page()
+
+      if Meteor.Router["#{currentPage}Url"]
+        # Route to same page we're on but with new profile
+        Meteor.Router.to(currentPage, newProfileId)
+      else
+        # Just gets ignored otherwise
+        Meteor.Router.to("dashboard", newProfileId)
 }
