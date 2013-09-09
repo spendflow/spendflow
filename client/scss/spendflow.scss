@@ -1,10 +1,29 @@
+$base_font_scale: 14;
+
 .alert {
   display: none;
 }
 
 body {
-  margin: 20px;
+  margin: 20em/$base_font_scale;
 }
+
+// Was a good idea but need to think more about it
+/* // Make it kinda accessible.
+a, a:active, a:visited, a:hover {
+  text-decoration: none;
+  border-bottom-style: solid;
+  border-bottom-width: 1em/$base_font_scale;
+  padding-bottom: 1em/$base_font_scale;
+}
+
+// But not in tables, for now
+table {
+  a, a:active, a:visited, a:hover {
+    border: inherit;
+    padding: inherit;
+  }
+} */
 
 .nav-alert {
   clear: both;
@@ -51,7 +70,7 @@ body {
 
 // Forms
 .add-record-form, .edit-record-form {
-  padding-left: 1px; // Cuz of weird Bootstrap option button thing
+  padding-left: 1em/$base_font_scale; // Cuz of weird Bootstrap option button thing
 
   select {
     width: auto;
@@ -69,3 +88,4 @@ body {
 @import "views/_incomes";
 @import "views/_expenses";
 @import "views/_payments";
+@import "views/_nav";
