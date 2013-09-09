@@ -11,7 +11,8 @@ parentContext is basically the server publish function context (this).
   data
 
 @getVirtualAccountName = (virtualAccountId) ->
-  virtualAccount = VirtualAccounts.findOne(virtualAccountId)
-  if virtualAccount
-    return virtualAccount.name
-  undefined
+  if virtualAccountId
+    virtualAccount = VirtualAccounts.findOne(virtualAccountId)
+    if virtualAccount
+      return virtualAccount.name
+  return undefined;
