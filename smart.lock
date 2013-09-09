@@ -6,7 +6,9 @@
       "moment": {},
       "accounting": {},
       "i18n": {},
-      "collection-hooks": {},
+      "collection-hooks": {
+        "path": "../../../Source/meteor-collection-hooks"
+      },
       "jquery-ui-bootstrap": {},
       "scss": {},
       "jquery-scrollintoview": {},
@@ -39,9 +41,7 @@
         "commit": "2cd6c72107a0d4afde57fb765ce9d57ad8ba43e2"
       },
       "collection-hooks": {
-        "git": "https://github.com/matb33/meteor-collection-hooks.git",
-        "tag": "v0.3.2",
-        "commit": "200b3b1de905fdc639223d7696d64ce41dd8cebd"
+        "path": "../../../Source/meteor-collection-hooks"
       },
       "jquery-ui-bootstrap": {
         "git": "https://github.com/TimHeckel/meteor-jquery-ui-bootstrap.git",
@@ -50,8 +50,8 @@
       },
       "scss": {
         "git": "https://github.com/fourseven/meteor-scss.git",
-        "tag": "v0.5.3",
-        "commit": "d3438b652f90ff2b418ac143fc3a746be2772e4b"
+        "tag": "v0.6.4.1",
+        "commit": "bf203edb83565943cc0c00a31d536de7094f312b"
       },
       "jquery-scrollintoview": {
         "git": "https://github.com/WeekdayFiller/meteor-jquery.scrollintoview",

@@ -4,7 +4,7 @@
     "moment": {},
     "accounting": {},
     "i18n": {},
-    "collection-hooks": {},
+    "collection-hooks": { "path": "/Users/kevin/Source/meteor-collection-hooks" },
     "jquery-ui-bootstrap": {},
     "scss": {},
     "jquery-scrollintoview": {},
