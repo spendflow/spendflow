@@ -2,12 +2,16 @@
   {{#unless envelopeAmounts}}
     <h2>Nothing to report, sir.</h2>
   {{else}}
-    <h2>You can pay all your envelopes by moving money as follows:</h2>
+    <h2>You have this much outstanding in envelope payments per envelope:</h2>
     {{#each envelopeAmounts}}
       <div class="envelope">
-        <strong>{{title}}:</strong> <span class="main-amount">{{total}}</span> {{!<a href="#" class="mark-all-paid" alt="Mark all these Envelope Payments paid" title="Mark all these Envelope Payments paid"><i class="icon-ok"></i></a>}}
+        <strong>{{title}}:</strong> <span class="main-amount">{{total}}</span> <a href="#" class="mark-all-paid" alt="Mark all these Envelope Payments paid" title="Mark all these Envelope Payments paid" data-target="{{_id}}"><i class="icon-ok"></i></a>
       </div>
     {{/each}}
+
+    <p>You might have already moved money into the right accounts when you transferred your income.
+      If so, just click the check marks next to each envelope. If not, move your money around as needed
+      (generally in your online banking), and then click them.</p>
   {{/unless}}
 </template>
 

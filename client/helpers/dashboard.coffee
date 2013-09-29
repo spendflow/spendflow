@@ -7,16 +7,13 @@ Template.dashboard.envelopeAmounts = ->
     data = {}
 
     # We start by finding Envelope Payments that are not paid but could be
-    payments = Payments.find({
-      "systemMeta.fromRecordId": envelope._id
-      paid: { $ne: true }
-      _incomeTransferred: true
-    }).fetch()
+    payments = getPayableEnvelopePayments(envelope._id)
 
     if (! _.isEmpty(payments))
       # Figure out the title and total
       data = {
-        title: getVirtualAccountName(envelope.virtualAccountId)
+        _id: envelope._id,
+        title: getVirtualAccountName(envelope.virtualAccountId),
       }
 
       data.total = 0.0
@@ -29,3 +26,17 @@ Template.dashboard.envelopeAmounts = ->
       envelopeAmounts.push data
   )
   envelopeAmounts
+
+Template.dashboard.events {
+  'click .mark-all-paid': (event) ->
+    event.preventDefault()
+    envelopeId = $(event.target).parents('a:eq(0)').attr('data-target')
+    count = +(getPayableEnvelopePayments(envelopeId).length)
+
+    alertify.confirm("You are about to mark #{count} payments paid. Please confirm this is intentional.", (event) ->
+      if event then Meteor.call('markAllEnvelopePaymentsPaid', envelopeId, (error, result) ->
+        if not error
+          showNavSuccess("All envelope payments marked paid.")
+      )
+    )
+}

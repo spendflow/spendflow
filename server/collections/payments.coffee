@@ -33,3 +33,18 @@ updatePaymentTargets = (payment) ->
   # TODO: Is this still a todo?
   expense = Expenses.findOne(payment.expenseId)
   updateExpenseCalculations(expense) if expense isnt null
+
+Meteor.methods {
+  markAllEnvelopePaymentsPaid: (envelopeId) ->
+    # Make sure they actually own this Envelope.
+    if (Envelopes.findOne envelopeId).owner is Meteor.userId()
+      envelopePayments = getPayableEnvelopePayments(envelopeId)
+      paymentIds = _.pluck(envelopePayments, '_id')
+
+      Payments.update({ _id: { $in: paymentIds } },
+      { $set: { paid: true } },
+      { multi: true }
+      )
+    else
+      throw new Meteor.Error(403, 'Access denied.')
+}
