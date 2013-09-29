@@ -113,7 +113,8 @@ Meteor.Router.add({
   showAlert(message, $(successAlertSelector))
 
 @showNavError = (message) ->
-  showAlert(message, $(errorAlertSelector))
+  # Show errors indefinitely
+  showAlert(message, $(errorAlertSelector), true, null)
 
 # Race condition? Removed for now, opened issue
 #Meteor.startup ->
