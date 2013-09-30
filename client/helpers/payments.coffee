@@ -20,6 +20,11 @@ Template.payment.thisRowBeingEdited = ->
 Template.payment.amount = ->
   accounting.formatMoney @amount
 
+# TODO: Statically cache expenses and incomes in this context to avoid
+# some lookups
+# Think about if the cache might be sticky in ways I don't want
+
+paymentExpenses = {}
 Template.payment.expense = ->
   if @expenseId
     expense = Expenses.findOne @expenseId
@@ -29,6 +34,7 @@ Template.payment.expense = ->
       expense
     else {}
 
+paymentIncomes = {}
 Template.payment.income = ->
   if @incomeId
     income = Incomes.findOne @incomeId
