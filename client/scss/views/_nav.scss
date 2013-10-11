@@ -4,3 +4,6 @@
     padding: inherit;
   }
 } */
+
+/* overwrite display: none; for everything except IE6-8 */
+:root *> .alertify-hidden { visibility: hidden; }
