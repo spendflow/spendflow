@@ -19,6 +19,12 @@ spendflowRoutes.forEach (route) ->
     else
       return ""
 
+Template.nav.profilesLabel = ->
+  if getCurrentProfile() and Meteor.Router.page() isnt 'profiles'
+    (Profiles.findOne getCurrentProfile()).name
+  else
+    'Profiles'
+
 Template.nav.events {
   'click .switch-profile': (event) ->
     $elem = $(event.target)

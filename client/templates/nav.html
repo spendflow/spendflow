@@ -1,6 +1,6 @@
 <template name="nav">
   {{#if profileId}}
-    <ul class="nav nav-pills pull-left">
+    <ul class="nav nav-pills pull-left spendflow-nav">
       <li id="page-index" class="{{indexActive}}"><a href="{{indexUrl profileId}}"><i class="icon-home"></i></a></li>
       <li id="page-dashboard" class="{{dashboardActive}}"><a href="{{dashboardUrl profileId}}">Dashboard</a></li>
       <li id="page-sessions" class="{{financeSessionsActive}}"><a href="{{sessionsUrl profileId}}">Sessions</a></li>
@@ -11,14 +11,14 @@
   {{/if}}
 
   {{! Put these into a Settings dropdown or something}}
-  <ul class="nav nav-pills pull-right">
+  <ul class="nav nav-pills pull-right spendflow-nav">
     {{#if profileId}}
       <li id="page-accounts" class="{{accountsActive}}"><a href="{{accountsUrl profileId}}">Accounts</a></li>
       <li id="page-envelopes" class="{{envelopesActive}}"><a href="{{envelopesUrl profileId}}">Envelopes</a></li>
     {{/if}}
     <li class="login-buttons">{{loginButtons}}</li>
     <li id="page-profiles-wrapper" class="dropdown {{profilesActive}}">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{#if profile}}{{profile.name}}{{else}}Profiles{{/if}} <b class="caret"></b></a>
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{profilesLabel}}<b class="caret"></b></a>
       <ul class="dropdown-menu">
         {{#each profiles}}
           <li><a href="#" class="switch-profile" id="{{_id}}">{{name}}</a></li>
