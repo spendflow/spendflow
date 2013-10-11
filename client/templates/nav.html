@@ -7,6 +7,7 @@
       <li id="page-income" class="{{incomeActive}}"><a href="{{incomeUrl profileId}}">Income</a></li>
       <li id="page-expenses" class="{{expensesActive}}"><a href="{{expensesUrl profileId}}">Expenses</a></li>
       <li id="page-payments" class="{{paymentsActive}}"><a href="{{paymentsUrl profileId}}">Payments</a></li>
+      {{#unless setupComplete}}<li class="hide-setup-help"><a href="#">Turn off setup help</a></li>{{/unless}}
     </ul>
   {{/if}}
 
