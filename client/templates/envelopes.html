@@ -54,10 +54,11 @@
 </template>
 
 <template name="newEnvelopeForm">
-  {{! FORM TO MAKE NEW THING}}
-  <button class="btn btn-large new-envelope-trigger" data-toggle="collapse" data-target="#new-envelope-form"><i
-    class="icon-plus"></i> New envelope
-  </button>
+  <div class="btn-toolbar">
+    <button class="btn btn-large new-envelope-trigger" data-toggle="collapse" data-target="#new-envelope-form"><i
+      class="icon-plus"></i> New envelope
+    </button>
+  </div>
   <div id="new-envelope-form" class="collapse">
     {{> envelopeForm}}
   </div>
@@ -88,7 +89,7 @@
 
       <div><input type="checkbox" name="active" value="1" {{#if _id}}{{#if active}}checked{{/if}}{{else}}checked{{/if}} /> <strong>Active.</strong> Un-check to deactivate this envelope. This won't affect past data.</div>
 
-      <div>
+      <div class="btn-toolbar">
         <button type="submit" class="btn {{#if _id}}save-envelope{{else}}add-envelope{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>
         {{#if _id}}<button class="btn cancel-editing">Cancel</button>{{/if}}
       </div>

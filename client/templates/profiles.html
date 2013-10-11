@@ -49,9 +49,11 @@
 </template>
 
 <template name="newProfileForm">
-  <button class="btn btn-large new-profile-trigger" data-toggle="collapse" data-target="#new-profile-form"><i
-    class="icon-plus"></i> New profile
-  </button>
+  <div class="btn-toolbar">
+    <button class="btn btn-large new-profile-trigger" data-toggle="collapse" data-target="#new-profile-form"><i
+      class="icon-plus"></i> New profile
+    </button>
+  </div>
   <div id="new-profile-form" class="collapse{{#unless profilesCount}} in{{/unless}}">
     {{> profileForm}}
   </div>
@@ -62,7 +64,7 @@
     <label>Name this profile</label>
     <input type="text" name="name"{{#if _id}} value="{{name}}"{{/if}} />
 
-    <div>
+    <div class="btn-toolbar">
       <button type="submit" class="btn {{#if _id}}save-profile{{else}}add-profile{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>
       {{#if _id}}<button class="btn cancel-editing">Cancel</button>{{/if}}
     </div>

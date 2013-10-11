@@ -50,9 +50,11 @@
 </template>
 
 <template name="newAccountForm">
-  <button class="btn btn-large new-account-trigger" data-toggle="collapse" data-target="#new-account-form"><i
-    class="icon-plus"></i> New account
-  </button>
+  <div class="btn-toolbar">
+    <button class="btn btn-large new-account-trigger" data-toggle="collapse" data-target="#new-account-form"><i
+      class="icon-plus"></i> New account
+    </button>
+  </div>
   <div id="new-account-form" class="collapse{{#unless virtualAccountsCount}} in{{/unless}}">
     {{> accountForm}}
   </div>
@@ -80,7 +82,7 @@
       <input type="checkbox" name="business"{{#if _id}}{{#if business}} checked{{/if}}{{/if}} />
     </label>
 
-    <div>
+    <div class="btn-toolbar">
       <button type="submit" class="btn {{#if _id}}save-account{{else}}add-account{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>
       {{#if _id}}<button class="btn cancel-editing">Cancel</button>{{/if}}
     </div>

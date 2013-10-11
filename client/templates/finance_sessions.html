@@ -46,9 +46,12 @@
 </template>
 
 <template name="newFinanceSessionForm">
-  <button class="btn btn-large new-finance-session-trigger" data-toggle="collapse" data-target="#new-finance-session-form"><i
-    class="icon-plus"></i> New Finance Session
-  </button>
+  <div class="btn-toolbar">
+    <button class="btn btn-large new-finance-session-trigger" data-toggle="collapse"
+            data-target="#new-finance-session-form"><i
+      class="icon-plus"></i> New Finance Session
+    </button>
+  </div>
   <div id="new-finance-session-form" class="collapse{{#unless financeSessionsCount}} in{{/unless}}">
     {{> financeSessionForm}}
   </div>
@@ -70,7 +73,7 @@
       <textarea class="notes" name="notes"></textarea>
     {{/if}}
 
-    <div>
+    <div class="btn-toolbar">
       <button type="submit" class="btn {{#if _id}}save-finance-session{{else}}add-finance-session{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>
       <a href="{{sessionsUrl profileId}}">Go back</a>
     </div>

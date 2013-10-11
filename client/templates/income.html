@@ -90,7 +90,11 @@
 </template>
 
 <template name="newIncomeForm">
-  <button class="btn btn-large new-income-trigger" data-toggle="collapse" data-target="#new-income-form"><i class="icon-plus"></i> New income</button>
+  <div class="btn-toolbar">
+    <button class="btn btn-large new-income-trigger" data-toggle="collapse" data-target="#new-income-form"><i
+      class="icon-plus"></i> New income
+    </button>
+  </div>
   <div id="new-income-form" class="{{#unless incomesCount}}in {{/unless}}collapse">
     {{> incomeForm}}
   </div>
@@ -144,7 +148,7 @@
     <label>If you'd like to include any notes to yourself about this income, enter them here.</label>
     <textarea class="notes" name="notes">{{#if _id}}{{notes}}{{/if}}</textarea>
 
-    <div>
+    <div class="btn-toolbar">
       <button type="submit" class="btn {{#if _id}}save-income{{else}}add-income{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>
       {{#if _id}}<button class="btn cancel-editing">Cancel</button>{{/if}}
     </div>

@@ -79,7 +79,9 @@
 </template>
 
 <template name="newPaymentForm">
-  <button class="btn btn-large new-payment-trigger" data-toggle="collapse" data-target="#new-payment-form"><i class="icon-plus"></i> New payment</button>
+  <div class="btn-toolbar">
+    <button class="btn btn-large new-payment-trigger" data-toggle="collapse" data-target="#new-payment-form"><i class="icon-plus"></i> New payment</button>
+  </div>
   <div id="new-payment-form" class="{{#unless paymentsCount}}in {{/unless}}collapse">
     {{> paymentForm}}
   </div>
