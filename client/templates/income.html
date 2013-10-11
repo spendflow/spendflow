@@ -1,6 +1,29 @@
 <template name="income">
+  {{#unless setupComplete}}
+    <h2>The Spendflow Workflow</h2>
+
+    <h3>1. Add income</h3>
+
+    <p>Add any upcoming income. Kevin uses this to add income he <em>knows</em> is coming. In his case, that means
+      money he's invoiced clients for, money family gives him, money from other business activities, etc. — anything
+      he wants to track within this system.</p>
+  {{/unless}}
   {{> incomeList}}
+
   {{> newIncomeForm}}
+  {{#unless setupComplete}}<h3>Next: <a href="{{expensesUrl profileId}}">Add expenses</a></h3>{{/unless}}
+
+  {{#unless setupComplete}}<h3 id="workflow-step-4">4. When you get paid, transfer your income (if necessary) and mark it transferred
+    (click <i class="icon-ok"></i> on <a href="{{incomeUrl profileId}}">Income</a> dashboard).</h3>
+
+    <p>Kevin usually receives income into business accounts, but he likes to keep business and personal funds
+      separate. He looks at the totals in the <strong>Commitments</strong> column and transferred the
+      <strong>Personal</strong> amounts from the account that received the income to his personal account.
+      While he's at it, he usually transfers the <strong>Envelope amounts</strong> to the accounts where he keeps
+      those savings as well. He's kind of jumping the gun, there, but it'll all work out, as we'll see...now.</p>
+
+    <h3>Next: <a href="{{paymentsUrl profileId}}">Pay your expenses</a></h3>
+  {{/unless}}
 </template>
 
 <template name="incomeList">

@@ -1,6 +1,18 @@
 <template name="envelopes">
+  {{#unless setupComplete}}
+    <h3>Add envelopes (rules for where part of your income should go)</h3>
+
+    <p>The Envelopes dashboard is inspired by the envelope method, although Kevin still isn't sure if he understands
+      what that is. He has a few rules set up in there, and when he adds income, he can choose if he wants to, for
+      example, set aside money for Tax, Business Savings, R&D, and similar things. He doesn't do this for <em>all</em>
+      income, e.g. if he is "withdrawing" money from his Time Off Fund. In that case, the income that the Time Off
+      Fund
+      came from was already partially put into those categories, so there is no need to do it again.</p>
+  {{/unless}}
   {{> newEnvelopeForm}}
   {{> envelopeList}}
+
+  {{#unless setupComplete}}<h3>Next: <a href="{{incomeUrl profileId}}">The Spendflow Workflow</a></h3>{{/unless}}
 </template>
 
 <template name="envelopeList">

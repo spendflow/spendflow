@@ -40,3 +40,9 @@ Template.dashboard.events {
       )
     )
 }
+
+Template.index.events {
+  'click .show-setup-help': (event) ->
+    event.preventDefault()
+    Meteor.users.update Meteor.userId(), { $unset: { 'profile.hideSetupHelp': 1 } }
+}

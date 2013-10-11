@@ -19,3 +19,9 @@ Handlebars.registerHelper "profile", ->
 
 Handlebars.registerHelper "profiles", ->
   Profiles.find().fetch()
+
+Handlebars.registerHelper "setupComplete", ->
+  u = Meteor.user()
+  if not (u.profile and u.profile.hideSetupHelp and u.profile.hideSetupHelp is true)
+    return false;
+  return true

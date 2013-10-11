@@ -1,16 +1,20 @@
 <template name="profiles">
-  {{#unless setupComplete}}
-    <h2>Setting Up Spendflow </h2>
-
-    <p>Spendflow is pretty quick to set up, and how you set it up depends a lot on how you manage your money.
-      What follows is an explanation of the setup screens.</p>
-
-    <p>The best thing about the initial setup is that <strong>it is all optional</strong>. You can still use
-      Spendflow even if you don't use Accounts or Envelopes. It just won't be as exciting.</p>
-  {{/unless}}
+  <div class="help">You probably only need one profile. Each one has its own income, expenses, and so on.</div>
 
   {{> newProfileForm}}
   {{> profileList}}
+
+  {{#unless setupComplete}}
+    <h3>About multiple profiles</h3>
+
+    <p>Most people only need one profile.</p>
+
+    <p>Kevin uses two, though — one for his financial picture in the US, and
+      one for the Norwegian side of things. If you are helping someone else manage their money, you might want to
+      add more profiles too.</p>
+
+    <h3>Next: <a href="{{accountsUrl profileId}}">Add your accounts</a></h3>
+  {{/unless}}
 </template>
 
 <template name="profileList">

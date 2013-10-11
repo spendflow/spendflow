@@ -38,4 +38,9 @@ Template.nav.events {
       else
         # Just gets ignored otherwise
         Meteor.Router.to("dashboard", newProfileId)
+  'click .hide-setup-help': (event) ->
+    event.preventDefault()
+    alertify.confirm 'Are you sure you want to turn off the Getting Started help? (You can re-enable it from your <i class="icon-home"></i> Home screen.)', (event) ->
+      if (event)
+        Meteor.users.update Meteor.userId(), { $set: 'profile.hideSetupHelp' : true }
 }

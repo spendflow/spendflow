@@ -1,6 +1,16 @@
 <template name="accounts">
+  {{#unless setupComplete}}
+    <h3>Add your accounts</h3>
+
+    <p>Accounts in Spendflow <em>represent</em> your bank, credit card, and savings accounts. The <strong>Current
+      account balance</strong> doesn't do anything yet, but in the future it will help you track balances in your
+      virtual accounts.</p>
+  {{/unless}}
+
   {{> newAccountForm}}
   {{> accountList}}
+
+  {{#unless setupComplete}}<h3>Next: <a href="{{envelopesUrl profileId}}">Add envelopes (rules for where part of your income should go)</a></h3>{{/unless}}
 </template>
 
 <template name="accountList">
@@ -74,5 +84,30 @@
       <button type="submit" class="btn {{#if _id}}save-account{{else}}add-account{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>
       {{#if _id}}<button class="btn cancel-editing">Cancel</button>{{/if}}
     </div>
+
+    <p>Here is when you should choose each type of account:</p>
+
+    <ul>
+      <li>
+        <strong>Bank account:</strong> Corresponds to an actual bank account. You can receive income into these,
+        and you can pay them back via expenses if you borrow money from yourself or otherwise owe money to a
+        specific bank account.
+      </li>
+      <li>
+        <strong>Virtual savings account:</strong> Corresponds to an amount of money that you set aside for specific
+        purposes. You can create <em>Envelopes</em> to automatically commit some of your income to these. In the
+        future,
+        the system will keep track of the balance for you, but you have to do it on your own for now. Kevin uses these
+        for automatically saving a percentage of client income for taxes, business R&D, and other business expenses.
+        He
+        also has a virtual account for vacation savings, but he manually creates expenses for that one since it's a
+        fixed amount and might be paid partially from several incomes.
+      </li>
+      <li>
+        <strong>Account to pay back:</strong> Use this type of account for accounts you <em>only</em> pay back, such
+        as loans and credit cards. You can set up expenses against them.
+      </li>
+    </ul>
+
   </form>
 </template>

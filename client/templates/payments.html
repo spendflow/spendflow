@@ -1,6 +1,34 @@
 <template name="payments">
+  {{#unless setupComplete}}
+    <h3>3. Bring it all together, and add payments!</h3>
+
+    <p>Now we come to the core of Spendflow. Use your remaining income to plan how you're going to pay your
+      expenses. You'll quickly see if you have enough or not. <strong>Remember, this is just a
+        planning step; don't forget to actually pay the expenses in whatever way you normally do.
+        You can then mark them Paid by clicking <i class="icon-ok"></i></strong>.</p>
+  {{/unless}}
+
   {{> newPaymentForm}}
+
+  {{#unless setupComplete}}<h3>Next: <a href="{{incomeUrl profileId}}">Transfer income when it arrives</a></h3>{{/unless}}
+
   {{> paymentList}}
+
+  {{#unless setupComplete}}
+    <h3>5. Pay your expenses and mark them <i class="icon-ok"></i> paid!</h3>
+
+    <p>You're almost done. Pay your expenses (including Envelopes), mark them paid, and call it a day (or an
+      evening).</p>
+
+    <p>At this point, Kevin has usually already taken care of <i class="icon-envelope"></i> Envelope payments, and
+      marks them all
+      paid right away. He then does all kinds of stuff (online bill pay in his online banking, transferring
+      money to Norway, just updating a spreadsheet to represent money moved around, transferring money among
+      accounts in online banking, paying bills on the biller's own site, etc.) and marks each payment done as he
+      goes along.</p>
+
+    <p>That should be enough to get you going. You'll discover other neat things as you go along.
+      Get in touch if you have any questions!</p>{{/unless}}
 </template>
 
 <template name="paymentList">
