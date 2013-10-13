@@ -42,7 +42,7 @@ deploy )
 echo Deploying...
 $METEOR_CMD bundle bundle.tgz && # > /dev/null 2>&1 &&
 rsync -avz --progress -e "ssh $SSH_OPT" bundle.tgz $SSH_HOST:/tmp/ && # > /dev/null 2>&1 &&
-rm bundle.tgz > /dev/null 2>&1 &&
+# rm bundle.tgz > /dev/null 2>&1 &&
 ssh $SSH_OPT $SSH_HOST PORT=$PORT MONGO_URL=$MONGO_URL ROOT_URL=$ROOT_URL APP_DIR=$APP_DIR 'sudo -E bash -s' > /dev/null 2>&1 <<'ENDSSH'
 if [ ! -d "$APP_DIR" ]; then
 mkdir -p $APP_DIR
