@@ -7,8 +7,8 @@
     recurring expenses for a new month, he uses the <i class="icon-repeat"></i> icon to pre-fill the
     New Expense form with the same information as an existing copy.</p>{{/unless}}
 
-  {{> expenseList}}
   {{> newExpenseForm}}
+  {{> expenseList}}
 
   {{#unless setupComplete}}<h3>Next: Bring it all together and <a href="{{paymentsUrl profileId}}">add payments</a></h3>{{/unless}}
 </template>

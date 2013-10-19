@@ -20,29 +20,27 @@ Template.payment.thisRowBeingEdited = ->
 Template.payment.amount = ->
   accounting.formatMoney @amount
 
-# TODO: Statically cache expenses and incomes in this context to avoid
-# some lookups
-# Think about if the cache might be sticky in ways I don't want
-
-paymentExpenses = {}
 Template.payment.expense = ->
   if @expenseId
-    expense = Expenses.findOne @expenseId
-    if expense
-      expense.dueDate = formatDate expense.dueDate
-      expense.destinationAccount = getVirtualAccountName(expense.destinationAccountId)
-      expense
-    else {}
+    expense = {}
+    expense.dueDate = formatDate @_expenseDueDate
+    expense.business = @_expenseBusiness
+    expense.description = @_expenseDescription
+    expense.desitnationAccountId = @_expenseDestinationAccountId
+    expense.destinationAccount = @_expenseDestinationAccount
+    expense.notes = @_expenseNotes
+    expense
 
-paymentIncomes = {}
 Template.payment.income = ->
   if @incomeId
-    income = Incomes.findOne @incomeId
-    if income
-      income.receiptDate = formatDate(income.receiptDate)
-      income.depositAccount = getVirtualAccountName(income.depositAccountId)
-      income
-    else {}
+    income = {}
+    income.transferred = @_incomeTransferred
+    income.receiptDate = formatDate(@_incomeReceiptDate)
+    income.description = @_incomeDescription
+    income.depositAccountId = @_incomeDepositAccountId
+    income.depositAccount = @_incomeDepositAccount
+    income.notes = @_incomeNotes
+    income
 
 Template.payment.events {
   'click .edit-payment': (event) ->
