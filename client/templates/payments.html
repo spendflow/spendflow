@@ -51,12 +51,6 @@
       </tbody>
     </table>
   </div>
-  {{#with editingPayment}}
-  {{!TODO: Put all fieldsets in wells, or something}}
-    <fieldset class="well">
-      {{> paymentForm}}
-    </fieldset>
-  {{/with}}
 </template>
 
 <template name="payment">
@@ -76,6 +70,16 @@
     <td>{{#unless equal systemMeta.from "envelope"}}{{notes}}{{/unless}}</td>
     <td>{{#unless equal systemMeta.from "envelope"}}<a href="#" class="edit-payment"><i class="icon-pencil"></i></a> <a href="#" class="remove-payment"><i class="icon-trash"></i></a>{{/unless}}</td>
   </tr>
+  {{#if thisRowBeingEdited}}
+    <tr>
+      <td colspan="6">
+        {{!TODO: Put all fieldsets in wells, or something}}
+        <fieldset class="well">
+          {{> paymentForm}}
+        </fieldset>
+      </td>
+    </tr>
+  {{/if}}
 </template>
 
 <template name="newPaymentForm">

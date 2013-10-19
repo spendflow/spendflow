@@ -1,6 +1,7 @@
 Template.expenseList.expenses = ->
   Expenses.find({ 'systemMeta.from': { $ne: 'envelope' } }, { sort: { dueDate:1 } }).fetch()
 
+# TODO: Needed anymore? 17 Oct 2013
 Template.expenseList.editingExpense = ->
   expense = Expenses.findOne(Session.get 'editingExpense') if Session.get 'editingExpense'
   expense

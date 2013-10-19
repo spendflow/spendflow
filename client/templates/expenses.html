@@ -37,12 +37,6 @@
       </tbody>
     </table>
   </div>
-  {{#with editingExpense}}
-    {{!TODO: Put all fieldsets in wells, or something}}
-    <fieldset class="well">
-      {{> expenseForm}}
-    </fieldset>
-  {{/with}}
 </template>
 
 <template name="expense">
@@ -71,6 +65,16 @@
     <td>{{multiline notes}}</td>
     <td>{{#unless equal systemMeta.from "envelope"}}<a href="#" class="edit-expense"><i class="icon-pencil"></i></a> <a href="#" class="copy-expense"><i class="icon-repeat"></i></a> <a href="#" class="remove-expense"><i class="icon-trash"></i></a>{{/unless}}</td>
   </tr>
+  {{#if thisRowBeingEdited}}
+    <tr>
+      <td colspan="11">
+        {{!TODO: Put all fieldsets in wells, or something}}
+        <fieldset class="well">
+          {{> expenseForm}}
+        </fieldset>
+      </td>
+    </tr>
+  {{/if}}
 </template>
 
 <template name="newExpenseForm">

@@ -49,12 +49,6 @@
       </tbody>
     </table>
   </div>
-  {{#with editingIncome}}
-    {{!TODO: Put all fieldsets in wells, or something}}
-    <fieldset class="well">
-      {{> incomeForm}}
-    </fieldset>
-  {{/with}}
 </template>
 
 <template name="incomeRecord">
@@ -87,6 +81,16 @@
     <td>{{multiline notes}}</td>
     <td><a href="#" class="edit-income"><i class="icon-pencil"></i></a> <a href="#" class="remove-income"><i class="icon-trash"></i></a></td>
   </tr>
+  {{#if thisRowBeingEdited}}
+    <tr>
+      <td colspan="9">
+        {{!TODO: Put all fieldsets in wells, or something}}
+        <fieldset class="well">
+          {{> incomeForm}}
+        </fieldset>
+      </td>
+    </tr>
+  {{/if}}
 </template>
 
 <template name="newIncomeForm">
