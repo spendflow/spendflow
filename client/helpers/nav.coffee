@@ -11,6 +11,10 @@ spendflowRoutes = [
   'profiles'
 ]
 
+templateRoutes = {
+  financeSessions: 'sessions'
+}
+
 spendflowRoutes.forEach (route) ->
   Template.nav["#{route}Active"] = ->
     # TODO: Needs refactoring if I change paths, but it's fine for now
@@ -37,6 +41,9 @@ Template.nav.events {
       Session.set('currentProfile', newProfileId)
 
       currentPage = Meteor.Router.page()
+      # Is this a page that trolls us? De-trollify the route.
+      if not _.isUndefined templateRoutes[currentPage]
+        currentPage = templateRoutes[currentPage]
 
       if Meteor.Router["#{currentPage}Url"]
         # Route to same page we're on but with new profile
