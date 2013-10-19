@@ -32,11 +32,6 @@
       </tbody>
     </table>
   </div>
-  {{#with editingAccount}}
-    <fieldset>
-      {{> accountForm}}
-    </fieldset>
-  {{/with}}
 </template>
 
 <template name="account">
@@ -47,6 +42,15 @@
     <td>{{business}}</td>
     <td><a href="#" class="edit-account"><i class="icon-pencil"></i></a> <a href="#" class="remove-account"><i class="icon-trash"></i></a></td>
   </tr>
+  {{#if thisRowBeingEdited}}
+    <tr>
+      <td colspan="5">
+        <fieldset>
+          {{> accountForm}}
+        </fieldset>
+      </td>
+    </tr>
+  {{/if}}
 </template>
 
 <template name="newAccountForm">

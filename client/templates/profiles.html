@@ -33,11 +33,6 @@
       </tbody>
     </table>
   </div>
-  {{#with editingProfile}}
-    <fieldset>
-      {{> profileForm}}
-    </fieldset>
-  {{/with}}
 </template>
 
 <template name="profile">
@@ -46,6 +41,15 @@
     <td>{{name}}</td>
     <td><a href="#" class="edit-profile"><i class="icon-pencil"></i></a> {{#if allowDelete}}<a href="#" class="remove-profile"><i class="icon-trash"></i></a>{{/if}}</td>
   </tr>
+  {{#if thisRowBeingEdited}}
+    <tr>
+      <td colspan="2">
+        <fieldset>
+          {{> profileForm}}
+        </fieldset>
+      </td>
+    </tr>
+  {{/if}}
 </template>
 
 <template name="newProfileForm">

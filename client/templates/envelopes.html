@@ -35,11 +35,6 @@
       </tbody>
     </table>
   </div>
-  {{#with editingEnvelope}}
-    <fieldset>
-      {{> envelopeForm}}
-    </fieldset>
-  {{/with}}
 </template>
 
 <template name="envelope">
@@ -51,6 +46,15 @@
     <td>{{active}}</td>
     <td><a href="#" class="edit-envelope"><i class="icon-pencil"></i></a> <a href="#" class="remove-envelope"><i class="icon-trash"></i></a></td>
   </tr>
+  {{#if thisRowBeingEdited}}
+    <tr>
+      <td colspan="5">
+        <fieldset>
+          {{> envelopeForm}}
+        </fieldset>
+      </td>
+    </tr>
+  {{/if}}
 </template>
 
 <template name="newEnvelopeForm">
