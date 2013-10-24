@@ -91,7 +91,16 @@
 <template name="expenseForm">
   <form{{#if _id}} class="edit-record-form" data-target="{{_id}}"{{else}} class="add-record-form"{{/if}}>
     <label>Date by which expense must be paid</label>
-    <input type="text" name="dueDate"{{#if _id}} value="{{dueDate}}"{{/if}} />
+      <div class="control-group">
+        <input type="text" name="dueDate"{{#if _id}} value="{{dueDate}}"{{/if}} />
+        {{#unless _id}}
+
+          <span>Add
+          <button class="clone-to-next-month">1 month</button>
+          <button class="clone-to-next-week">1 week</button>
+          and save</span>
+        {{/unless}}
+      </div>
 
     <label>Briefly describe the expense</label>
     <input type="text" name="description"{{#if _id}} value="{{description}}"{{/if}} />

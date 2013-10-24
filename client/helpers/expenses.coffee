@@ -127,41 +127,7 @@ Template.expenseForm.payFromAccounts = ->
   massaged
 
 Template.expenseForm.events {
-  'click .add-expense': (event) ->
-    event.preventDefault()
-    $context = $(event.target).parents('.add-record-form')
-
-    expenseValues = _.extend({
-      type: 'manual'
-    },
-      parseExpenseForm $context)
-
-    # Prep payFromAccounts
-    _.each(expenseValues.payFromAccounts, (pfa) ->
-      pfa.amount = null
-      pfa.paid = false
-    )
-
-    # Sanitize the data a bit
-    expenseValues.amount = +expenseValues.amount
-
-    # Initialize system-managed fields
-    expenseValues.amountRemaining = expenseValues.amount
-
-    # TODO: Don't forget about the tags!
-
-    # Validate
-    if not expenseValues.dueDate or not expenseValues.description or not expenseValues.amount or isNaN expenseValues.amount
-      showNavError("To add an expense entry, you have to fill out the date from which it can be used, describe it, and enter an amount.")
-      return
-
-    Expenses.insert expenseValues, (error, result) ->
-      if not error
-        clearFormFields $context
-        showNavSuccess "New expense added."
-      else
-        showNavError "There was a problem adding the new expense. Please try again. If the problem persists, contact us."
-        console.log error
+  'click .add-expense': addExpense
 
   'click .save-expense': (event) ->
     event.preventDefault()
@@ -203,7 +169,60 @@ Template.expenseForm.events {
   'click .cancel-editing': (event) ->
     event.preventDefault();
     Session.set 'editingExpense', null
+
+  'click .clone-to-next-week': (event) ->
+    event.preventDefault()
+    increaseDateAndSave event, "week"
+
+  'click .clone-to-next-month': (event) ->
+    event.preventDefault()
+    increaseDateAndSave event
 }
+
+addExpense = (event) ->
+  event.preventDefault()
+  $context = $(event.target).parents('.add-record-form')
+
+  expenseValues = _.extend({
+    type: 'manual'
+  },
+    parseExpenseForm $context)
+
+  # Prep payFromAccounts
+  _.each(expenseValues.payFromAccounts, (pfa) ->
+    pfa.amount = null
+    pfa.paid = false
+  )
+
+  # Sanitize the data a bit
+  expenseValues.amount = +expenseValues.amount
+
+  # Initialize system-managed fields
+  expenseValues.amountRemaining = expenseValues.amount
+
+  # TODO: Don't forget about the tags!
+
+  # Validate
+  if not expenseValues.dueDate or not expenseValues.description or not expenseValues.amount or isNaN expenseValues.amount
+    showNavError("To add an expense entry, you have to fill out the date from which it can be used, describe it, and enter an amount.")
+    return
+
+  Expenses.insert expenseValues, (error, result) ->
+    if not error
+      clearFormFields $context
+      showNavSuccess "New expense added."
+    else
+      showNavError "There was a problem adding the new expense. Please try again. If the problem persists, contact us."
+      console.log error
+
+increaseDateAndSave = (event, timePeriod = "month", howMany = 1) ->
+  if not _.contains(["month", "week"], timePeriod) then timePeriod = "month"
+
+  $context = $(event.target).parents('.add-record-form')
+  $datepicker = elementByName('dueDate', $context)
+  dateNow = moment($datepicker.datepicker("getDate"))
+  $datepicker.datepicker("setDate", (dateNow.add(howMany, timePeriod)).toDate())
+  addExpense(event) # This is OK cuz the buttons have the same parent form as the regular add button
 
 parseExpenseForm = ($context) ->
   ifp = new FormProcessor $context
