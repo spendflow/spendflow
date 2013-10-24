@@ -8,9 +8,16 @@
     New Expense form with the same information as an existing copy.</p>{{/unless}}
 
   {{> newExpenseForm}}
+  {{> expenseToolbar}}
   {{> expenseList}}
 
   {{#unless setupComplete}}<h3>Next: Bring it all together and <a href="{{paymentsUrl profileId}}">add payments</a></h3>{{/unless}}
+</template>
+
+<template name="expenseToolbar">
+  <form id="expense-toolbar">
+    <input type="checkbox" id="expenses-show-committed"{{#if showCommittedExpenses}} checked{{/if}} /> Show fully-committed expenses
+  </form>
 </template>
 
 <template name="expenseList">
@@ -40,9 +47,7 @@
 </template>
 
 <template name="expense">
-  {{! Template name diverges from the norm to avoid a name conflict.}}
-  {{! ROW OF THE THINGS}}
-  <tr data-target="{{_id}}"{{#if thisRowBeingEdited}} class="being-edited"{{/if}}>
+  <tr data-target="{{_id}}" class="{{#if thisRowBeingEdited}}being-edited{{/if}}{{#if expensePaid}} muted{{/if}}">
     <td>{{dueDate}}</td>
     <td>{{#if equal systemMeta.from "envelope"}}<i class="icon-envelope"></i> {{/if}}{{description}}</td>
     <td>
