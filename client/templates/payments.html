@@ -9,6 +9,7 @@
   {{/unless}}
 
   {{> newPaymentForm}}
+  {{> paymentToolbar}}
 
   {{#unless setupComplete}}<h3>Next: <a href="{{incomeUrl profileId}}">Transfer income when it arrives</a></h3>{{/unless}}
 
@@ -29,6 +30,12 @@
 
     <p>That should be enough to get you going. You'll discover other neat things as you go along.
       Get in touch if you have any questions!</p>{{/unless}}
+</template>
+
+<template name="paymentToolbar">
+  <form id="payment-toolbar">
+    <input type="checkbox" id="payments-show-paid"{{#if showPaidPayments}} checked{{/if}} /> Show completed payments
+  </form>
 </template>
 
 <template name="paymentList">

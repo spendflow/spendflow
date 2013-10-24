@@ -1,6 +1,21 @@
+Template.paymentToolbar.showPaidPayments = ->
+  if Meteor.user().profile and Meteor.user().profile.showPaidPayments
+    return true;
+  false
+
+Template.paymentToolbar.events {
+  'click #payments-show-paid': (event) ->
+    currentStatus = Template.paymentToolbar.showPaidPayments()
+    Meteor.users.update(Meteor.userId(), { $set: { 'profile.showPaidPayments' : ! currentStatus } })
+}
+
 Template.paymentList.payments = ->
+  selector = {
+    paid: { $ne: true }
+  }
+  if Template.paymentToolbar.showPaidPayments() then selector = {}
   payments = Payments.find(
-    {},
+    selector,
     { sort:
       {
         paid: 1
@@ -26,7 +41,7 @@ Template.payment.expense = ->
     expense.dueDate = formatDate @_expenseDueDate
     expense.business = @_expenseBusiness
     expense.description = @_expenseDescription
-    expense.desitnationAccountId = @_expenseDestinationAccountId
+    expense.destinationAccountId = @_expenseDestinationAccountId
     expense.destinationAccount = @_expenseDestinationAccount
     expense.notes = @_expenseNotes
     expense
