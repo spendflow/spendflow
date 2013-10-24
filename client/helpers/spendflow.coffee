@@ -110,11 +110,13 @@ Meteor.Router.add({
 @errorAlertSelector = "#nav-flash-error"
 
 @showNavSuccess = (message) ->
-  showAlert(message, $(successAlertSelector))
+  # showAlert(message, $(successAlertSelector))
+  showAlert(message, "success")
 
 @showNavError = (message) ->
   # Show errors indefinitely
-  showAlert(message, $(errorAlertSelector), true, null)
+#  showAlert(message, $(errorAlertSelector), true, null)
+  showAlert(message, "error")
 
 # Race condition? Removed for now, opened issue
 #Meteor.startup ->
