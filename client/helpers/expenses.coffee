@@ -1,5 +1,20 @@
+Template.expenseToolbar.showCommittedExpenses = ->
+  if Meteor.user().profile and Meteor.user().profile.showCommittedExpenses
+    return true;
+  false
+
+Template.expenseToolbar.events {
+  'click #expenses-show-committed': (event) ->
+    currentStatus = Template.expenseToolbar.showCommittedExpenses()
+    Meteor.users.update(Meteor.userId(), { $set: { 'profile.showCommittedExpenses' : ! currentStatus } })
+}
+
 Template.expenseList.expenses = ->
-  Expenses.find({ 'systemMeta.from': { $ne: 'envelope' } }, { sort: { dueDate:1 } }).fetch()
+  # TODO: Make a function that respects the profile-stored options. Right now, this is only done here.
+  # We can't do this server-side because we still need the Expenses to be in the data set; Payments may reference them.
+  selector = { 'systemMeta.from': { $ne: 'envelope' }, amountRemaining: { $gte: 0.01 } }
+  if Template.expenseToolbar.showCommittedExpenses() then delete selector.amountRemaining
+  Expenses.find(selector, { sort: { dueDate:1 } }).fetch()
 
 # TODO: Needed anymore? 17 Oct 2013
 Template.expenseList.editingExpense = ->
@@ -14,6 +29,10 @@ Template.expense.dueDate = ->
   
 Template.expense.amount = ->
   accounting.formatMoney @amount
+
+Template.expense.expensePaid = ->
+  # The one-cent thing again...this is the best way to deal with the weirdness of floats.
+  (accounting.formatMoney @amountRemaining) < 0.01
 
 Template.expense.amountRemaining = ->
   accounting.formatMoney @amountRemaining
