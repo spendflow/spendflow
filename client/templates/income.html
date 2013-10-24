@@ -8,9 +8,10 @@
       money he's invoiced clients for, money family gives him, money from other business activities, etc. — anything
       he wants to track within this system.</p>
   {{/unless}}
-  {{> incomeList}}
 
   {{> newIncomeForm}}
+  {{> incomeToolbar}}
+  {{> incomeList}}
   {{#unless setupComplete}}<h3>Next: <a href="{{expensesUrl profileId}}">Add expenses</a></h3>{{/unless}}
 
   {{#unless setupComplete}}<h3 id="workflow-step-4">4. When you get paid, transfer your income (if necessary) and mark it transferred
@@ -24,6 +25,12 @@
 
     <h3>Next: <a href="{{paymentsUrl profileId}}">Pay your expenses</a></h3>
   {{/unless}}
+</template>
+
+<template name="incomeToolbar">
+  <form id="income-toolbar">
+    <input type="checkbox" id="income-show-transferred"{{#if showTransferredIncome}} checked{{/if}} /> Show transferred income
+  </form>
 </template>
 
 <template name="incomeList">

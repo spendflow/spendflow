@@ -1,5 +1,20 @@
+Template.incomeToolbar.showTransferredIncome = ->
+  if Meteor.user().profile and Meteor.user().profile.showTransferredIncome
+    return true;
+  false
+
+Template.incomeToolbar.events {
+  'click #income-show-transferred': (event) ->
+    currentStatus = Template.incomeToolbar.showTransferredIncome()
+    Meteor.users.update(Meteor.userId(), { $set: { 'profile.showTransferredIncome' : ! currentStatus } })
+}
+
 Template.incomeList.incomes = ->
-  Incomes.find({}, { sort: { transferred: 1, receiptDate: 1 } }).fetch()
+  selector = {
+    transferred: { $ne: true }
+  }
+  if Template.incomeToolbar.showTransferredIncome() then selector = {}
+  Incomes.find(selector, { sort: { transferred: 1, receiptDate: 1 } }).fetch()
 
 Template.incomeList.editingIncome = ->
   income = Incomes.findOne(Session.get 'editingIncome') if Session.get 'editingIncome'
