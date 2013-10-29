@@ -8,7 +8,7 @@ Profiles
 
 if Meteor.isClient
   Deps.autorun =>
-    Meteor.subscribe 'spendflowProfiles'
+    @profilesSubscription = Meteor.subscribe 'spendflowProfiles'
 
 # Hooks
 @Profiles.before.insert ensureOwner

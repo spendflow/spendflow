@@ -1,5 +1,5 @@
 Template.profileList.rendered = ->
-  if not Profiles.findOne()
+  if profilesSubscription.ready() and not Profiles.findOne()
     showNavSuccess "Create your first profile to get started."
 
 Template.profileList.profiles = ->
