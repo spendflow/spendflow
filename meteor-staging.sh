@@ -1,7 +1,11 @@
 #!/bin/bash
 
+# Set current working directory
+cd "$(dirname "$0")"
+
 # IP or URL of the server you want to deploy to
 export APP_HOST=app-staging.spendflow.co
+export SETTINGS_FILE="./.deploy/.environment-staging"
 
 # Uncomment this if your host is an EC2 instance
 # export EC2_PEM_FILE=path/to/your/file.pem
@@ -31,7 +35,7 @@ echo Get some coffee, this will take a while.
 ssh $SSH_OPT $SSH_HOST DEBIAN_FRONTEND=noninteractive 'sudo -E bash -s' > /dev/null 2>&1 <<'ENDSSH'
 apt-get update
 apt-get install -y python-software-properties
-add-apt-repository ppa:chris-lea/node.js
+add-apt-repository -y ppa:chris-lea/node.js
 apt-get update
 apt-get install -y build-essential nodejs mongodb
 npm install -g forever
@@ -42,6 +46,9 @@ deploy )
 echo Deploying...
 $METEOR_CMD bundle bundle.tgz && # > /dev/null 2>&1 &&
 rsync -avz --progress -e "ssh $SSH_OPT" bundle.tgz $SSH_HOST:/tmp/ && # > /dev/null 2>&1 &&
+if [ -n "$SETTINGS_FILE" ]; then
+  rsync -avz --progress -e "ssh $SSH_OPT" $SETTINGS_FILE "$SSH_HOST:/tmp/.meteor-environment"
+fi
 # rm bundle.tgz > /dev/null 2>&1 &&
 ssh $SSH_OPT $SSH_HOST PORT=$PORT MONGO_URL=$MONGO_URL ROOT_URL=$ROOT_URL APP_DIR=$APP_DIR 'sudo -E bash -s' > /dev/null 2>&1 <<'ENDSSH'
 if [ ! -d "$APP_DIR" ]; then
@@ -52,6 +59,10 @@ pushd $APP_DIR
 forever stop bundle/main.js
 rm -rf bundle
 tar xfz /tmp/bundle.tgz -C $APP_DIR
+if [ -f /tmp/.meteor-environment ]; then
+  rm $APP_DIR/environment
+  mv /tmp/.meteor-environment $APP_DIR/.environment
+fi
 rm /tmp/bundle.tgz
 pushd bundle/programs/server/node_modules
 rm -rf fibers
@@ -70,7 +81,9 @@ patch -u bundle/programs/server/packages/webapp.js <<'ENDPATCH'
                                                                                                             // 433
 ENDPATCH
 # Pull in sensitive environment variables such as MAIL_URL
-source ${APP_DIR}/.environment
+if [ -f ${APP_DIR}/.environment ]; then
+  source ${APP_DIR}/.environment
+fi
 export MAIL_URL=${MAIL_URL}
 export METEOR_SETTINGS=${METEOR_SETTINGS}
 forever start bundle/main.js
