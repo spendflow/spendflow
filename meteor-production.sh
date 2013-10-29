@@ -31,7 +31,7 @@ echo Get some coffee, this will take a while.
 ssh $SSH_OPT $SSH_HOST DEBIAN_FRONTEND=noninteractive 'sudo -E bash -s' > /dev/null 2>&1 <<'ENDSSH'
 apt-get update
 apt-get install -y python-software-properties
-add-apt-repository ppa:chris-lea/node.js
+add-apt-repository -y ppa:chris-lea/node.js
 apt-get update
 apt-get install -y build-essential nodejs mongodb
 npm install -g forever
