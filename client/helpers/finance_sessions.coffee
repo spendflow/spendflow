@@ -10,13 +10,13 @@ Template.financeSessionList.events {
     if financeSession and financeSession.startDate
       startDate = "from " + formatDate(financeSession.startDate)
 
-    alertify.confirm "Are you sure you want to remove this Finance Session#{startDate}?", (event) ->
+    alertify.confirm "Are you sure you want to remove this Session#{startDate}?", (event) ->
       if event
         FinanceSessions.remove financeSessionId, (error) ->
           if not error
-            showNavSuccess "Finance Session removed."
+            showNavSuccess "Session removed."
           else
-            showNavError "I couldn't remove the Finance Session for some reason. Try again, and contact us if problems persist."
+            showNavError "I couldn't remove the Session for some reason. Try again, and contact us if problems persist."
             console.log error
 }
 
@@ -56,13 +56,13 @@ Template.newFinanceSessionForm.events {
       }, (error, result) ->
         if not error
           clearFormFields $context
-          SpendflowStats.track "Created new Finance Session.", {
+          SpendflowStats.track "Created new Session.", {
             noteLength: notes.length
           }
           Meteor.Router.to('editSession', Session.get("currentProfile"), result)
-          showNavSuccess "New Finance Session added."
+          showNavSuccess "New Session added."
         else
-          showNavError "There was a problem adding the new Finance Session. Please try again. If the problem persists, contact us."
+          showNavError "There was a problem adding the new Session. Please try again. If the problem persists, contact us."
           console.log error
 }
 
@@ -93,8 +93,8 @@ Template.financeSessionForm.events {
         }
       }, (error, result) ->
         if not error
-          showNavSuccess "Finance Session updated."
+          showNavSuccess "Session updated."
         else
-          showNavError "There was a problem updating the Finance Session. Please try again. If the problem persists, contact us."
+          showNavError "There was a problem updating the Session. Please try again. If the problem persists, contact us."
           console.log error
 }

@@ -1,9 +1,9 @@
 <template name="financeSessions">
   <div class="help">
-    <p>You should create a new Finance Session whenever you want to take notes about your finances.</p>
+    <p>You should create a new Session whenever you want to take notes about your finances.</p>
     <p>Kevin uses this
     to create text-based checklists ([] Like this) so he can remember what he was doing if he has to step away. He also
-    takes notes about things he might have to follow up on in the next Finance Session.</p>
+    takes notes about things he might have to follow up on in the next Session.</p>
   </div>
 
   {{> newFinanceSessionForm}}
@@ -49,7 +49,7 @@
   <div class="btn-toolbar">
     <button class="btn btn-large new-finance-session-trigger" data-toggle="collapse"
             data-target="#new-finance-session-form"><i
-      class="icon-plus"></i> New Finance Session
+      class="icon-plus"></i> New Session
     </button>
   </div>
   <div id="new-finance-session-form" class="collapse{{#unless financeSessionsCount}} in{{/unless}}">
@@ -59,7 +59,7 @@
 
 <template name="financeSessionForm">
   <form id="finance-session-form{{#if _id}}-{{_id}}{{/if}}" {{#if _id}} class="edit-record-form" data-target="{{_id}}"{{else}} class="add-record-form"{{/if}}>
-    <label>Start date of Finance Session (e.g. today)</label>
+    <label>Start date of Session (e.g. today)</label>
     <input type="text" name="startDate"{{#if _id}} value="{{startDate}}"{{/if}} />
 
     {{#if _id}}
