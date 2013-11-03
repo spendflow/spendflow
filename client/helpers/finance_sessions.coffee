@@ -1,5 +1,5 @@
 Template.financeSessionList.financeSessions = ->
-  financeSessions = FinanceSessions.find().fetch()
+  financeSessions = FinanceSessions.find({}, { sort: { startDate: -1 } }).fetch()
   financeSessions
 
 Template.financeSessionList.events {
