@@ -83,6 +83,11 @@ Template.accountList.editingAccount = ->
 Template.account.thisRowBeingEdited = ->
   Session.equals('editingAccount', this._id)
 
+Template.account.usedForExpenses = ->
+  criteria = {}
+  criteria["payFromAccounts.#{this._id}"] = { $exists: true }
+  if Expenses.find(criteria).count() > 0 then true else false
+
 Template.account.balance = ->
   if @type is "payFrom" and @balance then accounting.formatMoney @balance else ""
 
