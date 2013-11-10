@@ -60,7 +60,7 @@ forever stop bundle/main.js
 rm -rf bundle
 tar xfz /tmp/bundle.tgz -C $APP_DIR
 if [ -f /tmp/.meteor-environment ]; then
-  rm $APP_DIR/environment
+  rm $APP_DIR/.environment
   mv /tmp/.meteor-environment $APP_DIR/.environment
 fi
 # rm /tmp/bundle.tgz
