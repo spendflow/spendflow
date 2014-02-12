@@ -4,7 +4,9 @@
     "moment": {},
     "accounting": {},
     "i18n": {},
-    "collection-hooks": { "path": "/Users/kevin/Source/meteor-collection-hooks" },
+    "collection-hooks": {
+      "path": "/Users/kevin/Source/meteor-collection-hooks"
+    },
     "jquery-ui-bootstrap": {},
     "scss": {},
     "jquery-scrollintoview": {},
@@ -13,6 +15,7 @@
     "canonical": {},
     "jquery-autosize": {
       "path": "/Users/kevin/Source/meteor-jquery-autosize"
-    }
+    },
+    "iron-router": {}
   }
 }

@@ -17,3 +17,8 @@ smart-collections
 analyticsjs
 canonical
 jquery-autosize
+/moment
+/i18n
+/scss
+/analyticsjs
+/iron-router

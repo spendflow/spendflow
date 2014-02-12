@@ -30,3 +30,4 @@ webapp
 canonical
 jquery-autosize
 autoupdate
+iron-router
