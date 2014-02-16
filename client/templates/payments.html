@@ -11,7 +11,7 @@
   {{> newPaymentForm}}
   {{> paymentToolbar}}
 
-  {{#unless setupComplete}}<h3>Next: <a href="{{incomeUrl profileId}}">Transfer income when it arrives</a></h3>{{/unless}}
+  {{#unless setupComplete}}<h3>Next: <a href="{{urlFor 'income' profileId}}">Transfer income when it arrives</a></h3>{{/unless}}
 
   {{> paymentList}}
 

@@ -1,12 +1,12 @@
 Template.financeSessionList.financeSessions = ->
-  financeSessions = FinanceSessions.find({}, { sort: { startDate: -1 } }).fetch()
+  financeSessions = FinanceSessions.find({}, { sort: { startDate: -1 }, transform: extendDocWithProfileId }).fetch()
   financeSessions
 
 Template.financeSessionList.events {
   'click .remove-finance-session': (event) ->
     event.preventDefault()
     financeSessionId = recordIdFromRow event
-    financeSession = FinanceSessions.findOne(financeSessionId)
+    financeSession = FinanceSessions.findOne financeSessionId
     if financeSession and financeSession.startDate
       startDate = "from " + formatDate(financeSession.startDate)
 
@@ -59,17 +59,21 @@ Template.newFinanceSessionForm.events {
           SpendflowStats.track "Created new Session.", {
             noteLength: notes.length
           }
-          Meteor.Router.to('editSession', Session.get("currentProfile"), result)
+          data = {
+            profileId: getCurrentProfile()
+            _id: result
+          }
+          Router.go('editSession', data)
           showNavSuccess "New Session added."
         else
           showNavError "There was a problem adding the new Session. Please try again. If the problem persists, contact us."
           console.log error
 }
 
-Template.editSession.editingFinanceSession = ->
-  financeSession = Session.get "currentFinanceSession"
-  financeSession.startDate = formatDate financeSession.startDate
-  financeSession
+#Template.editSession.editingFinanceSession = ->
+#  financeSession = Session.get "currentFinanceSession"
+#  financeSession.startDate = formatDate financeSession.startDate
+#  financeSession
 
 Template.financeSessionForm.events {
   'click .save-finance-session': (event) ->

@@ -6,7 +6,6 @@
 preserve-inputs
 accounts-password
 bootstrap
-coffeescript
 jquery
 underscore
 router
@@ -31,3 +30,5 @@ canonical
 jquery-autosize
 autoupdate
 iron-router
+fast-render
+coffeescript

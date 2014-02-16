@@ -6,9 +6,10 @@ Profiles
 
 @Profiles = new Meteor.Collection 'profiles'
 
-if Meteor.isClient
-  Deps.autorun =>
-    @profilesSubscription = Meteor.subscribe 'spendflowProfiles'
+@profilesSubscription = null
+#if Meteor.isClient
+#  Deps.autorun =>
+#    @profilesSubscription = Meteor.subscribe 'spendflowProfiles'
 
 # Hooks
 @Profiles.before.insert ensureOwner

@@ -12,10 +12,10 @@
   {{> newIncomeForm}}
   {{> incomeToolbar}}
   {{> incomeList}}
-  {{#unless setupComplete}}<h3>Next: <a href="{{expensesUrl profileId}}">Add expenses</a></h3>{{/unless}}
+  {{#unless setupComplete}}<h3>Next: <a href="{{urlFor 'expenses' profileId}}">Add expenses</a></h3>{{/unless}}
 
   {{#unless setupComplete}}<h3 id="workflow-step-4">4. When you get paid, transfer your income (if necessary) and mark it transferred
-    (click <i class="icon-ok"></i> on <a href="{{incomeUrl profileId}}">Income</a> dashboard).</h3>
+    (click <i class="icon-ok"></i> on <a href="{{urlFor 'income' profileId}}">Income</a> dashboard).</h3>
 
     <p>Kevin usually receives income into business accounts, but he likes to keep business and personal funds
       separate. He looks at the totals in the <strong>Commitments</strong> column and transferred the
@@ -23,7 +23,7 @@
       While he's at it, he usually transfers the <strong>Envelope amounts</strong> to the accounts where he keeps
       those savings as well. He's kind of jumping the gun, there, but it'll all work out, as we'll see...now.</p>
 
-    <h3>Next: <a href="{{paymentsUrl profileId}}">Pay your expenses</a></h3>
+    <h3>Next: <a href="{{urlFor 'payments' profileId}}">Pay your expenses</a></h3>
   {{/unless}}
 </template>
 
@@ -43,7 +43,6 @@
           <th>Amount</th>
           <th>Envelope amounts</th>
           <th>Transferred</th>
-          <th>Biz</th>
           <th>Deposit account<br />Commitments</th>
           <th>Notes</th>
           <th>&nbsp;</th>
@@ -63,7 +62,7 @@
   {{! ROW OF THE THINGS}}
   <tr data-target="{{_id}}" class="{{#if thisRowBeingEdited}} being-edited {{/if}}{{#if transferred}} muted {{/if}}">
     <td>{{receiptDate}}</td>
-    <td>{{description}}</td>
+    <td>{{#if business}}<i class="fa fa-briefcase"></i>{{/if}}{{description}}</td>
     <td>
       <div class="main-amount">{{amount}}</div>
       <div class="amount-remaining">{{amountRemaining}} left</div>
@@ -78,7 +77,6 @@
       {{/if}}
     </td>
     <td>{{transferred}} <a title="Mark {{#if transferred}}not transferred{{else}}transferred{{/if}}" href="#" class="mark-transferred"><i class="{{#if transferred}} icon-ok-sign{{else}}icon-ok{{/if}}"></i></a></td>
-    <td>{{business}}</td>
     <td>
       <div>{{depositAccount}}</div>
       <div><b>Biz:</b> {{bizTotal}}</div>

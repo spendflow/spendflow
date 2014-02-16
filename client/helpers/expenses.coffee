@@ -1,5 +1,5 @@
 Template.expenseToolbar.showCommittedExpenses = ->
-  if Meteor.user().profile and Meteor.user().profile.showCommittedExpenses
+  if Meteor.user()?.profile?.showCommittedExpenses
     return true;
   false
 

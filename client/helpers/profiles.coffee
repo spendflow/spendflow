@@ -1,5 +1,5 @@
 Template.profileList.rendered = ->
-  if profilesSubscription.ready() and not Profiles.findOne()
+  if not Profiles.findOne()
     showNavSuccess "Create your first profile to get started."
 
 Template.profileList.profiles = ->
@@ -26,7 +26,7 @@ Template.profile.events {
     profileId = recordIdFromRow event
     profile = Profiles.findOne(profileId)
 
-    alertify.confirm "THIS IS A POTENTIALLY DANGEROUS ACTION! If you have any incomes, expenses, payments, accounts, or envelopes using this profile, you will lose access to them!
+    alertify.confirm("THIS IS A POTENTIALLY DANGEROUS ACTION! If you have any incomes, expenses, payments, accounts, or envelopes using this profile, you will lose access to them!
 
       Are you sure you want to remove <em>#{profile.name}</em>?", (event) ->
       if event
@@ -38,6 +38,7 @@ Template.profile.events {
             showNavError "I couldn't remove the profile for some reason. Try again, and contact us if the problems persist."
             console.log error
             SpendflowStats.track "Removing profile failed.",  { profile: profile }
+    )
 }
 
 Template.newProfileForm.profilesCount = ->

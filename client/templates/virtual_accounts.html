@@ -10,7 +10,7 @@
   {{> newAccountForm}}
   {{> accountList}}
 
-  {{#unless setupComplete}}<h3>Next: <a href="{{envelopesUrl profileId}}">Add envelopes (rules for where part of your income should go)</a></h3>{{/unless}}
+  {{#unless setupComplete}}<h3>Next: <a href="{{urlFor 'envelopes' profileId}}">Add envelopes (rules for where part of your income should go)</a></h3>{{/unless}}
 </template>
 
 <template name="accountList">

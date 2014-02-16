@@ -6,9 +6,6 @@
 
 @FinanceSessions = new Meteor.Collection 'sessions'
 
-if Meteor.isClient
-  Deps.autorun =>
-    Meteor.subscribe 'spendflowSessions', getCurrentProfile(), ->
-      Session.set("financeSessionsReady", true)
+@_sessionsSub = null
 
 @FinanceSessions.before.insert ensureCommonMetadata

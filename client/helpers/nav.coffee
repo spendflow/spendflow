@@ -2,7 +2,7 @@
 spendflowRoutes = [
   'index'
   'dashboard'
-  'financeSessions'
+  'sessions'
   'accounts'
   'envelopes'
   'income'
@@ -12,20 +12,20 @@ spendflowRoutes = [
 ]
 
 templateRoutes = {
-  financeSessions: 'sessions'
+
 }
 
 spendflowRoutes.forEach (route) ->
   Template.nav["#{route}Active"] = ->
     # TODO: Needs refactoring if I change paths, but it's fine for now
-    if Meteor.Router.page() is route
+    if Router.current()?.route?.name is route
       return "active"
     else
       return ""
 
 Template.nav.profilesLabel = ->
-  if getCurrentProfile() and Meteor.Router.page() isnt 'profiles'
-    (Profiles.findOne getCurrentProfile()).name
+  if getCurrentProfile() and Router.current()?.route?.name isnt 'profiles'
+    (Profiles.findOne getCurrentProfile())?.name or 'Profiles'
   else
     'Profiles'
 
@@ -40,17 +40,21 @@ Template.nav.events {
     if profile
       Session.set('currentProfile', newProfileId)
 
-      currentPage = Meteor.Router.page()
+      currentPage = Router.current()?.route?.name
       # Is this a page that trolls us? De-trollify the route.
       if not _.isUndefined templateRoutes[currentPage]
         currentPage = templateRoutes[currentPage]
 
-      if Meteor.Router["#{currentPage}Url"]
+      # TODO: Convert
+      if Router.current()?.path?
         # Route to same page we're on but with new profile
-        Meteor.Router.to(currentPage, newProfileId)
+        routeTarget = currentPage
       else
         # Just gets ignored otherwise
-        Meteor.Router.to("dashboard", newProfileId)
+        routeTarget = 'dashboard'
+
+      newParams = _.extend Router.current().params, { profileId: newProfileId };
+      Router.go routeTarget, Router.current().params
   'click .hide-setup-help': (event) ->
     event.preventDefault()
     alertify.confirm 'Are you sure you want to turn off the Getting Started help? (You can re-enable it from your <i class="icon-home"></i> Home screen.)', (event) ->

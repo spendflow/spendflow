@@ -1,12 +1,12 @@
 <template name="nav">
   {{#if profileId}}
     <ul class="nav nav-pills pull-left spendflow-nav">
-      <li id="page-index" class="{{indexActive}}"><a href="{{indexUrl profileId}}"><i class="icon-home"></i></a></li>
-      <li id="page-dashboard" class="{{dashboardActive}}"><a href="{{dashboardUrl profileId}}">Dashboard</a></li>
-      <li id="page-sessions" class="{{financeSessionsActive}}"><a href="{{sessionsUrl profileId}}">Sessions</a></li>
-      <li id="page-income" class="{{incomeActive}}"><a href="{{incomeUrl profileId}}">Income</a></li>
-      <li id="page-expenses" class="{{expensesActive}}"><a href="{{expensesUrl profileId}}">Expenses</a></li>
-      <li id="page-payments" class="{{paymentsActive}}"><a href="{{paymentsUrl profileId}}">Payments</a></li>
+      <li id="page-index" class="{{indexActive}}"><a href="{{urlFor 'index'}}"><i class="icon-home"></i></a></li>
+      <li id="page-dashboard" class="{{dashboardActive}}"><a href="{{urlFor 'dashboard' profileId}}">Dashboard</a></li>
+      <li id="page-sessions" class="{{sessionsActive}}"><a href="{{urlFor 'sessions' profileId}}">Sessions</a></li>
+      <li id="page-income" class="{{incomeActive}}"><a href="{{urlFor 'income' profileId}}">Income</a></li>
+      <li id="page-expenses" class="{{expensesActive}}"><a href="{{urlFor 'expenses' profileId}}">Expenses</a></li>
+      <li id="page-payments" class="{{paymentsActive}}"><a href="{{urlFor 'payments' profileId}}">Payments</a></li>
       {{#unless setupComplete}}<li class="hide-setup-help"><a href="#">Turn off setup help</a></li>{{/unless}}
     </ul>
   {{/if}}
@@ -14,8 +14,8 @@
   {{! Put these into a Settings dropdown or something}}
   <ul class="nav nav-pills pull-right spendflow-nav">
     {{#if profileId}}
-      <li id="page-accounts" class="{{accountsActive}}"><a href="{{accountsUrl profileId}}">Accounts</a></li>
-      <li id="page-envelopes" class="{{envelopesActive}}"><a href="{{envelopesUrl profileId}}">Envelopes</a></li>
+      <li id="page-accounts" class="{{accountsActive}}"><a href="{{urlFor 'accounts' profileId}}">Accounts</a></li>
+      <li id="page-envelopes" class="{{envelopesActive}}"><a href="{{urlFor 'envelopes' profileId}}">Envelopes</a></li>
     {{/if}}
     <li class="login-buttons">{{loginButtons}}</li>
     <li id="page-profiles-wrapper" class="dropdown {{profilesActive}}">
@@ -27,7 +27,7 @@
         {{#if profiles}}
           <li class="divider"></li>
         {{/if}}
-        <li id="page-profiles"><a href="{{profilesUrl}}">Manage Profiles</a></li>
+        <li id="page-profiles"><a href="{{urlFor 'profiles'}}">Manage Profiles</a></li>
       </ul>
   </ul>
 </template>

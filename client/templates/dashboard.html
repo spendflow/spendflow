@@ -45,14 +45,14 @@
       {{#unless profileId}}
         <p class="required">
           {{#unless profiles}}
-            <a href="{{profilesUrl}}">Create a profile</a> first. (Kudos for somehow managing to see this! It should be
+            <a href="{{urlFor 'profiles'}}">Create a profile</a> first. (Kudos for somehow managing to see this! It should be
             impossible).
           {{else}}
             Use the dropdown at the top-right to select a profile first.
           {{/unless}}
         </p>
       {{else}}
-        <h2><a href="{{profilesUrl}}">Let's get started.</a></h2>
+        <h2><a href="{{urlFor 'profiles'}}">Let's get started.</a></h2>
       {{/unless}}
     </div>
   {{else}}

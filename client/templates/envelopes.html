@@ -12,7 +12,7 @@
   {{> newEnvelopeForm}}
   {{> envelopeList}}
 
-  {{#unless setupComplete}}<h3>Next: <a href="{{incomeUrl profileId}}">The Spendflow Workflow</a></h3>{{/unless}}
+  {{#unless setupComplete}}<h3>Next: <a href="{{urlFor 'income' profileId}}">The Spendflow Workflow</a></h3>{{/unless}}
 </template>
 
 <template name="envelopeList">

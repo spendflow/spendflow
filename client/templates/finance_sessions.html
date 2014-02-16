@@ -30,18 +30,14 @@
 </template>
 
 <template name="editSession">
-  {{#with editingFinanceSession}}
-    <fieldset>
-      {{> financeSessionForm}}
-    </fieldset>
-  {{/with}}
+  {{> financeSessionForm}}
 </template>
 
 <template name="financeSession">
   <tr data-target="{{_id}}"{{#if thisRowBeingEdited}} class="being-edited"{{/if}}>
     <td>{{startDate}}</td>
     <td>{{multiline notesTeaser}}</td>
-    <td><a href="{{editSessionUrl profileId _id}}" class="edit-finance-session"><i class="icon-pencil"></i></a> <a href="#" class="remove-finance-session"><i class="icon-trash"></i></a></td>
+    <td><a href="{{urlFor 'editSession'}}" class="edit-finance-session"><i class="icon-pencil"></i></a> <a href="#" class="remove-finance-session"><i class="icon-trash"></i></a></td>
   </tr>
 </template>
 
@@ -58,24 +54,44 @@
 </template>
 
 <template name="financeSessionForm">
-  <form id="finance-session-form{{#if _id}}-{{_id}}{{/if}}" {{#if _id}} class="edit-record-form" data-target="{{_id}}"{{else}} class="add-record-form"{{/if}}>
-    <label>Start date of Session (e.g. today)</label>
-    <input type="text" name="startDate"{{#if _id}} value="{{startDate}}"{{/if}} />
+  <form id="finance-session-form{{#if _id}}-{{_id}}{{/if}}" {{#if _id}} class="edit-record-form"
+        data-target="{{_id}}"{{else}} class="add-record-form"{{/if}}>
+    <div class="row">
+      <div class="span{{#if _id}}{{!8}}12{{else}}12{{/if}}">
+        {{> financeSessionActions }}
 
-    {{#if _id}}
-      {{! So if we resize the textbox it doesn't jump back to how it was when we save}}
-      {{#isolate}}
-        <label>Your notes</label>
-        <textarea class="notes" name="notes">{{notes}}</textarea>
-      {{/isolate}}
-    {{else}}
-      <label>Your notes</label>
-      <textarea class="notes" name="notes"></textarea>
-    {{/if}}
+        <label>Start date of Session (e.g. today)</label>
+        <input type="text" name="startDate"{{#if _id}} value="{{startDate}}"{{/if}} />
 
-    <div class="control-group">
-      <button type="submit" class="btn {{#if _id}}save-finance-session{{else}}add-finance-session{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>
-      <a href="{{sessionsUrl profileId}}">Go back</a>
-    </div>
+        {{#if _id}}
+          {{! So if we resize the textbox it doesn't jump back to how it was when we save}}
+          {{#isolate}}
+            <label>Your notes</label>
+            <textarea class="notes" name="notes">{{notes}}</textarea>
+          {{/isolate}}
+        {{else}}
+          <label>Your notes</label>
+          <textarea class="notes" name="notes"></textarea>
+        {{/if}}
+      {{> financeSessionActions }}
+      {{#if _id}}</div> <!-- .span8 -->{{/if}}
+
+      <!--{{!#if _id}}-->
+        <!--<div class="span4">-->
+          <!--{{!> financeSessionActions }}-->
+        <!--</div> &lt;!&ndash; .span4 &ndash;&gt;-->
+      <!--{{!/if}}-->
+
+    {{#unless _id}}</div> <!-- .span12 -->{{/unless}}
+    </div> <!-- .row -->
   </form>
+</template>
+
+<template name="financeSessionActions">
+  <div class="control-group">
+    <button type="submit"
+            class="btn {{#if _id}}save-finance-session{{else}}add-finance-session{{/if}}">{{#if _id}}
+      Save{{else}}Add{{/if}}</button>
+    {{#if _id}}<a href="{{urlFor 'sessions' profileId}}">Go back</a>{{/if}}
+  </div> <!-- .control-group -->
 </template>

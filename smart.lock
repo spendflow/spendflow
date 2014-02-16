@@ -18,7 +18,11 @@
       "jquery-autosize": {
         "path": "../../../Source/meteor-jquery-autosize"
       },
-      "iron-router": {}
+      "iron-router": {},
+      "fast-render": {
+        "git": "git://github.com/arunoda/meteor-fast-render.git",
+        "branch": "master"
+      }
     },
     "packages": {
       "router": {
@@ -81,6 +85,11 @@
         "git": "https://github.com/EventedMind/iron-router.git",
         "tag": "v0.6.2",
         "commit": "ce56e58b45624dce992490f3a1c10f10d3948bae"
+      },
+      "fast-render": {
+        "git": "git://github.com/arunoda/meteor-fast-render.git",
+        "branch": "master",
+        "commit": "baf79a3e5863acc3abfe2d0d62fb23b21fe880de"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",

@@ -1,5 +1,5 @@
 Template.paymentToolbar.showPaidPayments = ->
-  if Meteor.user().profile and Meteor.user().profile.showPaidPayments
+  if Meteor.user()?.profile?.showPaidPayments
     return true;
   false
 

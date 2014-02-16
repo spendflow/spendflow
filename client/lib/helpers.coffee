@@ -12,7 +12,7 @@ Handlebars.registerHelper "multiline", (text) ->
   new Handlebars.SafeString(text)
 
 Handlebars.registerHelper "profileId", ->
-  getCurrentProfile()
+  if getCurrentProfile() then return { profileId: getCurrentProfile() } else return null;
 
 Handlebars.registerHelper "profile", ->
   if getCurrentProfile() then Profiles.findOne getCurrentProfile() else return null;
@@ -22,6 +22,6 @@ Handlebars.registerHelper "profiles", ->
 
 Handlebars.registerHelper "setupComplete", ->
   u = Meteor.user()
-  if not (u.profile and u.profile.hideSetupHelp and u.profile.hideSetupHelp is true)
+  if u and u.profile?.hideSetupHelp? isnt true
     return false;
-  return true
+  return true;

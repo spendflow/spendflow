@@ -11,7 +11,7 @@
   {{> expenseToolbar}}
   {{> expenseList}}
 
-  {{#unless setupComplete}}<h3>Next: Bring it all together and <a href="{{paymentsUrl profileId}}">add payments</a></h3>{{/unless}}
+  {{#unless setupComplete}}<h3>Next: Bring it all together and <a href="{{urlFor 'payments' profileId}}">add payments</a></h3>{{/unless}}
 </template>
 
 <template name="expenseToolbar">

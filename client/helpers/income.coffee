@@ -1,5 +1,5 @@
 Template.incomeToolbar.showTransferredIncome = ->
-  if Meteor.user().profile and Meteor.user().profile.showTransferredIncome
+  if Meteor.user()?.profile?.showTransferredIncome
     return true;
   false
 
