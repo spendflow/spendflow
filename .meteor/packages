@@ -8,7 +8,6 @@ accounts-password
 bootstrap
 jquery
 underscore
-router
 accounting
 i18n
 collection-hooks

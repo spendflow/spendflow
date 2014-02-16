@@ -1,6 +1,5 @@
 {
   "packages": {
-    "router": {},
     "moment": {},
     "accounting": {},
     "i18n": {},
