@@ -21,7 +21,8 @@
       "fast-render": {
         "git": "git://github.com/arunoda/meteor-fast-render.git",
         "branch": "master"
-      }
+      },
+      "font-awesome": {}
     },
     "packages": {
       "moment": {
@@ -85,6 +86,10 @@
         "branch": "master",
         "commit": "baf79a3e5863acc3abfe2d0d62fb23b21fe880de"
       },
+      "font-awesome": {
+        "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
+        "tag": "v4.0.3",
+        "commit": "61e9361384347547ae144f8228faa4deffda23db"
       },
       "jquery-ui": {
         "git": "https://github.com/TimHeckel/meteor-jquery-ui.git",

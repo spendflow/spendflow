@@ -18,6 +18,7 @@
     "iron-router": {},
     "fast-render": {
       "git": "git://github.com/arunoda/meteor-fast-render.git"
-    }
+    },
+    "font-awesome": {}
   }
 }
