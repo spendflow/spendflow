@@ -6,6 +6,4 @@
 ###
 @VirtualAccounts = new Meteor.Collection 'accounts'
 
-@_accountsSub = null
-
 @VirtualAccounts.before.insert ensureCommonMetadata

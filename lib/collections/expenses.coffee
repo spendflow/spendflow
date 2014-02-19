@@ -17,9 +17,5 @@ Expenses
 
 @Expenses = new Meteor.Collection 'expenses'
 
-if Meteor.isClient
-  Deps.autorun =>
-    Meteor.subscribe 'spendflowExpenses', getCurrentProfile()
-
 # Hooks
 @Expenses.before.insert ensureCommonMetadata

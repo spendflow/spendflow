@@ -21,9 +21,5 @@ Incomes
 
 @Incomes = new Meteor.Collection 'incomes'
 
-if Meteor.isClient
-  Deps.autorun =>
-    Meteor.subscribe 'spendflowIncomes', getCurrentProfile()
-
 # Hooks
 @Incomes.before.insert ensureCommonMetadata

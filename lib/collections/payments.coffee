@@ -14,10 +14,6 @@ Payments
 
 @Payments = new Meteor.Collection 'payments'
 
-if Meteor.isClient
-  Deps.autorun =>
-    Meteor.subscribe 'spendflowPayments', getCurrentProfile()
-
 # Hooks
 @Payments.before.insert ensureCommonMetadata
 @Payments.before.insert (userId, doc) ->
