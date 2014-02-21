@@ -4,7 +4,7 @@
 
     <p>Accounts in Spendflow <em>represent</em> your bank, credit card, and savings accounts. The <strong>Current
       account balance</strong> doesn't do anything yet, but in the future it will help you track balances in your
-      virtual accounts.</p>
+      envelope accounts.</p>
   {{/unless}}
 
   {{> newAccountForm}}
@@ -18,10 +18,9 @@
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>Name <i class="fa fa-exchange"></i> Linked Bank Account</th>
           <th>Type</th>
           <th>Balance</th>
-          <th>Biz</th>
           <th>&nbsp;</th>
         </tr>
       </thead>
@@ -36,15 +35,14 @@
 
 <template name="account">
   <tr data-target="{{_id}}"{{#if thisRowBeingEdited}} class="being-edited"{{/if}}>
-    <td>{{name}}</td>
-    <td>{{type}}</td>
+    <td>{{#if business}}<i class="fa fa-briefcase"></i> {{/if}}{{name}}{{#if bankAccountId}} <i class="fa fa-exchange"></i> {{bankAccount}}{{/if}}</td>
+    <td>{{#if equal type "payFrom"}}Envelope account{{/if}}{{#if equal type "payTo"}}Account to pay back{{/if}}{{#if equal type "bank"}}Bank account{{/if}}</td>
     <td>{{balance}}</td>
-    <td>{{business}}</td>
     <td><a href="#" class="edit-account"><i class="icon-pencil"></i></a>{{#unless usedForExpenses}} <a href="#" class="remove-account"><i class="icon-trash"></i></a>{{/unless}}</td>
   </tr>
   {{#if thisRowBeingEdited}}
     <tr>
-      <td colspan="5">
+      <td colspan="4">
         <fieldset>
           {{> accountForm}}
         </fieldset>
@@ -76,6 +74,7 @@
         <option value="payTo"{{#if equal type "payTo"}} selected{{/if}}>Account to pay back (e.g. Credit Card)</option>
       </select>
     </div>
+
     <label>Name this account</label>
     <input type="text" name="name"{{#if _id}} value="{{name}}"{{/if}} />
     {{!TODO: Don't allow changing balance directly if automated calculations have worked upon it}}
@@ -85,6 +84,18 @@
     <label class="checkbox">Is this a <strong>business</strong> account? (This is used to mark system-created Expenses and Incomes as business.)
       <input type="checkbox" name="business"{{#if _id}}{{#if business}} checked{{/if}}{{/if}} />
     </label>
+
+    <label>Link to a bank account (envelope accounts only)</label>
+    <div>
+      <select name="bankAccountId">
+        <option value="">Select bank account</option>
+        {{#each bankAccounts}}
+          {{> selectOptions}}
+        {{/each}}
+      </select>
+
+      <p>If you select the bank account in which you hold this money, Spendflow will be able to help you track your spending better.</p>
+    </div>
 
     <div class="btn-toolbar">
       <button type="submit" class="btn {{#if _id}}save-account{{else}}add-account{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>
@@ -100,13 +111,13 @@
         specific bank account.
       </li>
       <li>
-        <strong>Virtual savings account:</strong> Corresponds to an amount of money that you set aside for specific
+        <strong>Envelope account:</strong> Corresponds to an amount of money that you set aside for specific
         purposes. You can create <em>Envelopes</em> to automatically commit some of your income to these. In the
         future,
         the system will keep track of the balance for you, but you have to do it on your own for now. Kevin uses these
         for automatically saving a percentage of client income for taxes, business R&D, and other business expenses.
         He
-        also has a virtual account for vacation savings, but he manually creates expenses for that one since it's a
+        also has an envelope account for vacation savings, but he manually creates expenses for that one since it's a
         fixed amount and might be paid partially from several incomes.
       </li>
       <li>

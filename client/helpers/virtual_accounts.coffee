@@ -8,6 +8,7 @@ Template.newAccountForm.events {
     accountName = valByName 'name', $context
     accountBalance = if (valByName 'balance', $context).toString() isnt "" then valByName('balance', $context) else undefined
     business = checkboxStateByName('business', $context)
+    bankAccountId = valByName 'bankAccountId', $context
 
     if not accountType or not accountName or (accountType is "payFrom" and (not accountBalance or accountBalance.toString() is ""))
       showNavError "Please select an account type and give it a name. If it's a Pay From account, enter a balance, even if that is 0."
@@ -20,6 +21,7 @@ Template.newAccountForm.events {
         name: accountName
         balance: accountBalance
         business: business
+        bankAccountId: bankAccountId
       }, (error, result) ->
         if not error
           clearFormFields $context
@@ -28,6 +30,15 @@ Template.newAccountForm.events {
           showNavError "There was a problem adding the new account. Please try again. If the problem persists, contact us."
           console.log error
 }
+
+
+Template.accountForm.bankAccounts = ->
+  virtualAccounts = getVirtualAccounts undefined, undefined, {
+    type: {
+      $in: [ "bank" ]
+    }
+  }
+  getAccountSelector virtualAccounts, @bankAccountId or null
 
 Template.accountForm.events {
   'click .cancel-editing': (event) ->
@@ -44,6 +55,7 @@ Template.accountForm.events {
     accountName = valByName 'name', $context
     accountBalance = if (valByName 'balance', $context).toString() isnt "" then valByName('balance', $context) else undefined
     business = checkboxStateByName('business', $context)
+    bankAccountId = valByName 'bankAccountId', $context
 
     if not accountType or not accountName or (accountType is "payFrom" and (not accountBalance or accountBalance.toString() is ""))
       showNavError "Please select an account type and give it a name. If it's a Pay From account, enter a balance, even if that is 0."
@@ -55,6 +67,7 @@ Template.accountForm.events {
           name: accountName
           balance: accountBalance
           business: business
+          bankAccountId: bankAccountId
         }
       }, (error, result) ->
         if not error
@@ -90,6 +103,9 @@ Template.account.usedForExpenses = ->
 
 Template.account.balance = ->
   if @type is "payFrom" and @balance then accounting.formatMoney @balance else ""
+
+Template.account.bankAccount = ->
+  getVirtualAccountName(@bankAccountId or null)
 
 Template.account.events {
   'click .edit-account': (event) ->
