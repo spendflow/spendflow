@@ -17,11 +17,9 @@ scss
 email
 accounts-ui
 standard-app-packages
-accounts-testing
 jquery-scrollintoview
 managedUsers
 moment
-page-js-ie-support
 handlebars
 analyticsjs
 webapp

@@ -4,7 +4,7 @@
     "accounting": {},
     "i18n": {},
     "collection-hooks": {
-      "path": "/Users/kevin/Source/meteor-collection-hooks"
+      "path": "../../src/meteor-collection-hooks"
     },
     "jquery-ui-bootstrap": {},
     "scss": {},
@@ -13,7 +13,7 @@
     "analyticsjs": {},
     "canonical": {},
     "jquery-autosize": {
-      "path": "/Users/kevin/Source/meteor-jquery-autosize"
+      "path": "../../src/meteor-jquery-autosize"
     },
     "iron-router": {},
     "fast-render": {

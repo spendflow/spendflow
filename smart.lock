@@ -6,7 +6,7 @@
       "accounting": {},
       "i18n": {},
       "collection-hooks": {
-        "path": "../../../Source/meteor-collection-hooks"
+        "path": "../../src/meteor-collection-hooks"
       },
       "jquery-ui-bootstrap": {},
       "scss": {},
@@ -15,7 +15,7 @@
       "analyticsjs": {},
       "canonical": {},
       "jquery-autosize": {
-        "path": "../../../Source/meteor-jquery-autosize"
+        "path": "../../src/meteor-jquery-autosize"
       },
       "iron-router": {},
       "fast-render": {
@@ -41,7 +41,7 @@
         "commit": "e24f4ad9242741984dfa3985be4ed2c3bc34f9d5"
       },
       "collection-hooks": {
-        "path": "../../../Source/meteor-collection-hooks"
+        "path": "../../src/meteor-collection-hooks"
       },
       "jquery-ui-bootstrap": {
         "git": "https://github.com/TimHeckel/meteor-jquery-ui-bootstrap.git",
@@ -74,17 +74,17 @@
         "commit": "faba863fbf336c67264f79446578f484077e28bc"
       },
       "jquery-autosize": {
-        "path": "../../../Source/meteor-jquery-autosize"
+        "path": "../../src/meteor-jquery-autosize"
       },
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
-        "tag": "v0.6.2",
-        "commit": "ce56e58b45624dce992490f3a1c10f10d3948bae"
+        "tag": "v0.6.4",
+        "commit": "927bbaed1b87894fb6fb70807f74ff3a5bd89f29"
       },
       "fast-render": {
         "git": "git://github.com/arunoda/meteor-fast-render.git",
         "branch": "master",
-        "commit": "baf79a3e5863acc3abfe2d0d62fb23b21fe880de"
+        "commit": "dbfc8178594e5f696a39541278aac5dd25d458a0"
       },
       "font-awesome": {
         "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
