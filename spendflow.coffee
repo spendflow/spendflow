@@ -110,7 +110,8 @@ Router.map ->
         return _self._sessionsSub
     data: ->
       if @params._id and @params.profileId
-        financeSession = FinanceSessions.findOne @params._id, { reactive: false }
+        # TODO: Sometimes the below overreacts. Try to make it not-too-reactive so that edits in progress aren't lost.
+        financeSession = FinanceSessions.findOne @params._id
         if financeSession
           financeSession.startDate = formatDate financeSession.startDate
           return financeSession;
@@ -158,6 +159,11 @@ Router.map ->
           profileId = resolveProfileId @params
           _self._envelopesSub = Meteor.subscribe 'spendflowEnvelopes', profileId
       return _self._envelopesSub
+  }
+
+  @route 'expectations', {
+    path: '/:profileId/expectations'
+    fastRender: true
   }
 
 @resolveProfileId = (params) ->

@@ -1,0 +1,20 @@
+<template name="expectations">
+  {{> expectedMovements }}
+</template>
+
+<template name="expectedMovements">
+  <form>
+    <h2>Expected gross income</h2>
+    <div>Include <strong>all</strong> gross income. The Deducer will take your Envelopes and such into account when calculating.</div>
+    <input type="text" size="5" name="expectedIncomeAmount" /> every <select name="expectedIncomePeriod">{{> estimationPeriodOptions }}</select>
+
+    <h2>Expected expenses</h2>
+    <input type="text" size="5" name="expectedExpenseAmount" /> every <select name="expectedExpensePeriod">{{> estimationPeriodOptions }}</select>
+  </form>
+</template>
+
+<template name="estimationPeriodOptions">
+  <option value="year">year</option>
+  <option value="month">month</option>
+  <option value="week">week</option>
+</template>
