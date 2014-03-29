@@ -1,3 +1,13 @@
+Template.envelopeForm.attrs = ->
+  if @_id
+    return {
+      class: 'edit-record-form'
+      "data-target": @_id
+    };
+  return {
+    class: 'add-record-form'
+  }
+
 Template.envelopeForm.virtualAccounts = ->
   virtualAccounts = getVirtualAccounts undefined, undefined
   getAccountSelector virtualAccounts, this.virtualAccountId
@@ -74,6 +84,9 @@ Template.envelopeForm.events {
 
 Template.envelope.thisRowBeingEdited = ->
   Session.equals('editingEnvelope', this._id)
+
+Template.envelope.thisRowBeingEditedClasses = ->
+  if Session.equals 'editingEnvelope', @_id then 'being-edited' else ''
 
 Template.envelope.events {
   'click .edit-envelope': (event) ->

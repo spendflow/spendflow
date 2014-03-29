@@ -13,7 +13,7 @@
       one for the Norwegian side of things. If you are helping someone else manage their money, you might want to
       add more profiles too.</p>
 
-    <h3>Next: <a href="{{urlFor 'accounts' profileId}}">Add your accounts</a></h3>
+    <h3>Next: <a href="{{urlFor 'accounts' params=profileId}}">Add your accounts</a></h3>
   {{/unless}}
 </template>
 
@@ -37,7 +37,7 @@
 
 <template name="profile">
   {{! We deviated from the normal naming convention here to avoid conflicting with something unknown, though it doesn't seem to have been necessary.}}
-  <tr data-target="{{_id}}"{{#if thisRowBeingEdited}} class="being-edited"{{/if}}>
+  <tr data-target="{{_id}}" class={{#if thisRowBeingEdited}}"being-edited"{{/if}}>
     <td>{{name}}</td>
     <td><a href="#" class="edit-profile"><i class="icon-pencil"></i></a> {{#if allowDelete}}<a href="#" class="remove-profile"><i class="icon-trash"></i></a>{{/if}}</td>
   </tr>
@@ -64,9 +64,9 @@
 </template>
 
 <template name="profileForm">
-  <form{{#if _id}} class="edit-record-form" data-target="{{_id}}"{{else}} class="add-record-form"{{/if}}>
+  <form {{attrs}}>
     <label>Name this profile</label>
-    <input type="text" name="name"{{#if _id}} value="{{name}}"{{/if}} />
+    <input type="text" name="name" value={{name}} />
 
     <div class="btn-toolbar">
       <button type="submit" class="btn {{#if _id}}save-profile{{else}}add-profile{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>

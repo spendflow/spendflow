@@ -9,16 +9,17 @@
     "jquery-ui-bootstrap": {},
     "scss": {},
     "jquery-scrollintoview": {},
-    "managedUsers": {},
+    "managedUsers": {
+      "git": "https://github.com/jzgoda/managedUsers",
+      "tag": "v0.1.6"
+    },
     "analyticsjs": {},
     "canonical": {},
     "jquery-autosize": {
       "path": "../../src/meteor-jquery-autosize"
     },
     "iron-router": {},
-    "fast-render": {
-      "git": "git://github.com/arunoda/meteor-fast-render.git"
-    },
-    "font-awesome": {}
+    "font-awesome": {},
+    "fast-render": {}
   }
 }

@@ -97,6 +97,15 @@ Template.payment.events {
 Template.newPaymentForm.paymentsCount = ->
   !! Payments.find({}, { reactive: false }).count()
 
+Template.paymentForm.attrs = ->
+  attrs = { id: 'edit-payment-form' }
+  if @_id
+    attrs.id += "-#{@_id}"
+    attrs.class = 'edit-record-form'
+    attrs["data-target"] = @_id
+  else
+    attrs.class = 'add-record-form'
+
 Template.paymentForm.expenses = ->
   expenses = getExpenses undefined, undefined, {
     $or: [

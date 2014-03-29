@@ -11,12 +11,12 @@
   {{> expenseToolbar}}
   {{> expenseList}}
 
-  {{#unless setupComplete}}<h3>Next: Bring it all together and <a href="{{urlFor 'payments' profileId}}">add payments</a></h3>{{/unless}}
+  {{#unless setupComplete}}<h3>Next: Bring it all together and <a href="{{urlFor 'payments' params=profileId}}">add payments</a></h3>{{/unless}}
 </template>
 
 <template name="expenseToolbar">
   <form id="expense-toolbar">
-    <input type="checkbox" id="expenses-show-committed"{{#if showCommittedExpenses}} checked{{/if}} /> Show fully-committed expenses
+    <input type="checkbox" id="expenses-show-committed" checked={{showCommittedExpenses}} /> Show fully-committed expenses
   </form>
 </template>
 
@@ -47,7 +47,7 @@
 </template>
 
 <template name="expense">
-  <tr data-target="{{_id}}" class="{{#if thisRowBeingEdited}}being-edited{{/if}}{{#if expensePaid}} muted{{/if}}">
+  <tr data-target="{{_id}}" {{rowAttrs}}>
     <td>{{dueDate}}</td>
     <td>{{#if equal systemMeta.from "envelope"}}<i class="icon-envelope"></i> {{/if}}{{description}}</td>
     <td>
@@ -94,10 +94,10 @@
 </template>
 
 <template name="expenseForm">
-  <form{{#if _id}} class="edit-record-form" data-target="{{_id}}"{{else}} class="add-record-form"{{/if}}>
+  <form {{attrs}}>
     <label>Date by which expense must be paid</label>
       <div class="control-group">
-        <input type="text" name="dueDate"{{#if _id}} value="{{dueDate}}"{{/if}} />
+        <input type="text" name="dueDate" value="{{dueDate}}" />
         {{#unless _id}}
 
           <span>Add
@@ -108,19 +108,19 @@
       </div>
 
     <label>Briefly describe the expense</label>
-    <input type="text" name="description"{{#if _id}} value="{{description}}"{{/if}} />
+    <input type="text" name="description" value="{{description}}" />
 
     <label>Amount</label>
-    <input type="text" name="amount"{{#if _id}} value="{{amount}}"{{/if}} />
+    <input type="text" name="amount" value="{{amount}}" />
 
     {{! TODO: Add tags using meteor-tags}}
 
     <label class="checkbox">Is this a <strong>business</strong> expense? (This is used for the calculation that tells you how much of the income you commit to this you should transfer to your personal account.)
-      <input type="checkbox" name="business"{{#if _id}}{{#if business}} checked{{/if}}{{/if}} />
+      <input type="checkbox" name="business" checked={{business}} />
     </label>
 
     <label class="checkbox">
-      <input type="checkbox" name="oneTime"{{#if _id}}{{#if oneTime}} checked{{/if}}{{/if}} /> Is this a <strong>one-time</strong> expense? If you budgeted for this, don't check this.
+      <input type="checkbox" name="oneTime" checked={{oneTime}} /> Is this a <strong>one-time</strong> expense? If you budgeted for this, don't check this.
     </label>
 
     <label>Optionally select an account if this expense represents a <strong>payment to another account</strong> (credit card payment, savings deposit, paying back yourself)</label>
@@ -138,7 +138,7 @@
       {{#each payFromAccounts}}
         <span id="{{_id}}">
           <label class="checkbox">
-            <input type="checkbox" name="payFromAccounts[]" value="{{_id}}"{{#if accountInUse}} checked{{/if}} /> {{virtualAccount}}
+            <input type="checkbox" name="payFromAccounts[]" value="{{_id}}" checked={{accountInUse}} /> {{virtualAccount}}
           </label>
         </span>
       {{/each}}
@@ -146,16 +146,16 @@
 
     <label class="expense-priority"><strong>Priority</strong></label>{{! (when committing income automatically, lower priority numbers get it first)</label>}}
     <label class="radio inline">
-      <input type="radio" name="priority" value="1"{{#if _id}}{{#if equal priority "1"}} checked{{/if}}{{/if}}} /> 1
+      <input type="radio" name="priority" value="1" checked={{equal priority "1"}} /> 1
     </label>
     <label class="radio inline">
-      <input type="radio" name="priority" value="2"{{#if _id}}{{#if equal priority "2"}} checked{{/if}}{{/if}}} /> 2
+      <input type="radio" name="priority" value="2" checked={{equal priority "2"}} /> 2
     </label>
     <label class="radio inline">
-      <input type="radio" name="priority" value="3"{{#unless _id}} checked{{/unless}}{{#if _id}}{{#if equal priority "3"}} checked{{/if}}{{/if}}} /> 3
+      <input type="radio" name="priority" value="3" checked={{defaultPriorityChecked}} /> 3
     </label>
     <label class="radio inline">
-      <input type="radio" name="priority" value="4"{{#if _id}}{{#if equal priority "4"}} checked{{/if}}{{/if}}} /> 4 {{! (won't be committed to automatically)}}
+      <input type="radio" name="priority" value="4" checked={{equal priority "4"}} /> 4 {{! (won't be committed to automatically)}}
     </label>
 
     {{!-- TODO: jquery-ui/bootstrap conflicts make this not work :( --}}

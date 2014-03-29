@@ -11,18 +11,18 @@
       "jquery-ui-bootstrap": {},
       "scss": {},
       "jquery-scrollintoview": {},
-      "managedUsers": {},
+      "managedUsers": {
+        "git": "https://github.com/jzgoda/managedUsers",
+        "tag": "v0.1.6"
+      },
       "analyticsjs": {},
       "canonical": {},
       "jquery-autosize": {
         "path": "../../src/meteor-jquery-autosize"
       },
       "iron-router": {},
-      "fast-render": {
-        "git": "git://github.com/arunoda/meteor-fast-render.git",
-        "branch": "master"
-      },
-      "font-awesome": {}
+      "font-awesome": {},
+      "fast-render": {}
     },
     "packages": {
       "moment": {
@@ -50,8 +50,8 @@
       },
       "scss": {
         "git": "https://github.com/fourseven/meteor-scss.git",
-        "tag": "v0.7.0",
-        "commit": "39f60d58c2b890bdd897ef52188644f3093fc2ac"
+        "tag": "v0.8.4",
+        "commit": "11af0da643944d241fe7d173af76162c4b670dee"
       },
       "jquery-scrollintoview": {
         "git": "https://github.com/WeekdayFiller/meteor-jquery.scrollintoview",
@@ -59,7 +59,7 @@
         "commit": "2adb657b6f6c09728d726b26d6b3d1de85b41f9a"
       },
       "managedUsers": {
-        "git": "https://github.com/jzgoda/managedUsers.git",
+        "git": "https://github.com/jzgoda/managedUsers",
         "tag": "v0.1.6",
         "commit": "becaa15e37cddb28d0da26bb57015c92242d2915"
       },
@@ -78,23 +78,28 @@
       },
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
-        "tag": "v0.6.4",
-        "commit": "927bbaed1b87894fb6fb70807f74ff3a5bd89f29"
-      },
-      "fast-render": {
-        "git": "git://github.com/arunoda/meteor-fast-render.git",
-        "branch": "master",
-        "commit": "dbfc8178594e5f696a39541278aac5dd25d458a0"
+        "tag": "v0.7.0",
+        "commit": "05f34bc48c4cad9fdaa366c1ddcabe6980232ece"
       },
       "font-awesome": {
         "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
         "tag": "v4.0.3",
         "commit": "61e9361384347547ae144f8228faa4deffda23db"
       },
+      "fast-render": {
+        "git": "https://github.com/arunoda/meteor-fast-render.git",
+        "tag": "v0.1.22",
+        "commit": "13c1d80bfd0366ad8d84f7a6ffa3cd9c21f9721e"
+      },
       "jquery-ui": {
         "git": "https://github.com/TimHeckel/meteor-jquery-ui.git",
         "tag": "v1.9.2",
         "commit": "c437d45edcf1367df8d5ffa8bad2867758030bd2"
+      },
+      "blaze-layout": {
+        "git": "https://github.com/EventedMind/blaze-layout.git",
+        "tag": "v0.2.2",
+        "commit": "8bc53798fe5965669ae67c72f91829fcfdceabfd"
       }
     }
   }

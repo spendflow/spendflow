@@ -25,6 +25,16 @@ Template.financeSession.startDate = ->
 Template.financeSession.notesTeaser = ->
   return @notes.substring(0, 80)
 
+Template.financeSessionForm.attrs = ->
+  attrs = { id: 'finance-session-form' }
+  if @_id
+    attrs.id += "-#{@_id}"
+    attrs.class = 'edit-record-form'
+    attrs["data-target"] = @_id
+  else
+    attrs.class = 'add-record-form'
+
+
 Template.financeSessionForm.rendered = ->
   $context = $ this.firstNode
   $startDate = (elementByName 'startDate', $context)
@@ -102,3 +112,7 @@ Template.financeSessionForm.events {
           showNavError "There was a problem updating the Session. Please try again. If the problem persists, contact us."
           console.log error
 }
+
+Template.financeSessionActions.submitClasses = ->
+  if @_id then 'save-finance-session'
+  else 'add-finance-session'

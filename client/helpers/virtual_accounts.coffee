@@ -31,6 +31,15 @@ Template.newAccountForm.events {
           console.log error
 }
 
+Template.accountForm.attrs = ->
+  if @_id
+    return {
+    class: 'edit-record-form'
+    "data-target": @_id
+    };
+  return {
+  class: 'add-record-form'
+  }
 
 Template.accountForm.bankAccounts = ->
   virtualAccounts = getVirtualAccounts undefined, undefined, {

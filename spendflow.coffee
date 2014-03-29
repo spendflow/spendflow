@@ -24,17 +24,17 @@ Deps.autorun ->
   startSubscriptions() if Meteor.isClient # Start subscriptions globally
 
 Router.configure {
-  autoRender: false
   notFoundTemplate: 'notFound'
+  layoutTemplate: 'spendflowMaster'
   loadingTemplate: 'loading'
   waitOn: ->
     return _self.profilesSubscription
 }
 
-checkLoggedIn = ->
+checkLoggedIn = (pause) ->
   if not Meteor.user() and not Meteor.loggingIn()
     @render('public')
-    @stop()
+    pause()
 
   if Meteor.loggingIn() and not (__fast_render_config?.subscriptions?.currentUser and Meteor.user())
     @render(@loadingTemplate)
@@ -61,19 +61,22 @@ hasProfile = ->
     Session.set "currentProfile", @params.profileId
 
 if Meteor.isClient
-  Router.before checkLoggedIn
-#  Router.before waitForProfiles
-  Router.before hasProfile, { except: ['profiles'] }
-  Router.before applyProfile
+  Router.onBeforeAction checkLoggedIn
+  Router.onBeforeAction hasProfile, { except: ['profiles'] }
+  Router.onBeforeAction applyProfile
+#  Router.onBeforeAction 'loading'
+  Router.onBeforeAction 'dataNotFound'
 
 Router.map ->
   @route 'index', {
     path: '/'
     fastRender: true
+    data: -> {}
   }
 
   @route 'profiles', {
     fastRender: true
+    data: -> {}
   }
 
   @route 'dashboard', {
@@ -83,6 +86,7 @@ Router.map ->
 #    fastRender: true
 #    waitOn: ->
 #      return startSubscriptions();
+    data: -> {}
   }
 
   @route 'sessions', {
@@ -94,6 +98,7 @@ Router.map ->
         profileId = resolveProfileId @params
         _self._sessionsSub = Meteor.subscribe 'spendflowSessions', profileId
       return _self._sessionsSub
+    data: -> {}
   }
   @route 'editSession', {
     path: '/:profileId/sessions/:_id/edit'
@@ -124,6 +129,7 @@ Router.map ->
     # fastRender: true
     waitOn: ->
       return _self._incomesSub
+    data: -> {}
   }
 
   @route 'expenses', {
@@ -131,6 +137,7 @@ Router.map ->
     # fastRender: true
     waitOn: ->
       return _self._expensesSub
+    data: -> {}
   }
 
   @route 'payments', {
@@ -138,6 +145,7 @@ Router.map ->
     # fastRender: true
     waitOn: ->
       return _self._paymentsSub
+    data: -> {}
   }
 
   @route 'accounts', {
@@ -149,6 +157,7 @@ Router.map ->
           profileId = resolveProfileId @params
           _self._accountsSub = Meteor.subscribe 'spendflowAccounts', profileId
       return _self._accountsSub
+    data: -> {}
   }
 
   @route 'envelopes', {
@@ -159,11 +168,13 @@ Router.map ->
           profileId = resolveProfileId @params
           _self._envelopesSub = Meteor.subscribe 'spendflowEnvelopes', profileId
       return _self._envelopesSub
+    data: -> {}
   }
 
   @route 'expectations', {
     path: '/:profileId/expectations'
     fastRender: true
+    data: -> {}
   }
 
 @resolveProfileId = (params) ->
@@ -177,7 +188,3 @@ Router.map ->
 if Meteor.isServer
   FastRender.onAllRoutes (urlPath) ->
     @subscribe 'spendflowProfiles'
-#    @subscribe 'currentUser'
-#    @subscribe 'userData'
-#    @subscribe 'systemUsers'
-#    @subscribe "meteor.loginServiceConfiguration"

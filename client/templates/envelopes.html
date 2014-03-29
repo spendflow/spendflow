@@ -12,7 +12,7 @@
   {{> newEnvelopeForm}}
   {{> envelopeList}}
 
-  {{#unless setupComplete}}<h3>Next: <a href="{{urlFor 'income' profileId}}">The Spendflow Workflow</a></h3>{{/unless}}
+  {{#unless setupComplete}}<h3>Next: <a href="{{urlFor 'income' params=profileId}}">The Spendflow Workflow</a></h3>{{/unless}}
 </template>
 
 <template name="envelopeList">
@@ -39,7 +39,7 @@
 
 <template name="envelope">
   {{! ROW OF THE THINGS}}
-  <tr data-target="{{_id}}"{{#if thisRowBeingEdited}} class="being-edited"{{/if}}>
+  <tr data-target="{{_id}}" class="{{thisRowBeingEditedClasses}}">
     <td>{{virtualAccount}}</td>
     <td>{{rate}}%</td>
     <td>{{enabledByDefault}}</td>
@@ -69,34 +69,33 @@
 </template>
 
 <template name="envelopeForm">
-    {{! FORM FIELDS}}
-    <form{{#if _id}} class="edit-record-form" data-target="{{_id}}"{{else}} class="add-record-form"{{/if}}>
+  {{! FORM FIELDS}}
+  <form {{attrs}}>
+    <div>
+      <label>Which account should be connected to this envelope? Money saved will go there automatically.</label>
       <div>
-        <label>Which account should be connected to this envelope? Money saved will go there automatically.</label>
-        <div>
-          <select name="virtualAccountId">
-            <option value="">Select an account</option>
-            {{#each virtualAccounts}}
-              {{> selectOptions}}
-            {{/each}}
-          </select>
-        </div>
+        <select name="virtualAccountId">
+          <option value="">Select an account</option>
+          {{#each virtualAccounts}}
+            {{> selectOptions}}
+          {{/each}}
+        </select>
       </div>
+    </div>
 
-      <label>How much income should be saved? (for 10%, enter 10. You can use decimals such as 10.5)</label>
-      <div class="input-append">
-        <input type="text" placeholder="30" name="rate"{{#if _id}} value="{{rate}}"{{/if}} />
-        <span class="add-on">%</span>
-      </div>
+    <label>How much income should be saved? (for 10%, enter 10. You can use decimals such as 10.5)</label>
+    <div class="input-append">
+      <input type="text" placeholder="30" name="rate" value="{{rate}}" />
+      <span class="add-on">%</span>
+    </div>
 
-      <div><input type="checkbox" name="enabledByDefault" value="1" {{#if _id}}{{#if enabledByDefault}}checked{{/if}}{{/if}} /> <strong>Enabled by default.</strong> Check the box to put a portion of all new income into this envelope. <strong>You can still select and un-select it when you're creating the income.</strong> If you know some of most income will go into this envelope, check the box.</div>
+    <div><input type="checkbox" name="enabledByDefault" value="1" checked={{enabledByDefault}} /> <strong>Enabled by default.</strong> Check the box to put a portion of all new income into this envelope. <strong>You can still select and un-select it when you're creating the income.</strong> If you know some of most income will go into this envelope, check the box.</div>
 
-      <div><input type="checkbox" name="active" value="1" {{#if _id}}{{#if active}}checked{{/if}}{{else}}checked{{/if}} /> <strong>Active.</strong> Un-check to deactivate this envelope. This won't affect past data.</div>
+    <div><input type="checkbox" name="active" value="1" checked={{active}} /> <strong>Active.</strong> Un-check to deactivate this envelope. This won't affect past data.</div>
 
-      <div class="btn-toolbar">
-        <button type="submit" class="btn {{#if _id}}save-envelope{{else}}add-envelope{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>
-        {{#if _id}}<button class="btn cancel-editing">Cancel</button>{{/if}}
-      </div>
-    </form>
-  </div>
+    <div class="btn-toolbar">
+      <button type="submit" class="btn {{#if _id}}save-envelope{{else}}add-envelope{{/if}}">{{#if _id}}Save{{else}}Add{{/if}}</button>
+      {{#if _id}}<button class="btn cancel-editing">Cancel</button>{{/if}}
+    </div>
+  </form>
 </template>

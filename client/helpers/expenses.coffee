@@ -24,6 +24,13 @@ Template.expenseList.editingExpense = ->
 Template.expense.thisRowBeingEdited = ->
   Session.equals('editingExpense', this._id)
 
+Template.expense.rowAttrs = ->
+  if Template.expense?.thisRowBeingEdited?.call(@)
+    attrs = { class: 'being-edited' }
+    attrs.class += ' muted' if @expensePaid?
+    attrs
+  else null
+
 Template.expense.dueDate = ->
   formatDate @dueDate
   
@@ -95,6 +102,21 @@ Template.expense.events {
 
 Template.newExpenseForm.expensesCount = ->
   !! Expenses.find({}, { reactive: false }).count()
+
+Template.expenseForm.attrs = ->
+  if @_id
+    return {
+    class: 'edit-record-form'
+    "data-target": @_id
+    };
+  return {
+  class: 'add-record-form'
+  }
+
+Template.expenseForm.defaultPriorityChecked = ->
+  if parseInt @priority? is 3
+    true
+  else false
 
 Template.expenseForm.rendered = ->
   $context = $ @firstNode

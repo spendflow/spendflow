@@ -102,6 +102,16 @@ Template.incomeForm.rendered = ->
   $receiptDate = (elementByName 'receiptDate', $context)
   $receiptDate.datepicker()
 
+Template.incomeForm.attrs = ->
+  if @_id
+    return {
+    class: 'edit-record-form'
+    "data-target": @_id
+    };
+  return {
+  class: 'add-record-form'
+  }
+
 Template.incomeForm.receiptDate = ->
   moment(@receiptDate).format("MM/DD/YYYY")
 

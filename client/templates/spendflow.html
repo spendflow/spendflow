@@ -3,7 +3,7 @@
   <title>Spendflow</title>
 </head>
 
-<body>
+<template name="spendflowMaster">
   <div class="container">
     {{#if currentUser}}
       {{> nav}}
@@ -12,14 +12,14 @@
     {{/if}}
 
     <div id="spendflow" class="{{currentPage}}">
-      {{renderRouter}}
+      {{> yield}}
     </div>
   </div>
-</body>
+</template>
 
 <template name="public">
   <div>Not logged in.</div>
-  {{loginButtons}}
+  {{> loginButtons}}
 </template>
 
 <template name="loading">
@@ -39,5 +39,15 @@
 </template>
 
 <template name="selectOptions">
-  <option value="{{optionValue}}"{{#if selected}} selected{{/if}}>{{optionText}}</option>
+  <option value="{{optionValue}}" selected={{selected}}>{{optionText}}</option>
+</template>
+
+<template name="_maybeEm_wrapInEm">
+  <em>
+    {{> UI.contentBlock}}
+  </em>
+</template>
+
+<template name="_maybeEm_noop">
+  {{> UI.contentBlock}}
 </template>

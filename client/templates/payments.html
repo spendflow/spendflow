@@ -11,7 +11,7 @@
   {{> newPaymentForm}}
   {{> paymentToolbar}}
 
-  {{#unless setupComplete}}<h3>Next: <a href="{{urlFor 'income' profileId}}">Transfer income when it arrives</a></h3>{{/unless}}
+  {{#unless setupComplete}}<h3>Next: <a href="{{urlFor 'income' params=profileId}}">Transfer income when it arrives</a></h3>{{/unless}}
 
   {{> paymentList}}
 
@@ -34,7 +34,7 @@
 
 <template name="paymentToolbar">
   <form id="payment-toolbar">
-    <input type="checkbox" id="payments-show-paid"{{#if showPaidPayments}} checked{{/if}} /> Show completed payments
+    <input type="checkbox" id="payments-show-paid" checked={{showPaidPayments}} /> Show completed payments
   </form>
 </template>
 
@@ -99,7 +99,7 @@
 </template>
 
 <template name="paymentForm">
-  <form{{#if _id}} class="edit-record-form" data-target="{{_id}}" id="edit-payment-{{_id}}"{{else}} class="add-record-form" id="add-payment-form"{{/if}}>
+  <form {{attrs}}>
     <label>Which expense are you paying?</label>
     <select name="expenseId">
       <option value="">Select an expense</option>
@@ -119,10 +119,10 @@
     </select>
 
     <label>Amount</label>
-    <input type="text" name="amount"{{#if _id}} value="{{amount}}"{{/if}} />
+    <input type="text" name="amount" value={{amount}} />
 
     <label class="checkbox"><strong>Paid</strong> (payment has physically been made)
-      <input type="checkbox" name="paid"{{#if _id}}{{#if paid}} checked{{/if}}{{/if}} />
+      <input type="checkbox" name="paid" checked={{paid}} />
     </label>
 
     <label>If you'd like to include any notes to yourself about this payment, enter them here.</label>

@@ -10,7 +10,7 @@
   {{> newAccountForm}}
   {{> accountList}}
 
-  {{#unless setupComplete}}<h3>Next: <a href="{{urlFor 'envelopes' profileId}}">Add envelopes (rules for where part of your income should go)</a></h3>{{/unless}}
+  {{#unless setupComplete}}<h3>Next: <a href="{{urlFor 'envelopes' params=profileId}}">Add envelopes (rules for where part of your income should go)</a></h3>{{/unless}}
 </template>
 
 <template name="accountList">
@@ -34,7 +34,7 @@
 </template>
 
 <template name="account">
-  <tr data-target="{{_id}}"{{#if thisRowBeingEdited}} class="being-edited"{{/if}}>
+  <tr data-target="{{_id}}" class="{{#if thisRowBeingEdited}}being-edited{{/if}}">
     <td>{{#if business}}<i class="fa fa-briefcase"></i> {{/if}}{{name}}{{#if bankAccountId}} <i class="fa fa-exchange"></i> {{bankAccount}}{{/if}}</td>
     <td>{{#if equal type "payFrom"}}Envelope account{{/if}}{{#if equal type "payTo"}}Account to pay back{{/if}}{{#if equal type "bank"}}Bank account{{/if}}</td>
     <td>{{balance}}</td>
@@ -63,26 +63,26 @@
 </template>
 
 <template name="accountForm">
-  <form{{#if _id}} class="edit-record-form" data-target="{{_id}}"{{else}} class="add-record-form"{{/if}}>
+  <form {{attrs}}>
     <div>
       <select name="type">
         {{! TODO: Be sure to actually validate these values}}
         <option value="">Select account type</option>
         {{! TODO: Finish adding pre-selection logic for this}}
-        <option value="bank"{{#if equal type "bank"}} selected{{/if}}>Bank account (for receiving income)</option>
-        <option value="payFrom"{{#if equal type "payFrom"}} selected{{/if}}>Virtual/savings account for specific expenses (e.g. Eating Out)</option>
-        <option value="payTo"{{#if equal type "payTo"}} selected{{/if}}>Account to pay back (e.g. Credit Card)</option>
+        <option value="bank" selected={{equal type "bank"}}>Bank account (for receiving income)</option>
+        <option value="payFrom" selected={{equal type "payFrom"}}>Virtual/savings account for specific expenses (e.g. Eating Out)</option>
+        <option value="payTo" selected={{equal type "payTo"}}>Account to pay back (e.g. Credit Card)</option>
       </select>
     </div>
 
     <label>Name this account</label>
-    <input type="text" name="name"{{#if _id}} value="{{name}}"{{/if}} />
+    <input type="text" name="name" value={{name}} />
     {{!TODO: Don't allow changing balance directly if automated calculations have worked upon it}}
     <label>Current account balance (be careful when changing this!)</label>
-    <input type="text" placeholder="0.00" name="balance"{{#if _id}} value="{{balance}}"{{/if}} />
+    <input type="text" placeholder="0.00" name="balance" value={{balance}} />
 
     <label class="checkbox">Is this a <strong>business</strong> account? (This is used to mark system-created Expenses and Incomes as business.)
-      <input type="checkbox" name="business"{{#if _id}}{{#if business}} checked{{/if}}{{/if}} />
+      <input type="checkbox" name="business" checked={{business}} />
     </label>
 
     <label>Link to a bank account (envelope accounts only)</label>
