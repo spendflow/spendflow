@@ -36,14 +36,10 @@ checkLoggedIn = (pause) ->
     @render('public')
     pause()
 
-  if Meteor.loggingIn() and not (__fast_render_config?.subscriptions?.currentUser and Meteor.user())
-    @render(@loadingTemplate)
-    @stop()
-
-waitForProfiles = ->
-  if _self.profilesSubscription
-    console.log _self.profilesSubscription
-    _self.profilesSubscription.wait();
+#  if Meteor.loggingIn() and not (__fast_render_config?.subscriptions?.currentUser and Meteor.user())
+#    thisLoadingTemplate = @lookupProperty 'loadingTemplate'
+#    @render(thisLoadingTemplate)
+#    pause()
 
 hasProfile = ->
   if @ready() and Meteor.user() and not Profiles.findOne()
