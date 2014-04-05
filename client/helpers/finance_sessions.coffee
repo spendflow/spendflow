@@ -26,13 +26,14 @@ Template.financeSession.notesTeaser = ->
   return @notes.substring(0, 80)
 
 Template.financeSessionForm.attrs = ->
-  attrs = { id: 'finance-session-form' }
+  attrs = {}
   if @_id
-    attrs.id += "-#{@_id}"
+    attrs.id += "finance-sessions-form-#{@_id}"
     attrs.class = 'edit-record-form'
     attrs["data-target"] = @_id
   else
     attrs.class = 'add-record-form'
+  attrs
 
 
 Template.financeSessionForm.rendered = ->

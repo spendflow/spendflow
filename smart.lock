@@ -88,8 +88,8 @@
       },
       "fast-render": {
         "git": "https://github.com/arunoda/meteor-fast-render.git",
-        "tag": "v0.1.22",
-        "commit": "13c1d80bfd0366ad8d84f7a6ffa3cd9c21f9721e"
+        "tag": "v0.1.25",
+        "commit": "010c4ee25b48ab6a7373000be48f9cd4a8535880"
       },
       "jquery-ui": {
         "git": "https://github.com/TimHeckel/meteor-jquery-ui.git",

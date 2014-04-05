@@ -98,13 +98,14 @@ Template.newPaymentForm.paymentsCount = ->
   !! Payments.find({}, { reactive: false }).count()
 
 Template.paymentForm.attrs = ->
-  attrs = { id: 'edit-payment-form' }
+  attrs = {}
   if @_id
-    attrs.id += "-#{@_id}"
+    attrs.id += "edit-payment-form-#{@_id}"
     attrs.class = 'edit-record-form'
     attrs["data-target"] = @_id
   else
     attrs.class = 'add-record-form'
+  attrs
 
 Template.paymentForm.expenses = ->
   expenses = getExpenses undefined, undefined, {
@@ -175,7 +176,6 @@ Template.paymentForm.events {
         $expense = elementByName('expenseId', $context)
         newPayment = Payments.findOne result
         paymentExpense = Expenses.findOne newPayment.expenseId
-        console.log "Expense: #{paymentExpense}. Remaining: #{paymentExpense.amountRemaining}"
         if paymentExpense
           if (Math.abs(accounting.formatMoney paymentExpense.amountRemaining)) isnt 0.00
             $expense.val(paymentExpense._id)

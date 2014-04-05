@@ -13,12 +13,14 @@ startSubscriptions = ->
   # TODO: Optimize these only to subscribe to the ones needed for the current page
   # e.g. taking filters, etc. into account
   _self.profilesSubscription = Meteor.subscribe('spendflowProfiles')
-  _self._accountsSub = Meteor.subscribe 'spendflowAccounts', getCurrentProfile()
-  _self._envelopesSub = Meteor.subscribe 'spendflowEnvelopes', getCurrentProfile()
-  _self._incomesSub = Meteor.subscribe 'spendflowIncomes', getCurrentProfile()
-  _self._expensesSub = Meteor.subscribe 'spendflowExpenses', getCurrentProfile()
-  _self._paymentsSub = Meteor.subscribe 'spendflowPayments', getCurrentProfile()
-  _self._sessionsSub = Meteor.subscribe 'spendflowSessions', getCurrentProfile()
+  currentProfile = getCurrentProfile()
+  console.log "Profile: #{currentProfile}"
+  _self._accountsSub = Meteor.subscribe 'spendflowAccounts', currentProfile
+  _self._envelopesSub = Meteor.subscribe 'spendflowEnvelopes', currentProfile
+  _self._incomesSub = Meteor.subscribe 'spendflowIncomes', currentProfile
+  _self._expensesSub = Meteor.subscribe 'spendflowExpenses', currentProfile
+  _self._paymentsSub = Meteor.subscribe 'spendflowPayments', currentProfile
+  _self._sessionsSub = Meteor.subscribe 'spendflowSessions', currentProfile
 
 Deps.autorun ->
   startSubscriptions() if Meteor.isClient # Start subscriptions globally
