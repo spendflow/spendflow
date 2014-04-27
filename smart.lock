@@ -27,8 +27,8 @@
     "packages": {
       "moment": {
         "git": "https://github.com/acreeger/meteor-moment.git",
-        "tag": "v2.5.1",
-        "commit": "8c9bc5d3fc96705057737cb9743d555417f6e551"
+        "tag": "v2.6.0",
+        "commit": "26156df681750fd6e6ed77043eef32b6653ebbdf"
       },
       "accounting": {
         "git": "https://github.com/IainShigeoka/meteor-accounting.git",
@@ -65,8 +65,8 @@
       },
       "analyticsjs": {
         "git": "https://github.com/nate-strauser/meteor-analyticsjs.git",
-        "tag": "v0.1.5",
-        "commit": "d908bd2d40b9e34621a4051c1da666c20c3e9436"
+        "tag": "v0.1.8",
+        "commit": "98b3f4a538b4aac2d34aaf5783ff2b1d416fef26"
       },
       "canonical": {
         "git": "https://github.com/projectricochet/meteor-canonical.git",
@@ -78,8 +78,8 @@
       },
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
-        "tag": "v0.7.0",
-        "commit": "05f34bc48c4cad9fdaa366c1ddcabe6980232ece"
+        "tag": "v0.7.1",
+        "commit": "d1ffb3f06ea4c112132b030f2eb1a70b81675ecb"
       },
       "font-awesome": {
         "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
@@ -88,8 +88,8 @@
       },
       "fast-render": {
         "git": "https://github.com/arunoda/meteor-fast-render.git",
-        "tag": "v0.1.25",
-        "commit": "010c4ee25b48ab6a7373000be48f9cd4a8535880"
+        "tag": "v0.2.4",
+        "commit": "160a64bd61792f53a7c8848c5e979a953be13564"
       },
       "jquery-ui": {
         "git": "https://github.com/TimHeckel/meteor-jquery-ui.git",
@@ -98,8 +98,8 @@
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
-        "tag": "v0.2.2",
-        "commit": "8bc53798fe5965669ae67c72f91829fcfdceabfd"
+        "tag": "v0.2.4",
+        "commit": "b40e9b0612329288d75cf52ad14a7da64bb8618f"
       }
     }
   }
