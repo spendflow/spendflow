@@ -36,7 +36,7 @@ Router.configure {
 checkLoggedIn = (pause) ->
   if not Meteor.user() and not Meteor.loggingIn()
     @render('public')
-    pause()
+#    pause()
 
 #  if Meteor.loggingIn() and not (__fast_render_config?.subscriptions?.currentUser and Meteor.user())
 #    thisLoadingTemplate = @lookupProperty 'loadingTemplate'
@@ -63,6 +63,10 @@ if Meteor.isClient
   Router.onBeforeAction hasProfile, { except: ['profiles'] }
   Router.onBeforeAction applyProfile
 #  Router.onBeforeAction 'loading'
+  Router.onBeforeAction (pause) ->
+    # Temporary until loading works
+#    if not @ready()
+#      pause()
   Router.onBeforeAction 'dataNotFound'
 
 Router.map ->
@@ -146,6 +150,7 @@ Router.map ->
     data: -> {}
   }
 
+  # TODO: Fix FastRender
   @route 'accounts', {
     path: '/:profileId/accounts'
     fastRender: true
