@@ -1,0 +1,5 @@
+{
+  "public": {
+    "analytics_api_key": "YOUR_SEGMENT_IO_API_KEY"
+  }
+}
