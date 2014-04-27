@@ -1,6 +1,7 @@
 <template name="dashboard">
   {{#unless envelopeAmounts}}
-    <h2>Nothing to report, sir.</h2>
+    <h2>Envelope Payment Summary</h2>
+    <p>Your envelope payments are all caught up. When you mark more income with linked envelopes transferred, I'll show you a summary of pending envelope payments.</p>
   {{else}}
     <h2>You have this much outstanding in envelope payments per envelope:</h2>
     {{#each envelopeAmounts}}
@@ -13,6 +14,8 @@
       If so, just click the check marks next to each envelope. If not, move your money around as needed
       (generally in your online banking), and then click them.</p>
   {{/unless}}
+
+
 </template>
 
 <template name="index">
