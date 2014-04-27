@@ -28,11 +28,12 @@ Payments.after.remove (userId, doc) ->
 updatePaymentTargets = (payment) ->
   # The payment might be getting deleted as part of another action, so make sure the Income and Expense still actually exist before trying to remove them.
   income = Incomes.findOne(payment.incomeId)
-  updateIncomeCalculations(income) if income isnt null
+  updateIncomeCalculations(income) if income
   # TODO: Update income envelopes that are marked paid
   # TODO: Is this still a todo?
+  # TODO: I dunno. All is lost. Hopefully this will come up again eventually.
   expense = Expenses.findOne(payment.expenseId)
-  updateExpenseCalculations(expense) if expense isnt null
+  updateExpenseCalculations(expense) if expense
 
 Meteor.methods {
   markAllEnvelopePaymentsPaid: (envelopeId) ->

@@ -33,6 +33,14 @@ Expenses.before.remove (userId, doc) ->
 @updatePaymentsUsingExpense = (expenseId) ->
   newPayments = []
   Payments.find({ expenseId: expenseId }).forEach((payment) ->
+    # Is this an orphaned payment? If so, remove it and stop.
+    paymentIncome = Incomes.findOne payment.incomeId
+    paymentExpense = Expenses.findOne payment.expenseId
+
+    if not paymentIncome or not paymentExpense
+      Payments.remove payment._id
+      return;
+
     addPaymentMetadata(payment)
     newPayments.push payment
   )

@@ -33,6 +33,9 @@ Incomes.before.remove (userId, doc) ->
   # fromRecordId varies, but relatedRecord is always the Income
   Expenses.remove { 'systemMeta.relatedRecordId': doc._id }
 
+  # Remove payments referencing this income; the above only removes envelope payments
+  Payments.remove { incomeId: doc._id }
+
 @updateIncomeCalculations = (income) ->
   # Update amountRemaining and hope it doesn't loop forever
   Incomes.update(income._id, {
