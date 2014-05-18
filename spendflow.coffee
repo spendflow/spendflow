@@ -174,11 +174,11 @@ Router.map ->
     data: -> {}
   }
 
-  @route 'expectations', {
-    path: '/:profileId/expectations'
-    fastRender: true
-    data: -> {}
-  }
+#  @route 'expectations', {
+#    path: '/:profileId/expectations'
+#    fastRender: true
+#    data: -> {}
+#  }
 
 @resolveProfileId = (params) ->
   profileId = undefined
