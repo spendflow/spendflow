@@ -1,3 +1,5 @@
+@SPENDFLOW_VERSION = '1.7.9-pre'
+
 @spendflowPrecision = 2
 
 # TODO: Allow changing accounting.js settings from a UI
