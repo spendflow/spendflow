@@ -14,7 +14,6 @@ startSubscriptions = ->
   # e.g. taking filters, etc. into account
   _self.profilesSubscription = Meteor.subscribe('spendflowProfiles')
   currentProfile = getCurrentProfile()
-  console.log "Profile: #{currentProfile}"
   _self._accountsSub = Meteor.subscribe 'spendflowAccounts', currentProfile
   _self._envelopesSub = Meteor.subscribe 'spendflowEnvelopes', currentProfile
   _self._incomesSub = Meteor.subscribe 'spendflowIncomes', currentProfile
@@ -35,8 +34,9 @@ Router.configure {
 
 checkLoggedIn = (pause) ->
   if not Meteor.user() and not Meteor.loggingIn()
+    console.log 'Rendering public'
     @render('public')
-#    pause()
+    pause()
 
 #  if Meteor.loggingIn() and not (__fast_render_config?.subscriptions?.currentUser and Meteor.user())
 #    thisLoadingTemplate = @lookupProperty 'loadingTemplate'
