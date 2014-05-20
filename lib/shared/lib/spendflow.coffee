@@ -1,4 +1,4 @@
-@SPENDFLOW_VERSION = '1.7.15'
+@SPENDFLOW_VERSION = '1.7.15.dev'
 
 @spendflowPrecision = 2
 
