@@ -16,6 +16,10 @@ It aims to solve the problem of budget decay, the tendency for budgets to reflec
 
 Spendflow aims to bridge this gap and allow you to track your finances with the least amount of data entry possible. It eschews automated bank feeds (other tools can give you that level of granularity) and instead tries to help you have the information to manage your finances wisely.
 
+## Why are GitHub issues disabled?
+
+Pivotal Tracker is being used to manage the project. [Click here to go there.](https://www.pivotaltracker.com/projects/844191)
+
 ## Features
 
 * **Profiles**: Do you have bank accounts in multiple countries or manage finances that you want to keep separate? Profiles let you do that. All data you enter gets saved to the profile you are using, and you can easily switch them in-place. All on the same user account.
