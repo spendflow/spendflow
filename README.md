@@ -1,6 +1,8 @@
+## What is Spendflow?
+
 Spendflow is a personal finance tracker designed to bring your budget to life. [Sign up for the private beta of the hosted version.](http://wiz1.us/spendflowbeta)
 
-# How to run yourself
+## How to run yourself
 
 Download the latest release and run it with `meteor`. It will be available on `http://localhost:3000`.
 
