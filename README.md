@@ -51,7 +51,7 @@ You can use [Meteor DDP](https://github.com/Charuru/livedata/blob/master/DDP.md)
 
 ## Contributing
 
-(Note: CLA required. GitHub should prompt you for this, or I'll update this.)
+**(Note: Contributor License Agreement (CLA) required before I can merge your pull request. See the wiki for [how to submit the CLA](https://github.com/spendflow/spendflow/wiki/Signing-the-Contributor-License-Agreement).**)
 
 Since Spendflow is built in Meteor, contributing is really easy! It's something like this:
 
