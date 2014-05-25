@@ -1,4 +1,4 @@
-Spendflow is a personal finance tracker designed to bring your budget to life.
+Spendflow is a personal finance tracker designed to bring your budget to life. [Sign up for the private beta of the hosted version.](http://wiz1.us/spendflowbeta)
 
 # How to run yourself
 
