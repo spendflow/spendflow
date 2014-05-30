@@ -18,9 +18,13 @@ It aims to solve the problem of budget decay, the tendency for budgets to reflec
 
 Spendflow aims to bridge this gap and allow you to track your finances with the least amount of data entry possible. It eschews automated bank feeds (other tools can give you that level of granularity) and instead tries to help you have the information to manage your finances wisely.
 
-## Why are GitHub issues disabled?
+## Support and community
 
-Pivotal Tracker is being used to manage the project. [Click here to go there.](https://www.pivotaltracker.com/projects/844191)
+Report bugs or suggest new features on [the Issues page](https://github.com/spendflow/spendflow/issues).
+
+Pivotal Tracker is being used to prioritize project work. [Click here to go there.](https://www.pivotaltracker.com/projects/844191)
+
+Trusted contributors can be added to Pivotal Tracker as participants, but anyone can take a look at the current prioritization.
 
 ## Features
 
