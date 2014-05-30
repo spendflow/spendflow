@@ -2,7 +2,9 @@
 
 Spendflow is a personal finance tracker designed to bring your budget to life. [Sign up for the private beta of the hosted version.](http://wiz1.us/spendflowbeta)
 
-## How to run yourself
+## How to run yourself (Mac OS X and Linux)
+
+You need to [Meteor](http://docs.meteor.com/#quickstart) to run Spendflow. Click that link for installation instructions. It's a one-liner.
 
 Download the latest release and run it with `meteor`. It will be available on `http://localhost:3000`.
 
@@ -12,11 +14,17 @@ You can also clone it from the Git repository:
 
 Same procedure to run it.
 
-(some stuff about setting up a `settings.json` file)
+If for some reason you want events to be sent to your Segment.io account, look at `settings-example.json` and save your own copy as `settings.json`. Run it with `meteor --settings=settings.json`.
 
-It aims to solve the problem of budget decay, the tendency for budgets to reflect reality less and less as time goes on. You know how it goes. You set up a great budget, but actually tracking your income and spending requires too much data entry. So you compensate. You wing it and leave a big buffer in your bank account on top of what you budgeted, or you just don’t track it and run into surprises. Surprises aren’t that fun when bills have to be paid.
+### Windows? ([issue](https://github.com/spendflow/spendflow/issues/3))
 
-Spendflow aims to bridge this gap and allow you to track your finances with the least amount of data entry possible. It eschews automated bank feeds (other tools can give you that level of granularity) and instead tries to help you have the information to manage your finances wisely.
+Meteor doesn't support Windows natively, but you can run it in a virtual machine. A `Vagrantfile` for Vagrant would be welcome; there's a draft one in the repository, but it was just me messing around.
+
+## Vision
+
+Spendflow aims to solve the problem of budget decay, the tendency for budgets to reflect reality less and less as time goes on. You know how it goes. You set up a great budget, but actually tracking your income and spending requires too much data entry. So you compensate. You wing it and leave a big buffer in your bank account on top of what you budgeted, or you just don’t track it and run into surprises. Surprises aren’t that fun when bills have to be paid.
+
+The driving force behind Spendflow is the motivation to bridge this gap and allow you to track your finances **with the least amount of data entry possible**. It eschews automated bank feeds (other tools can give you that level of granularity) and instead tries to help you have enough information to manage your finances wisely.
 
 ## Support and community
 
@@ -25,6 +33,8 @@ Report bugs or suggest new features on [the Issues page](https://github.com/spen
 Pivotal Tracker is being used to prioritize project work. [Click here to go there.](https://www.pivotaltracker.com/projects/844191)
 
 Trusted contributors can be added to Pivotal Tracker as participants, but anyone can take a look at the current prioritization.
+
+Spendflow is on [Facebook](https://facebook.com/spendflow), [Twitter](https://twitter.com/spendflow), and [Google+](https://google.com/+SpendflowCo) too. It's [@wizonesolutions](https://twitter.com/wizonesolutions) behind the curtain :)
 
 ## Features
 
