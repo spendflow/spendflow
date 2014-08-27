@@ -63,7 +63,7 @@ It already allows you to set up Envelopes; these are an easy way to automaticall
 
 ## API (DDP, no REST yet)
 
-You can use [Meteor DDP](https://github.com/Charuru/livedata/blob/master/DDP.md) to communicate with Spendflow. There is not a separate REST API yet, but there likely will be in the future.
+You can use [Meteor DDP](https://github.com/meteor/meteor/blob/1b9bb206cd229fe1639d9c1f94455865000ba5c3/packages/livedata/DDP.md) to communicate with Spendflow. There is not a separate REST API yet, but there likely will be in the future.
 
 ## Contributing
 
