@@ -57,7 +57,7 @@ There’s a bit of a workflow to all this. There is in-app documentation that pr
 
 ## The vision (not all working yet)
 
-My vision is for it to collect your expectations and budget (ideally imported from another app that is tailored for budgeting) and then only require your account balances and any new recurring expenses or income every so often to tell you if you are on track or not. It follows the principle that people don’t really care why they are within budget as long as they are, but they do care if they are under. If your account balances differ from what Spendflow expects, it will
+My vision is for it to collect your expectations and budget (ideally imported from another app that is tailored for budgeting) and then only require your account balances and any new recurring expenses or income every so often to tell you if you are on track or not. It follows the principle that people don’t really care why they are within budget as long as they are, but they do care if they are over. If your account balances differ from what Spendflow expects, it will
 
 It already allows you to set up Envelopes; these are an easy way to automatically earmark part of your income for specific purposes. I run a small business, so I have Envelopes for Tax and Research/Development. It doesn’t track balances on these yet, but that is also part of the vision. I still track them in a spreadsheet, but once Spendflow is tracking them for me I’ll be really close to not needing spreadsheets anymore.
 
