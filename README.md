@@ -4,7 +4,7 @@ Spendflow is a personal finance tracker designed to bring your budget to life. [
 
 ## How to run yourself (Mac OS X and Linux)
 
-You need to [Meteor](http://docs.meteor.com/#quickstart) to run Spendflow. Click that link for installation instructions. It's a one-liner.
+You need to install [Meteor](http://docs.meteor.com/#quickstart) to run Spendflow. Click that link for installation instructions. It's a one-liner.
 
 Download the latest release and run it with `meteor`. It will be available on `http://localhost:3000`.
 
