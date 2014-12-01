@@ -1,4 +1,5 @@
 ## What is Spendflow?
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/spendflow/spendflow?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Spendflow is a personal finance tracker designed to bring your budget to life. [Sign up for the private beta of the hosted version.](http://wiz1.us/spendflowbeta)
 
